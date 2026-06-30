@@ -2,2448 +2,1486 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1">
-<title>PROPAGAN-DICE</title>
-
-<!-- PWA Meta -->
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1,user-scalable=no">
+<title>PROPAGAN-SCORE</title>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="PROPAGANDICE">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="theme-color" content="#0d0d14">
-<meta name="description" content="Faction dice combat game for 2 players">
-
-<!-- Inline SVG icon for Apple touch icon -->
-<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAATo0lEQVR42u3dv6vV9x3H8e85OEnPIrdji4M0EDJ1sVDIUKQusZghUFepgyCdivgniHQqgkOLq4EOCbFLSshQKOiSSQSDg7RjLy6nuNql5+Z4Pfee78/P9/P5vB+PJYlJ9N5zr76e38/5tWgYzWp18NatADCd9fpw4VYYhxvSyAOIAwGAsQcQBQLA4AMgCASA0QdADAgAow+AGBAAhh8AISAAjD4AYkAAGH4AhIAAMPwACAEBYPgBEAICwPADIAQEgOEHQAiMa2n8ASDeJi3cyAAQ7zSgiA/U8AMgBMaV/V0Axh+A0pSwXUs3IADE27CFGw0AppXjXQLZnQAYfwCcBgQLAOMPgAhIY+FGAYC0crhLYPYTAOMPgNOAYAFg/AEQAcECwPgDIALm28JltE8YAETADAFg/AFg/m1c1v4JAoAImDEAjD8A5LOVy9o+IQAQARkEgPEHgPy2c1n6JwAAIiCjADD+AJDvli5L+4ABQARkfAIAAORr9ABw9Q8A+W/rMvcPEAAYf2OXuX5gAMB0W+sxAAAQ0CgB4OofAMo6BVjm8oEAAOm2dzn3BwAApN9gjwEAgIB6B4CrfwAo9xTACQAAOAFw9Q8AEU4Blql+IQAgnwhwFwAABNQpAFz9A0AdpwBOAADACYCrfwCIcArgBAAAnAC4+geACKcATgAAwAmAq38AiHAK4AQAAJwAuPoHgAinAE4AAMAJAAAQOgAc/wNA2U7bcicAAOAEwNU/AEQ4BXACAABOAACAkAHg+B8A6rJr250AAIATAAAgXAA4/geAOh3feCcAABD9BAAAEAAAQO0B4P5/AKjb9tY7AQCAyCcAAIAAAAAEAABQXQB4ACAAxLDZfCcAABD1BAAAEAAAgAAAAAQAACAAAIDyLDwFEACcAAAAAgAAEAAAgAAAAAQAACAAAAABAAAIAABAAAAAAgAAEAAAgAAAAAQAACAAAAABAAAIAABAAACAAAAABAAAIAAAAAEAAAgAAEAAAAACAAAQAACAAAAABAAAIAAAAAEAAAgAAEAAAAACAAAQAACAAAAAAQAACAAAQAAAAAIAABAAAIAAAAAEAAAgAAAAAQAACAAAQAAAAAIAABAAAIAAAAAEAAAgAAAAAQAAAgCI5t///N07fwViWaxWB2/dDBBv+JumaV48f9Z88OFHR//8k1/+xQ0EAgCodfj3EQIgAIBAwy8EQAAAgYdfCIAAACoe/svXXzVfPzwvBEAAAFGG/zghAAIAqHT8dw1/3xAQASAAgAqGXwiAAAACD78QAAEABB5+IQACAChk+Kca/64RIARAAAAVDL8QAAEABB5+IQACAAg8/EIABAAQePiFAAgAIPDwCwEQAEDg4RcCIACAwMMvBEAAAIGHXwiAAADDH3j4hQAIADD+gYe/bwiIABAAYPiFACAAwPALAUAAgOEXAoAAgByG3/hPGwFCAAQAGH4h4AYDAQCGXwgAAgAMvxAABAAYfiEAAgAw/EIABAAYfsMvBEAAgOE3/EIABAAYfoQACAAw/AgBEABQw/gb/rghIAIQAGD4EQIgAMDwIwRAAIDhRwiAAICyht/40ycChAACAAw/QsANhgAAw48QAAEAhh8hAAIADD9CAAQAGH6EAAgAMPwIARAAYPgRAiAAMPyGHyEAAgDjb/ipIAREAAIADD9CAAQAht/wIwRAAGD4i/kDvCSCSghA0zTN0k1AyuF31U9Ebb+fu/wegaHOuAnI5Yrf8BMhAtqcBmx+zzgRQABg+EEIgADA8M/o0wK/JF/4rhQCIAAw/CAEQABg+EEIIADA8IMQQACA4QchgADA8Bt+EAIIAAy/4QchgAAg9PgbfsgzBEQAAgDDDwFDwGkAAgDDD0JACCAAMPwgBIjMuwEafuMPFYbAmL/3cQJAwCt+ww/1ngY4ERAAGH7DD0JACAgADL/hByEgBAQAhh8QAggADD8gBCjfYrU6eOtmMPy08/XD858W+If9F75y7Pm+bv3fCgEnABh+wIkAAgDDDwgBBABZjb/hB6YMARFQJo8BMPwk0uV+Vl9LSvzeFQJOADD8QMATAXcLCAAMPyAEhEDmvBlQ5sNv/IFcQ2DMP8NwAkDjkf1APacBTgQEAIYfEAJCQABg+AEhIAQEgOE3/IAQQAAYfsMPCAEEgOEHEAIIAMMPIAQQAIYfQAggAAw/gBBAAGQ7/oYfwDsPCgDDDyAEGu8zIAAMP4AQEAICwPADCAEhMC7vBthj+I0/QNoQGPPPZpwATHLFb/gB5jkNcCIgAAw/gBAQAgLA8AMIASEgAAw/gBBAABh+ACEgAAy/4QcQAgLA8Bt+ACEgAAw/AEJAABh+AISAAKhg/A0/gBDY7EbtEbBYrQ7eGn7DDxBNmxCo+TSgygAw/AAIgUABYPgBEAKBAsAD/ABIGQE1hEDRAWD4ARACgQLA8AMgBIKeAOyLAMMPQKoQKPEUoLoAMPwApA6BF8+fNZduPCnqc1mW+kV48fzZe/9s/AGY0uXrr3buT4mKfyXA7Rv+T3/4b9M0TfP7P/7IdykAo9pszPb2fPDhR8V+PkUHwIvnz5prd143TdM0j+6eEwIATDr8G1duvfz/371sHt+/IADmJAQASDf85avuzYCEAACGf79lrV/Aa3deH8XAaV9UADhpJ67celnl+Fd5ArDvRMBpAABthr92Z6J8ca/dee1uAQBOHf4o4x8qAHadBggBAMMfbfhDBoAQADD80Yc/dAAIAQDDH3X4BYAQADD8AgAhAGD4BYAQEAIAhl8ACAEhAGD4BYAQEAIAhv+Y9frwadM0zWp1cFEACAEAgl3xlxICAkAIABj+iUIg5wgQAEIAJvOfw3+992M/PvipG4aqh7+U0wABMGEIiABK8vXD8zt//PL1V6ON/+bHRQBDxr/EB/flGAICYMIQcBpA6eO/79+dFAknjb8IINrw5xwCAmCiEHC3ADWMf5+f4+e/+UfrEwIRQJvhr2X8cwsBAZDoNEAIEEHb8d+OgO+++njviQKGv1ZzhoAAEAKQnbEfj4DhFwICQAiAMMDwIwCEANQSBiLA8CMAhACIAAw/AkAIQCrfffVxpwcC7noAIIYfASAEhAAVR4DxN/wIAIQAwSLA+Bt+BABCgGARYPwNPwIAIUAGLl9/NcqrAc59pe8BgIYfASAEAAw/eyzdBOWFwCYGTvtNCJBy/K/cemn8nQAwx4mA0wCGmPJugFQfP/MNPwKAmULA3QJA6uE3/gKADE8DhACRTgFc/Rt+BIAQEAKA4UcACAEhQO2nAK7+DT8CACEAGH4EAEKA2k8BXP0bfgQAQoBgEWD8DT8CACFAsAgw/oYfAYAQINHY5hACht/wIwAQAgQ7DTD+hh8BgBAgWAQYf8PPNLwZEDtDwBsOkcMYG/9xxt8b9eAEgEEnAk4D2B7lKU8DDP94ww9OABgcAtt/yDgRYKqRNv79ht/44wSAJKcBTgQ4PtZDTgSM/jhX/IYfAYAQYJYY6BMBxt/wIwAQAoDhRwAgBMjFlA/4a/tzRz4pMPwIAIQAGH43DAIAIQCGHwQAQgAMPwgAhAAYfhAACAEw/CAAEAK057n6hh8BAEIADD8V8F4AzB4C3nmQiOPvHfpwAgCNdx4k1vCDAIAdIeBuAWocfuOPAICOpwFCAMMPAgAhIAQw/CAAEAJCAMMPAgAhAIYfBABCAAw/CACEABh+EAAIATD8CAAQAmD4EQAgBDD8hh8BAEIAww9V8WZAhAgBbzhEl/H3Rj04AYCKTwScBuCNehAAECwE3C1g+I8z/ggACHgaIAQMPwgAEAJCwPCDAAAhIAQMPwgAEAIYfhAAIAQw/CAAQAhg+EEAgBDA8IMAACGA4QcBAEIAww8CAIQAhh8EAAgBDD9Mx7sBwsgh4J0Hpxl/79AHTgCguBMBpwHDhh8QAFBcCLhboN/wG38QAFDVaYAQMPwgAEAIhA0Bww8CAIRAoBAw/CAAQAgECgHDDwIACBQChh8EABAoBAw/CAAgUAgYfhAAQKAQMPzTuHfzbHP7wRs3BAIAhEBeIWD4QQDAOx7dPffe6+JTTwgYfhAAQKAQMPxQB+8GyGRX/8dHivFDIPU7D3qHvrTu3Tz7zl/BCQBw4onAFKcB3qEPBACQcQiMfbeA434QANDa8WN/Dwac7zSgbwgYfhAAQKAQMPwgAGCUq3+nAGWEgOEHAQAECwHDDzF5GiAEC4GTTmI8pS8vx5/656mACACyte85/14TIN8QMPwgAAAAAQAACAA4QdvjfXcDAAgAAEAAUPvVv1MAAAEAwAlOesqfpwIiAAAAAcB8+h7nuxsAQAAAAAKA2q/+nQIAzM+bATHrcG9+Lu8UCOAEgCDj7zQAQABQwPBPPdIpfg3I3b6n+nkqIAKA4q/6nQYAzMdjAMhyiD02AMAJAMHG32kAgBMADK7TAAAnAES+2nYaAOAEgKDD6jQAwAkAga+qnQZQo7ZP8fNUQJwAEHpAnQZQ06hP+fPefvDGFwIBQPPeaJYYA0YfQAAQJAaMPoAAIEgMGH0AAUCQGDD6AAKAIDFg9AHS8jRAOvF2wABOADD8k/waTgMAnAAQZPydBgA4ASDw+G//uk4CqEHbF+Hp84JBXuAHJwBUeSXuJABAADCDua/AnQAACACCjbDxBxAABIsA4w8gAAgWAcYfQAAQLAKMP4AAIFgEGH8AAUCwCDD+AAKAYBFg/AEEAMEiwPjDD7q+qp9XAWQoLwWMEYfMIuC0lwU2/AgAAKcB0Ju7AABAAAAAAgAAEAAAgAAAAAQAACAAAAABAAAIAABAAAAAAgAAEAAAgAAAAAQAACAAAAABAAAIAABAAACAAAAABAAAIAAAAAEAAAgAAEAAAAACAAAQAACAAAAABAAAMLUzbgIe3T2X3cd07c5rXxhCu3fz7Hs/dvvBGzcMAgAgwuif9O/FAEMt1+vDhZsBIO/xH/rfw7b1+nDhMQAAhY2/CGCUEwA3AUB54y8CEAAAQcdfBCAAAIBOPAuA3k+5y/HpgxDt6n/75/PMAJwAAAD7A8BTAQEghs3mOwEASGyqB+15MCCdTwAAAAEAAAgAAKDaAPBAQACo2/bWOwEAgMgnAACAAABgIlO9Yp9XAqSLd14KeL0+XKxWB2/dLADpXP3s173/3y//+nc3IK0cf6yf9wIASOT7b69OGg9XP/vhx3/2qy/d4LQ/AQAg/9Hv+uuKAVoFgLsBANIN/xhH+PvuQth8LEIgrl1P9XcCAJBo+LuO/fawn/b/7vp3u6JACCAAABKNf58r/F3jvfmxtj/f9n93/Of7/turIoDdAeBuAIBh45/To/M3H8t2CIiAOE56pV+vAwAw0eD2se/+fE8ZZNITAKcAAHWOqwhw9e8EAAACEwAAIxjrZXj3XaGPdQXvZYM5NQC8RTBAfaNq/Mfx+P6F5vH9C9l+fPs2vPinAT66e665due170Qgq3G9d/Ps4FOAtq8DYPjTD//Gxd/+7Wmpn0erK/ycHwz4zZ9/cfT3QiB9fA3la5bH1/DKrZdujIkMCQFX/PGGf7U6uJji6r+KE4BLN54chcDmDzOjAuR2IpA6Boy+K/5RAqCEpwQKAaCkGBjrlMDQG/4+V/9VnAAIAaDWMMDwz34CUMopgBAAYIzxL3X4uzx7r/rXAbh048lRDIzxoDUA6hz+0se/q87P8y/55YE9Y2B8Q6LK1yCfr59nARD9ij+X4R/yLICur90T6u2A3S0AQI7DP4fOAVDDmwQJAQDDX9Pw93nl3jN9f6Ea3inw0o0nzXp9+PTp559cFAIAhj/K+PcOgNpsvhmEAIDhj6J3ANRyCiAEAAx/tKt/JwBCAMDwOwFwCiAEAAx/hKv/punxOgC7lBwB6/Vh62+Up59/cvT8TCFADbwOAIY/L21fB2Do+A8+AYhyEuBEAMDw13LlP2oARCMEAAx/6UYLgCinAEIAwPCXfvU/+glAxAgQAgBpxj/6Ff+Y4980E7wb4NgfYGkhsPkG9c6DAMOH3/hPt60eAzBRCDgNABh2xW/4pzVJAES9K+B4BDSNuwUADH9+V/+TngCIACEAYPjzHP+mGemFgE5TSgR0eUGgIbyYEDnxQkAY/jzsegGgqR9Tt0j0iRVzEiAEEABg+Occ/hTjnywASosAIYAAAMM/x/CnGv+kAVBiBAgBBAAY/lTDn3L8kwdAqREgBBAAYPinHP7U4z9LAJQcAUIAAQCGf+zhn2P8ZwsAESAEEAAYfuM/3/jPGgClR4AQQACA4R8y/HOO/+wBUEMECAEEAIbf8Hcd/rnHP4sAqCUChAACgIjjb/i7D38O459NAAiB4SEgAhAAuOo3/MUGQE0RkDIEnAYgADD8eQ9/buOfZQDUFgFCAAGA4Y89/DmOf7YBIASEAAIAw2/4AwdAjREgBBAAGP76hz/38S8iAGqNACGAAMDw1zn8JYx/MQEgBIQAAgDDb/gDB4AQEAIIAAy/4Q8cADVHgBBAAGD4yxn+Use/6AAQAkIAAYDhN/yBA6D2EPDywggADH9e41/68FcXAEJACCAAMPyGP3AACAEhgAAw/t6ox/AHDgAhMH4IiAABgKt+wy8AxECwEHAaIAAw/BGGv/bRDxsAQkAIIAAMv+GPPvyhA6DmGBACCADDb/iNvgAIHANCAAFg+A2/0RcAgYNACCAADH/k4Tf4AiB8FAgBBIDhr334jb0AEAdCAAFg+CsdfiM/nv8BHPkHnIkcZB0AAAAASUVORK5CYII=">
-
-<!-- Inline PWA manifest -->
-<link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22PROPAGAN-DICE%22%2C%22short_name%22%3A%22PROPAGANDICE%22%2C%22description%22%3A%22Faction%20dice%20combat%20for%202%20players%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%230d0d14%22%2C%22theme_color%22%3A%22%230d0d14%22%2C%22orientation%22%3A%22portrait%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage/png%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAATo0lEQVR42u3dv6vV9x3H8e85OEnPIrdji4M0EDJ1sVDIUKQusZghUFepgyCdivgniHQqgkOLq4EOCbFLSshQKOiSSQSDg7RjLy6nuNql5%2BZ4Pfee78/P9/P5vB%2BPJYlJ9N5zr76e38/5tWgYzWp18NatADCd9fpw4VYYhxvSyAOIAwGAsQcQBQLA4AMgCASA0QdADAgAow%2BAGBAAhh8AISAAjD4AYkAAGH4AhIAAMPwACAEBYPgBEAICwPADIAQEgOEHQAiMa2n8ASDeJi3cyAAQ7zSgiA/U8AMgBMaV/V0Axh%2BA0pSwXUs3IADE27CFGw0AppXjXQLZnQAYfwCcBgQLAOMPgAhIY%2BFGAYC0crhLYPYTAOMPgNOAYAFg/AEQAcECwPgDIALm28JltE8YAETADAFg/AFg/m1c1v4JAoAImDEAjD8A5LOVy9o%2BIQAQARkEgPEHgPy2c1n6JwAAIiCjADD%2BAJDvli5L%2B4ABQARkfAIAAORr9ABw9Q8A%2BW/rMvcPEAAYf2OXuX5gAMB0W%2BsxAAAQ0CgB4OofAMo6BVjm8oEAAOm2dzn3BwAApN9gjwEAgIB6B4CrfwAo9xTACQAAOAFw9Q8AEU4Blql%2BIQAgnwhwFwAABNQpAFz9A0AdpwBOAADACYCrfwCIcArgBAAAnAC4%2BgeACKcATgAAwAmAq38AiHAK4AQAAJwAuPoHgAinAE4AAMAJAAAQOgAc/wNA2U7bcicAAOAEwNU/AEQ4BXACAABOAACAkAHg%2BB8A6rJr250AAIATAAAgXAA4/geAOh3feCcAABD9BAAAEAAAQO0B4P5/AKjb9tY7AQCAyCcAAIAAAAAEAABQXQB4ACAAxLDZfCcAABD1BAAAEAAAgAAAAAQAACAAAIDyLDwFEACcAAAAAgAAEAAAgAAAAAQAACAAAAABAAAIAABAAAAAAgAAEAAAgAAAAAQAACAAAAABAAAIAABAAACAAAAABAAAIAAAAAEAAAgAAEAAAAACAAAQAACAAAAABAAAIAAAAAEAAAgAAEAAAAACAAAQAACAAAAAAQAACAAAQAAAAAIAABAAAIAAAAAEAAAgAAAAAQAACAAAQAAAAAIAABAAAIAAAAAEAAAgAAAAAQAAAgCI5t///N07fwViWaxWB2/dDBBv%2BJumaV48f9Z88OFHR//8k1/%2BxQ0EAgCodfj3EQIgAIBAwy8EQAAAgYdfCIAAACoe/svXXzVfPzwvBEAAAFGG/zghAAIAqHT8dw1/3xAQASAAgAqGXwiAAAACD78QAAEABB5%2BIQACAChk%2BKca/64RIARAAAAVDL8QAAEABB5%2BIQACAAg8/EIABAAQePiFAAgAIPDwCwEQAEDg4RcCIACAwMMvBEAAAIGHXwiAAADDH3j4hQAIADD%2BgYe/bwiIABAAYPiFACAAwPALAUAAgOEXAoAAgByG3/hPGwFCAAQAGH4h4AYDAQCGXwgAAgAMvxAABAAYfiEAAgAw/EIABAAYfsMvBEAAgOE3/EIABAAYfoQACAAw/AgBEABQw/gb/rghIAIQAGD4EQIgAMDwIwRAAIDhRwiAAICyht/40ycChAACAAw/QsANhgAAw48QAAEAhh8hAAIADD9CAAQAGH6EAAgAMPwIARAAYPgRAiAAMPyGHyEAAgDjb/ipIAREAAIADD9CAAQAht/wIwRAAGD4i/kDvCSCSghA0zTN0k1AyuF31U9Ebb%2Bfu/wegaHOuAnI5Yrf8BMhAtqcBmx%2BzzgRQABg%2BEEIgADA8M/o0wK/JF/4rhQCIAAw/CAEQABg%2BEEIIADA8IMQQACA4QchgADA8Bt%2BEAIIAAy/4QchgAAg9PgbfsgzBEQAAgDDDwFDwGkAAgDDD0JACCAAMPwgBIjMuwEafuMPFYbAmL/3cQJAwCt%2Bww/1ngY4ERAAGH7DD0JACAgADL/hByEgBAQAhh8QAggADD8gBCjfYrU6eOtmMPy08/XD858W%2BIf9F75y7Pm%2Bbv3fCgEnABh%2BwIkAAgDDDwgBBABZjb/hB6YMARFQJo8BMPwk0uV%2BVl9LSvzeFQJOADD8QMATAXcLCAAMPyAEhEDmvBlQ5sNv/IFcQ2DMP8NwAkDjkf1APacBTgQEAIYfEAJCQABg%2BAEhIAQEgOE3/IAQQAAYfsMPCAEEgOEHEAIIAMMPIAQQAIYfQAggAAw/gBBAAGQ7/oYfwDsPCgDDDyAEGu8zIAAMP4AQEAICwPADCAEhMC7vBthj%2BI0/QNoQGPPPZpwATHLFb/gB5jkNcCIgAAw/gBAQAgLA8AMIASEgAAw/gBBAABh%2BACEgAAy/4QcQAgLA8Bt%2BACEgAAw/AEJAABh%2BAISAAKhg/A0/gBDY7EbtEbBYrQ7eGn7DDxBNmxCo%2BTSgygAw/AAIgUABYPgBEAKBAsAD/ABIGQE1hEDRAWD4ARACgQLA8AMgBIKeAOyLAMMPQKoQKPEUoLoAMPwApA6BF8%2BfNZduPCnqc1mW%2BkV48fzZe/9s/AGY0uXrr3buT4mKfyXA7Rv%2BT3/4b9M0TfP7P/7IdykAo9pszPb2fPDhR8V%2BPkUHwIvnz5prd143TdM0j%2B6eEwIATDr8G1duvfz/371sHt%2B/IADmJAQASDf85avuzYCEAACGf79lrV/Aa3deH8XAaV9UADhpJ67celnl%2BFd5ArDvRMBpAABthr92Z6J8ca/dee1uAQBOHf4o4x8qAHadBggBAMMfbfhDBoAQADD80Yc/dAAIAQDDH3X4BYAQADD8AgAhAGD4BYAQEAIAhl8ACAEhAGD4BYAQEAIAhv%2BY9frwadM0zWp1cFEACAEAgl3xlxICAkAIABj%2BiUIg5wgQAEIAJvOfw3%2B992M/PvipG4aqh7%2BU0wABMGEIiABK8vXD8zt//PL1V6ON/%2BbHRQBDxr/EB/flGAICYMIQcBpA6eO/79%2BdFAknjb8IINrw5xwCAmCiEHC3ADWMf5%2Bf4%2Be/%2BUfrEwIRQJvhr2X8cwsBAZDoNEAIEEHb8d%2BOgO%2B%2B%2BnjviQKGv1ZzhoAAEAKQnbEfj4DhFwICQAiAMMDwIwCEANQSBiLA8CMAhACIAAw/AkAIQCrfffVxpwcC7noAIIYfASAEhAAVR4DxN/wIAIQAwSLA%2BBt%2BBABCgGARYPwNPwIAIUAGLl9/NcqrAc59pe8BgIYfASAEAAw/eyzdBOWFwCYGTvtNCJBy/K/cemn8nQAwx4mA0wCGmPJugFQfP/MNPwKAmULA3QJA6uE3/gKADE8DhACRTgFc/Rt%2BBIAQEAKA4UcACAEhQO2nAK7%2BDT8CACEAGH4EAEKA2k8BXP0bfgQAQoBgEWD8DT8CACFAsAgw/oYfAYAQINHY5hACht/wIwAQAgQ7DTD%2Bhh8BgBAgWAQYf8PPNLwZEDtDwBsOkcMYG/9xxt8b9eAEgEEnAk4D2B7lKU8DDP94ww9OABgcAtt/yDgRYKqRNv79ht/44wSAJKcBTgQ4PtZDTgSM/jhX/IYfAYAQYJYY6BMBxt/wIwAQAoDhRwAgBMjFlA/4a/tzRz4pMPwIAIQAGH43DAIAIQCGHwQAQgAMPwgAhAAYfhAACAEw/CAAEAK057n6hh8BAEIADD8V8F4AzB4C3nmQiOPvHfpwAgCNdx4k1vCDAIAdIeBuAWocfuOPAICOpwFCAMMPAgAhIAQw/CAAEAJCAMMPAgAhAIYfBABCAAw/CACEABh%2BEAAIATD8CAAQAmD4EQAgBDD8hh8BAEIAww9V8WZAhAgBbzhEl/H3Rj04AYCKTwScBuCNehAAECwE3C1g%2BI8z/ggACHgaIAQMPwgAEAJCwPCDAAAhIAQMPwgAEAIYfhAAIAQw/CAAQAhg%2BEEAgBDA8IMAACGA4QcBAEIAww8CAIQAhh8EAAgBDD9Mx7sBwsgh4J0Hpxl/79AHTgCguBMBpwHDhh8QAFBcCLhboN/wG38QAFDVaYAQMPwgAEAIhA0Bww8CAIRAoBAw/CAAQAgECgHDDwIACBQChh8EABAoBAw/CAAgUAgYfhAAQKAQMPzTuHfzbHP7wRs3BAIAhEBeIWD4QQDAOx7dPffe6%2BJTTwgYfhAAQKAQMPxQB%2B8GyGRX/8dHivFDIPU7D3qHvrTu3Tz7zl/BCQBw4onAFKcB3qEPBACQcQiMfbeA434QANDa8WN/Dwac7zSgbwgYfhAAQKAQMPwgAGCUq3%2BnAGWEgOEHAQAECwHDDzF5GiAEC4GTTmI8pS8vx5/656mACACyte85/14TIN8QMPwgAAAAAQAACAA4QdvjfXcDAAgAAEAAUPvVv1MAAAEAwAlOesqfpwIiAAAAAcB8%2Bh7nuxsAQAAAAAKA2q/%2BnQIAzM%2BbATHrcG9%2BLu8UCOAEgCDj7zQAQABQwPBPPdIpfg3I3b6n%2BnkqIAKA4q/6nQYAzMdjAMhyiD02AMAJAMHG32kAgBMADK7TAAAnAES%2B2nYaAOAEgKDD6jQAwAkAga%2BqnQZQo7ZP8fNUQJwAEHpAnQZQ06hP%2BfPefvDGFwIBQPPeaJYYA0YfQAAQJAaMPoAAIEgMGH0AAUCQGDD6AAKAIDFg9AHS8jRAOvF2wABOADD8k/waTgMAnAAQZPydBgA4ASDw%2BG//uk4CqEHbF%2BHp84JBXuAHJwBUeSXuJABAADCDua/AnQAACACCjbDxBxAABIsA4w8gAAgWAcYfQAAQLAKMP4AAIFgEGH8AAUCwCDD%2BAAKAYBFg/AEEAMEiwPjDD7q%2Bqp9XAWQoLwWMEYfMIuC0lwU2/AgAAKcB0Ju7AABAAAAAAgAAEAAAgAAAAAQAACAAAAABAAAIAABAAAAAAgAAEAAAgAAAAAQAACAAAAABAAAIAABAAACAAAAABAAAIAAAAAEAAAgAAEAAAAACAAAQAACAAAAABAAAMLUzbgIe3T2X3cd07c5rXxhCu3fz7Hs/dvvBGzcMAgAgwuif9O/FAEMt1%2BvDhZsBIO/xH/rfw7b1%2BnDhMQAAhY2/CGCUEwA3AUB54y8CEAAAQcdfBCAAAIBOPAuA3k%2B5y/HpgxDt6n/75/PMAJwAAAD7A8BTAQEghs3mOwEASGyqB%2B15MCCdTwAAAAEAAAgAAKDaAPBAQACo2/bWOwEAgMgnAACAAABgIlO9Yp9XAqSLd14KeL0%2BXKxWB2/dLADpXP3s173/3y//%2Bnc3IK0cf6yf9wIASOT7b69OGg9XP/vhx3/2qy/d4LQ/AQAg/9Hv%2BuuKAVoFgLsBANIN/xhH%2BPvuQth8LEIgrl1P9XcCAJBo%2BLuO/fawn/b/7vp3u6JACCAAABKNf58r/F3jvfmxtj/f9n93/Of7/turIoDdAeBuAIBh45/To/M3H8t2CIiAOE56pV%2BvAwAw0eD2se/%2BfE8ZZNITAKcAAHWOqwhw9e8EAAACEwAAIxjrZXj3XaGPdQXvZYM5NQC8RTBAfaNq/Mfx%2BP6F5vH9C9l%2BfPs2vPinAT66e665due170Qgq3G9d/Ps4FOAtq8DYPjTD//Gxd/%2B7Wmpn0erK/ycHwz4zZ9/cfT3QiB9fA3la5bH1/DKrZdujIkMCQFX/PGGf7U6uJji6r%2BKE4BLN54chcDmDzOjAuR2IpA6Boy%2BK/5RAqCEpwQKAaCkGBjrlMDQG/4%2BV/9VnAAIAaDWMMDwz34CUMopgBAAYIzxL3X4uzx7r/rXAbh048lRDIzxoDUA6hz%2B0se/q87P8y/55YE9Y2B8Q6LK1yCfr59nARD9ij%2BX4R/yLICur90T6u2A3S0AQI7DP4fOAVDDmwQJAQDDX9Pw93nl3jN9f6Ea3inw0o0nzXp9%2BPTp559cFAIAhj/K%2BPcOgNpsvhmEAIDhj6J3ANRyCiAEAAx/tKt/JwBCAMDwOwFwCiAEAAx/hKv/punxOgC7lBwB6/Vh62%2BUp59/cvT8TCFADbwOAIY/L21fB2Do%2BA8%2BAYhyEuBEAMDw13LlP2oARCMEAAx/6UYLgCinAEIAwPCXfvU/%2BglAxAgQAgBpxj/6Ff%2BY4980E7wb4NgfYGkhsPkG9c6DAMOH3/hPt60eAzBRCDgNABh2xW/4pzVJAES9K%2BB4BDSNuwUADH9%2BV/%2BTngCIACEAYPjzHP%2BmGemFgE5TSgR0eUGgIbyYEDnxQkAY/jzsegGgqR9Tt0j0iRVzEiAEEABg%2BOcc/hTjnywASosAIYAAAMM/x/CnGv%2BkAVBiBAgBBAAY/lTDn3L8kwdAqREgBBAAYPinHP7U4z9LAJQcAUIAAQCGf%2Bzhn2P8ZwsAESAEEAAYfuM/3/jPGgClR4AQQACA4R8y/HOO/%2BwBUEMECAEEAIbf8Hcd/rnHP4sAqCUChAACgIjjb/i7D38O459NAAiB4SEgAhAAuOo3/MUGQE0RkDIEnAYgADD8eQ9/buOfZQDUFgFCAAGA4Y89/DmOf7YBIASEAAIAw2/4AwdAjREgBBAAGP76hz/38S8iAGqNACGAAMDw1zn8JYx/MQEgBIQAAgDDb/gDB4AQEAIIAAy/4Q8cADVHgBBAAGD4yxn%2BUse/6AAQAkIAAYDhN/yBA6D2EPDywggADH9e41/68FcXAEJACCAAMPyGP3AACAEhgAAw/t6ox/AHDgAhMH4IiAABgKt%2Bwy8AxECwEHAaIAAw/BGGv/bRDxsAQkAIIAAMv%2BGPPvyhA6DmGBACCADDb/iNvgAIHANCAAFg%2BA2/0RcAgYNACCAADH/k4Tf4AiB8FAgBBIDhr334jb0AEAdCAAFg%2BCsdfiM/nv8BHPkHnIkcZB0AAAAASUVORK5CYII%3D%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image/png%22%7D%5D%7D">
-
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-
-<!-- Inline service worker removed — single-file PWA works offline natively -->
+<meta name="apple-mobile-web-app-title" content="PROPAGAN SCORE">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;margin:0;padding:0;}
+*{
+  box-sizing:border-box;margin:0;padding:0;
+  -webkit-tap-highlight-color:transparent;
+  -webkit-touch-callout:none;
+  -webkit-user-select:none;
+  user-select:none;
+}
 
 :root{
-  --bg:        #0d0d14;
-  --surface:   #13131f;
-  --surface2:  #1a1a2a;
-  --border:    #2a2a3e;
-  --border2:   #3a3a54;
-  --gold:      #c9a84c;
-  --gold2:     #e8c86a;
-  --cream:     #e8e4d0;
-  --muted:     #6b6b8a;
-  --red:       #8b1a1a;
-  --red2:      #c0392b;
-  --green:     #1a5c2a;
-  --green2:    #27ae60;
-  --blue:      #1a2a5c;
-  --blue2:     #2980b9;
-  --font-ui:   'Barlow Condensed', sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  /* Dark RPG palette */
+  --bg:       #0d0f14;
+  --panel:    #13161e;
+  --surface:  #1a1e2a;
+  --border:   #252b3a;
+  --border2:  #2e3650;
+
+  /* Accent — gold for headings / neutral */
+  --gold:     #c9a84c;
+  --gold-dim: #7a6128;
+  --gold-glow:rgba(201,168,76,0.18);
+
+  /* Count-DOWN mode — electric cyan (also P1's signature color) */
+  --dn-bg:    #060f1f;
+  --dn-text:  #00c8ff;
+  --dn-bright:#40ddff;
+  --dn-pip:   #0a2a4a;
+  --dn-fill:  #0090d0;
+  --dn-glow:  rgba(0,200,255,0.35);
+  --dn-border:#0a2540;
+
+  /* Player 2 signature — electric magenta/purple */
+  --p2-bg:    #150a24;
+  --p2-text:  #d63bff;
+  --p2-bright:#ef6dff;
+  --p2-fill:  #b820d8;
+  --p2-glow:  rgba(214,59,255,0.4);
+  --p2-border:#2a0f45;
+
+  /* KO — red */
+  --ko-fill:  #c0392b;
+  --ko-glow:  rgba(192,57,43,0.5);
+
+  --divider-h: 42px;
 }
 
+html,body{
+  height:100%;width:100%;
+  background:var(--bg);
+  font-family:'Rajdhani',sans-serif;
+  overflow:hidden;
+  touch-action:manipulation;
+  color:#e8e0cc;
+}
 body{
-  background:var(--bg);
-  display:flex;align-items:flex-start;justify-content:center;
-  min-height:100dvh;
-  font-family:var(--font-ui);
-  padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px) 0;
-  overflow:hidden;touch-action:none;
-  color:var(--cream);
+  display:flex;flex-direction:column;align-items:stretch;
+  padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px)
+          env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px);
+  transition:transform 0.45s cubic-bezier(0.4,0,0.2,1);
+  transform-origin:center center;
 }
 
-/* ── App shell ── */
-.app{
-  width:100vw;max-width:460px;
-  min-height:100dvh;
+/* ══ PLAYER PANEL ══ */
+.player{
+  flex:1;display:flex;flex-direction:column;
+  background:var(--panel);position:relative;overflow:hidden;min-height:0;
+}
+.player.p2{ transform:rotate(180deg); }
+
+/* subtle top-edge highlight */
+.player.p1::before{ content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold-dim),transparent);z-index:1; }
+.player.p2::before{ content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold-dim),transparent);z-index:1; }
+
+/* ── Flash overlay ── */
+.flash{
+  position:absolute;inset:0;opacity:0;pointer-events:none;z-index:20;
+  transition:opacity .06s;
+}
+.flash.show{ opacity:1; }
+
+/* ── Header ── */
+.p-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:6px 14px 5px;
+  border-bottom:1px solid var(--border);
+  flex-shrink:0;
+  background:linear-gradient(180deg,#1e2230 0%,var(--panel) 100%);
+}
+.p-label{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:16px;letter-spacing:3px;
+  color:var(--gold);
+  text-shadow:0 0 12px var(--gold-glow);
+}
+
+/* ── Row bands ── */
+.row-band{
+  display:flex;flex-shrink:0;
+  border-bottom:1px solid var(--border);
+  min-height:0;
+}
+.row-gdp{ flex:2.8; }
+.row-atk{ flex:1.3; }
+.row-eq { flex:1.2; border-bottom:none; }
+
+/* ══ STAT CELL ══ */
+.stat{
+  flex:1;
   display:flex;flex-direction:column;
-  background:var(--bg);
+  align-items:center;justify-content:space-between;
+  padding:6px 5px 5px;
+  border-right:1px solid var(--border);
+  min-height:0;overflow:hidden;
+  cursor:pointer;
+  position:relative;
+  background:var(--surface);
+  transition:background 0.25s;
+}
+.stat:last-child{ border-right:none; }
+.stat-gdp{ flex:1;border-right:none;padding:14px 5px 12px; }
+
+/* tap ripple */
+.stat::after{
+  content:'';position:absolute;inset:0;
+  background:rgba(255,255,255,0.06);
+  opacity:0;transition:opacity .15s;pointer-events:none;
+}
+.stat.tapped::after{ opacity:1; }
+
+/* ══ PLAYER SIGNATURE COLORS — applied to every stat cell, LED-saturated ══ */
+
+/* Player 1 — electric cyan */
+.player.p1 .stat{
+  background:var(--dn-bg);
+  border-color:var(--dn-border);
+}
+.player.p1 .stat-label{ color:var(--dn-text); }
+.player.p1 .stat-val{
+  color:var(--dn-bright);
+  text-shadow:
+    0 0 6px var(--dn-glow),
+    0 0 16px var(--dn-glow),
+    0 0 32px var(--dn-glow);
+}
+.player.p1 .pip-track::after{ background:var(--dn-fill); box-shadow:0 0 8px var(--dn-glow); }
+
+/* Player 2 — electric magenta/purple */
+.player.p2 .stat{
+  background:var(--p2-bg);
+  border-color:var(--p2-border);
+}
+.player.p2 .stat-label{ color:var(--p2-text); }
+.player.p2 .stat-val{
+  color:var(--p2-bright);
+  text-shadow:
+    0 0 6px var(--p2-glow),
+    0 0 16px var(--p2-glow),
+    0 0 32px var(--p2-glow);
+}
+.player.p2 .pip-track::after{ background:var(--p2-fill); box-shadow:0 0 8px var(--p2-glow); }
+
+/* unlocked pulse ring — brief confirmation flash on reset */
+.unlock-flash{
+  position:absolute;inset:0;border-radius:0;
+  border:2px solid rgba(0,200,255,0.8);
+  opacity:0;pointer-events:none;z-index:13;
+}
+.unlock-flash.show{
+  animation:unlockPulse 0.4s ease-out;
+}
+@keyframes unlockPulse{
+  0%{ opacity:1; transform:scale(0.94); }
+  100%{ opacity:0; transform:scale(1.02); }
+}
+
+/* ── Label ── */
+.stat-label{
+  font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:#5a6080;flex-shrink:0;text-align:center;line-height:1;
+  transition:color .2s;
+}
+.stat-gdp .stat-label{ font-size:13px;letter-spacing:3px; }
+
+/* ── Value ── */
+.stat-val{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(32px,9vw,58px);
+  color:#e8e0cc;line-height:1;
+  flex:1;display:flex;align-items:center;justify-content:center;
+  transition:transform .1s,color .25s,text-shadow .25s;
+}
+.stat-val.pop{ transform:scale(1.35); }
+.stat-gdp .stat-val{ font-size:clamp(48px,13vw,84px); }
+
+/* ══ DICE BUTTON (sits beside GDP) ══ */
+.dice-btn{
+  flex-shrink:0;
+  width:46px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:4px;
+  margin-left:6px;
+  border:1px solid var(--border2);
+  border-radius:6px;
+  background:var(--surface);
+  cursor:pointer;
+  transition:background .15s,border-color .15s;
+}
+.dice-btn:active{ background:rgba(255,255,255,0.06); }
+.dice-btn svg{ width:20px;height:20px; }
+.dice-btn .dice-btn-label{
+  font-size:7px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  color:#5a6080;
+}
+.player.p1 .dice-btn{ border-color:var(--dn-border); }
+.player.p1 .dice-btn svg{ color:var(--dn-bright); }
+.player.p1 .dice-btn .dice-btn-label{ color:var(--dn-text); }
+.player.p2 .dice-btn{ border-color:var(--p2-border); }
+.player.p2 .dice-btn svg{ color:var(--p2-bright); }
+.player.p2 .dice-btn .dice-btn-label{ color:var(--p2-text); }
+
+/* ══ DICE OVERLAY — full panel, slides in over the score board ══ */
+.dice-overlay{
+  position:absolute;inset:0;z-index:30;
+  background:var(--panel);
+  display:flex;flex-direction:column;
+  transform:translateY(100%);
+  transition:transform 0.32s cubic-bezier(0.4,0,0.2,1);
+  pointer-events:none;
+}
+.dice-overlay.open{
+  transform:translateY(0);
+  pointer-events:auto;
+}
+
+/* top bar with back button */
+.dice-topbar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:7px 10px;
+  border-bottom:1px solid var(--border);
+  flex-shrink:0;
+  background:linear-gradient(180deg,#1e2230 0%,var(--panel) 100%);
+}
+.dice-back-btn{
+  display:flex;align-items:center;gap:5px;
+  background:none;border:1px solid var(--border2);
+  border-radius:5px;padding:4px 9px;cursor:pointer;
+  font-family:'Rajdhani',sans-serif;font-weight:700;font-size:11px;letter-spacing:1px;
+  color:#8a90a8;
+}
+.dice-back-btn svg{ width:13px;height:13px; }
+.dice-title{
+  font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:2px;
+  color:var(--gold);
+}
+
+/* ── Dice roll screen ── */
+.dice-stage{
+  flex:1;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:6px;padding:8px;min-height:0;overflow-y:auto;
+}
+.dice-group-label{
+  font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:#5a6080;margin-top:2px;
+}
+.dice-group-label span{ color:#aab0c8;letter-spacing:1px; }
+.dice-row{
+  display:flex;gap:10px;align-items:center;justify-content:center;
+}
+.die-box{
+  width:78px;height:78px;
+  border:3px solid var(--border2);border-radius:11px;
+  background:var(--surface);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Bebas Neue',sans-serif;
+  cursor:pointer;
+  position:relative;
+  transition:transform .08s;
+}
+.die-box:active{ transform:scale(0.93); }
+.die-box.rolling{ animation:dieShake .35s ease infinite; }
+@keyframes dieShake{
+  0%,100%{ transform:translate(0,0) rotate(0deg); }
+  25%{ transform:translate(-2px,1px) rotate(-3deg); }
+  75%{ transform:translate(2px,-1px) rotate(3deg); }
+}
+.die-box .die-sym{ font-size:36px;line-height:1; }
+.die-box-eq{ width:70px;height:70px; }
+.die-box-eq .die-sym{ font-size:32px; }
+.player.p1 .die-box{ border-color:var(--dn-border); }
+.player.p1 .die-box .die-sym{ filter:drop-shadow(0 0 6px var(--dn-glow)); }
+.player.p2 .die-box{ border-color:var(--p2-border); }
+.player.p2 .die-box .die-sym{ filter:drop-shadow(0 0 6px var(--p2-glow)); }
+
+.dice-roll-btn{
+  padding:9px 24px;border:none;border-radius:8px;
+  font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:2px;
+  cursor:pointer;color:#0a0c10;
+  transition:transform .07s;
+  margin-top:2px;
+}
+.dice-roll-btn:active{ transform:translateY(2px); }
+.player.p1 .dice-roll-btn{ background:var(--dn-bright); box-shadow:0 4px 0 var(--dn-fill); }
+.player.p1 .dice-roll-btn:active{ box-shadow:0 1px 0 var(--dn-fill); }
+.player.p2 .dice-roll-btn{ background:var(--p2-bright); box-shadow:0 4px 0 var(--p2-fill); }
+.player.p2 .dice-roll-btn:active{ box-shadow:0 1px 0 var(--p2-fill); }
+
+/* end-turn banner — shown when both equip dice land on Stop */
+.end-turn-banner{
+  display:none;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:11px;letter-spacing:1px;
+  color:#ff6b6b;
+  border:1px solid #5a2030;
+  background:rgba(192,57,43,0.12);
+  border-radius:6px;
+  padding:4px 10px;
+  text-align:center;
+}
+.end-turn-banner.show{ display:block; }
+
+/* ── Roll counters ── */
+.roll-counter{
+  font-family:'Bebas Neue',sans-serif;font-size:10px;letter-spacing:1px;
+  color:#6a7090;margin-left:4px;
+}
+
+/* ── Disabled (out of rolls) vs Locked (no-action this turn) dice ── */
+.die-box.die-disabled{
+  opacity:0.35;cursor:default;
+}
+.die-box.die-locked{
+  opacity:0.4;cursor:default;
+  border-color:#5a2030 !important;
+  background:repeating-linear-gradient(135deg,var(--surface),var(--surface) 4px,#1f1015 4px,#1f1015 8px);
+}
+.die-box.die-locked::after{
+  content:'\1F512';
+  position:absolute;bottom:2px;right:3px;font-size:9px;line-height:1;opacity:0.8;
+}
+
+/* ── Equip die + its own counter, stacked ── */
+.eq-die-col{
+  display:flex;flex-direction:column;align-items:center;gap:3px;
+}
+
+/* ── Equip-hit tally — sits off to the side of the equip dice ── */
+.eq-hit-badge{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:1px;
+  margin-left:6px;padding:6px 10px;
+  border:1px solid var(--border2);border-radius:8px;
+  background:var(--surface);
+}
+.eq-hit-sym{ font-size:18px;line-height:1; }
+.eq-hit-count{
+  font-family:'Bebas Neue',sans-serif;font-size:18px;line-height:1;
+}
+.player.p1 .eq-hit-badge{ border-color:var(--dn-border); }
+.player.p1 .eq-hit-count{ color:var(--dn-bright); }
+.player.p2 .eq-hit-badge{ border-color:var(--p2-border); }
+.player.p2 .eq-hit-count{ color:var(--p2-bright); }
+
+/* small variant of the roll button, for the faction "roll all" action */
+.dice-roll-btn-small{
+  padding:6px 18px;font-size:11px;
+}
+
+/* bottom row holding the next-turn button (centered when it's the only item) */
+.dice-bottom-row{
+  display:flex;align-items:center;justify-content:center;
+  width:100%;max-width:280px;margin-top:4px;
+}
+.dice-bottom-row-solo{ justify-content:center; }
+.next-turn-btn{
+  background:none;border:1px solid var(--border2);border-radius:6px;
+  padding:5px 11px;cursor:pointer;
+  font-family:'Rajdhani',sans-serif;font-weight:700;font-size:10px;letter-spacing:1px;
+  color:#8a90a8;
+}
+.player.p1 .next-turn-btn{ border-color:var(--dn-border); }
+.player.p2 .next-turn-btn{ border-color:var(--p2-border); }
+
+.pip-track{ display:none; }
+
+/* ── GDP bar ── */
+.stat-gdp .pip-track{
+  display:block;
+  width:90%;height:8px;
+  background:var(--border2);
+  border-radius:4px;
+  margin-bottom:4px;
+  flex-shrink:0;
+  overflow:hidden;
+  position:relative;
+}
+/* inner fill bar — driven by a CSS custom property set via JS; color comes from player signature rules below */
+.stat-gdp .pip-track::after{
+  content:'';
+  position:absolute;inset:0;
+  width:var(--bar-pct,100%);
+  border-radius:4px;
+  transition:width 0.2s ease, background 0.25s;
+}
+
+/* ── D6 result overlay ── */
+.d6-overlay{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:rgba(6,15,31,0.92);
+  z-index:15;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .12s;
+}
+.d6-overlay.show{ opacity:1; }
+.d6-face{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(38px,12vw,64px);
+  color:#40ddff;
+  text-shadow:0 0 24px rgba(0,200,255,0.7),0 0 6px rgba(0,200,255,0.5);
+  line-height:1;
+}
+.d6-label{
+  font-size:10px;font-weight:700;letter-spacing:3px;
+  color:#0090d0;margin-top:3px;text-transform:uppercase;
+}
+
+/* ── Long-press SVG arc ── */
+.lp-svg{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-54%);
+  pointer-events:none;z-index:10;
+  opacity:0;transition:opacity .1s;
+}
+.lp-svg.active{ opacity:1; }
+
+/* KO counter's charge arc renders as a fixed overlay centered on that
+   player's whole panel, so it's visible no matter which hand/side you use */
+.ko-center-arc{
+  position:fixed;
+  width:84px;height:84px;
+  pointer-events:none;z-index:50;
+  opacity:0;transition:opacity .1s;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+}
+.ko-center-arc.active{ opacity:1; }
+
+/* ══ DIVIDER ══ */
+.divider{
+  flex-shrink:0;height:var(--divider-h);
+  background:#0a0c10;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;
+  padding:0 10px;
+  gap:8px;
+  z-index:20;
   position:relative;
 }
 
-/* ── Top bar ── */
-.top-bar{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:max(10px,env(safe-area-inset-top)) 16px 8px;
-  flex-shrink:0;
-  border-bottom:1px solid var(--border);
-  position:relative;z-index:1;
+/* thin gold line top+bottom of divider */
+.divider::before,.divider::after{
+  content:'';position:absolute;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent 0%,var(--gold-dim) 30%,var(--gold-dim) 70%,transparent 100%);
 }
-.top-bar-logo{
-  font-family:var(--font-ui);font-weight:900;font-size:15px;
-  letter-spacing:3px;color:var(--gold);text-transform:uppercase;
-}
-.top-bar-logo span{color:var(--muted);}
-.top-bar-right{display:flex;align-items:center;gap:10px;}
-.power-pip{width:7px;height:7px;border-radius:50%;background:var(--red2);box-shadow:0 0 6px var(--red2);}
-.power-pip.on{background:var(--green2);box-shadow:0 0 8px var(--green2);}
+.divider::before{ top:0; }
+.divider::after { bottom:0; }
 
-/* ── Screen area ── */
-#gb-screen{
-  flex:1;min-height:0;
-  position:relative;overflow:hidden;
-  font-family:var(--font-ui);
-  font-size:14px;color:var(--cream);
-  background:var(--bg);
+.divider-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:13px;letter-spacing:4px;
+  color:var(--gold-dim);
+  white-space:nowrap;
 }
 
-/* ── Screens ── */
-.scr{position:absolute;inset:0;display:flex;flex-direction:column;overflow:hidden;}
-.scr-hidden{display:none!important}
-
-/* ═══════════════════════════ TITLE ════════════════════════════ */
-#scr-title{
-  background:var(--bg);
-  align-items:center;justify-content:center;
-  gap:0;padding:24px 20px;
-}
-.title-eyebrow{
-  font-size:11px;letter-spacing:5px;color:var(--muted);
-  text-transform:uppercase;margin-bottom:10px;
-}
-.title-logo{
-  font-weight:900;font-size:52px;letter-spacing:-1px;
-  color:var(--cream);line-height:0.9;text-align:center;
-  text-transform:uppercase;
-}
-.title-logo em{color:var(--gold);font-style:normal;}
-.title-sub{
-  font-size:12px;letter-spacing:4px;color:var(--muted);
-  margin:12px 0 28px;text-transform:uppercase;
-}
-.title-factions{
-  display:grid;grid-template-columns:1fr 1fr;gap:6px;
-  width:100%;max-width:320px;margin-bottom:28px;
-}
-.faction-pill{
-  border:1px solid var(--border2);padding:7px 12px;
-  font-size:13px;font-weight:700;letter-spacing:1px;
-  color:var(--muted);background:var(--surface);
-  display:flex;align-items:center;gap:8px;
-}
-.faction-pill .fp-sym{font-size:20px;font-family:'Courier New',monospace;color:var(--cream);}
-.tmenu{display:flex;flex-direction:column;gap:8px;width:100%;max-width:320px;}
-.tmenu-item{
-  padding:14px 20px;font-size:15px;font-weight:700;letter-spacing:2px;
-  text-transform:uppercase;cursor:pointer;
+/* reset button — icon-only */
+.reset-btn{
+  background:none;
   border:1px solid var(--border2);
-  background:var(--surface);color:var(--muted);
-  text-align:center;transition:all .12s;
-}
-.tmenu-item.active{
-  background:var(--gold);color:var(--bg);
-  border-color:var(--gold);
-}
-.title-hint{
-  font-size:11px;letter-spacing:2px;color:var(--muted);
-  margin-top:16px;animation:pulse 2s ease-in-out infinite;
-}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
-
-/* ═══════════════════════════ SETUP ════════════════════════════ */
-#scr-setup{background:var(--bg);padding:20px 16px;gap:0;}
-.setup-header{
-  font-weight:900;font-size:22px;letter-spacing:2px;
-  color:var(--gold);text-transform:uppercase;
-  border-bottom:1px solid var(--border);padding-bottom:12px;margin-bottom:16px;
-  display:flex;justify-content:space-between;align-items:center;
-}
-.setup-header span{font-size:11px;color:var(--muted);font-weight:400;letter-spacing:3px;}
-.setup-row{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:20px 16px;border-bottom:1px solid var(--border);
-  cursor:pointer;font-size:15px;font-weight:700;letter-spacing:1px;
-  color:var(--muted);text-transform:uppercase;
-  background:transparent;transition:background .1s;
-  -webkit-tap-highlight-color:transparent;
-}
-.setup-row.sel{background:var(--surface2);color:var(--cream);}
-.setup-row.sel::before{content:'▶ ';}
-.sv{color:var(--gold);font-size:15px;font-family:var(--font-mono);}
-.setup-faction-grid{
-  display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:20px;
-}
-.setup-faction-card{
-  border:1px solid var(--border);padding:8px 10px;
-  background:var(--surface);
-}
-.sfc-name{font-size:11px;color:var(--muted);letter-spacing:2px;margin-bottom:4px;text-transform:uppercase;}
-.sfc-sym{font-size:22px;font-family:'Courier New',monospace;color:var(--cream);font-weight:900;}
-.setup-begin{
-  margin-top:20px;padding:16px;
-  background:var(--gold);color:var(--bg);
-  font-size:15px;font-weight:900;letter-spacing:3px;
-  text-align:center;cursor:pointer;text-transform:uppercase;
-}
-
-/* ═══════════════════════════ STATS ════════════════════════════ */
-#scr-stats{background:var(--bg);padding:12px 14px;gap:10px;display:flex;flex-direction:column;align-items:stretch;}
-.stat-box{
-  border:1px solid var(--border2);
-  background:var(--surface);
-  padding:10px 12px;flex:1;display:flex;flex-direction:column;min-height:0;
-}
-.stat-title{
-  font-size:13px;font-weight:700;letter-spacing:2px;
-  color:var(--gold);text-transform:uppercase;
-  margin-bottom:8px;flex-shrink:0;
-  display:flex;justify-content:space-between;align-items:center;
-}
-.stat-title span{font-size:11px;color:var(--muted);font-weight:400;}
-.stat-zone{
-  position:relative;flex:1;min-height:0;width:100%;
-  background:var(--surface2);
-  border:1px solid var(--border);
-}
-.stat-die{
-  width:48px;height:56px;
-  border:1px solid var(--border2);
-  border-radius:6px;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  background:var(--surface);
-  position:absolute;transform-origin:center center;
-  box-shadow:0 4px 16px rgba(0,0,0,.6);
-}
-.stat-die .die-val{
-  font-size:22px;font-weight:700;line-height:1;
-  font-family:var(--font-mono);color:var(--cream);
-}
-.stat-die .die-lbl{
-  font-size:9px;font-weight:700;letter-spacing:2px;
-  color:var(--gold);margin-top:3px;text-transform:uppercase;
-  font-family:var(--font-ui);
-}
-.stat-hp-total{
-  font-size:11px;font-family:var(--font-mono);font-weight:700;
-  color:var(--gold);position:absolute;right:6px;bottom:5px;
-  background:var(--surface);padding:2px 6px;
-  border:1px solid var(--border2);letter-spacing:1px;white-space:nowrap;
-}
-.stat-die.rolling{animation:dieshake .25s ease infinite}
-.stat-die.zspinning{animation:zspin .55s cubic-bezier(.2,.6,.4,1) forwards}
-.stat-die.land{animation:dieland .18s ease}
-
-/* ═══════════════════════════ GAME ════════════════════════════ */
-#scr-game{flex-direction:column;}
-
-.player-half{
-  flex:1;min-height:0;display:flex;flex-direction:column;
-  padding:8px 12px;position:relative;overflow:hidden;
-  background:var(--bg);
-}
-.player-half.p2{
-  flex-direction:column-reverse;
-  border-top:none;
-}
-
-.p-name-row{
-  display:flex;justify-content:space-between;align-items:center;
-  margin-bottom:4px;
-}
-.p-name{
-  font-size:13px;font-weight:900;letter-spacing:2px;
-  color:var(--cream);text-transform:uppercase;
-}
-.p-falls{
-  display:flex;gap:5px;align-items:center;
-}
-.fall-dot{
-  width:10px;height:10px;border-radius:50%;
-  border:2px solid var(--border2);background:transparent;
-  transition:all .2s;
-}
-.fall-dot.filled{background:var(--red2);border-color:var(--red2);box-shadow:0 0 6px var(--red2);}
-
-.hp-bar-row{display:flex;align-items:center;gap:8px;margin:3px 0;}
-.hp-label{
-  font-size:11px;font-weight:700;letter-spacing:2px;
-  color:var(--muted);text-transform:uppercase;white-space:nowrap;
-  min-width:38px;
-}
-.hp-track{
-  flex:1;height:8px;background:var(--surface2);
-  border:1px solid var(--border);overflow:hidden;border-radius:2px;
-}
-.hp-seg{
-  height:100%;
-  background:linear-gradient(90deg,var(--gold),var(--gold2));
-  transition:width .4s ease;border-radius:2px;
-}
-.hp-val{
-  font-size:13px;font-weight:700;font-family:var(--font-mono);
-  color:var(--cream);min-width:54px;text-align:right;
-}
-.hp-stats{
-  font-size:11px;font-weight:700;font-family:var(--font-mono);
-  color:var(--muted);white-space:nowrap;margin-left:4px;
-}
-
-.status-strip{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:3px 0;gap:6px;min-height:22px;
-}
-.faction-badge{
-  font-size:11px;font-weight:700;letter-spacing:2px;
-  padding:3px 8px;border:1px solid var(--border2);
-  background:var(--surface);color:var(--muted);
-  text-transform:uppercase;white-space:nowrap;
-}
-.faction-badge.lit{
-  background:var(--gold);color:var(--bg);
-  border-color:var(--gold);
-}
-.phase-lbl{
-  font-size:11px;font-weight:700;letter-spacing:1px;
-  color:var(--muted);text-align:right;flex:1;min-width:0;
-  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
-  text-transform:uppercase;
-}
-.phase-lbl.active{
-  color:var(--gold2);
-  animation:slowBlink 1.4s ease-in-out infinite;
-}
-@keyframes slowBlink{0%,100%{opacity:1}50%{opacity:0.2}}
-
-/* Dice tray */
-.dice-tray{
-  flex:1;min-height:0;position:relative;display:flex;
-}
-.fdie-zone{
-  flex:3;position:relative;
-  border-right:1px solid var(--border2);
-}
-.edie-zone{
-  flex:1;position:relative;min-width:82px;
-  background:var(--surface);
-}
-
-.fdie{
-  width:54px;height:54px;border-radius:8px;
-  border:1px solid var(--border2);
+  color:#3a4060;
   display:flex;align-items:center;justify-content:center;
-  background:var(--surface2);position:absolute;
-  cursor:pointer;transform-origin:center center;
-  box-shadow:0 4px 16px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.06);
+  padding:5px;cursor:pointer;border-radius:4px;
+  transition:border-color .15s,color .15s;
+  line-height:0;
 }
-.fdie .fsym{
-  font-size:28px;line-height:1;color:var(--cream);
-  font-weight:900;font-family:'Courier New',monospace;
-}
-.fdie.rolling{animation:dieshake .25s ease infinite}
-.fdie.zspinning{animation:zspin .55s cubic-bezier(.2,.6,.4,1) forwards}
-.fdie.land{animation:dieland .18s ease}
-.fdie.pip-highlight{
-  box-shadow:0 0 0 2px var(--gold),0 4px 16px rgba(201,168,76,.4);
-  border-color:var(--gold);
-}
+.reset-btn:active{ border-color:var(--gold-dim);color:var(--gold); }
+.reset-btn svg{ width:14px;height:14px;display:block; }
 
-.edie{
-  width:52px;height:52px;border-radius:8px;
-  border:1px solid var(--gold);
-  display:flex;align-items:center;justify-content:center;
-  background:#1a1508;position:absolute;
-  cursor:pointer;transform-origin:center center;
-  box-shadow:0 4px 16px rgba(0,0,0,.5),inset 0 1px 0 rgba(201,168,76,.1);
-}
-.edie canvas{display:block}
-.edie.rolling{animation:dieshake .25s ease infinite}
-.edie.zspinning{animation:zspin .55s cubic-bezier(.2,.6,.4,1) forwards}
-.edie.land{animation:dieland .18s ease}
-
-.out-bar{
-  display:flex;gap:4px;padding:2px 0;flex-wrap:wrap;min-height:20px;align-items:center;
-}
-.out-chip{
-  font-size:11px;font-weight:700;font-family:var(--font-mono);
-  padding:2px 7px;border-radius:2px;
-  background:var(--surface2);color:var(--muted);
-  border:1px solid var(--border);
-}
-.out-chip.war{color:var(--red2);border-color:var(--red);}
-.out-chip.def{color:var(--blue2);border-color:var(--blue);}
-
-/* Center divider */
-.divider{
-  height:28px;flex-shrink:0;position:relative;
-  background:var(--surface);
-  border-top:1px solid var(--border2);
-  border-bottom:1px solid var(--border2);
-  display:flex;align-items:center;justify-content:center;
-  cursor:pointer;
-}
-.div-text{
-  font-size:11px;font-weight:700;letter-spacing:4px;
-  color:var(--gold);text-transform:uppercase;
-}
-.active-arrow{
-  position:absolute;font-size:14px;color:var(--gold);
-  left:12px;transition:all .2s;
-}
-.favored-sig{
-  position:absolute;right:12px;
-  font-size:16px;font-family:'Courier New',monospace;
-  color:var(--gold);animation:favPulse 2s ease-in-out infinite;
-}
-@keyframes favPulse{0%,100%{opacity:1;text-shadow:0 0 8px var(--gold)}50%{opacity:.5;text-shadow:none}}
-
-/* Toast */
-#gb-toast{
-  position:absolute;bottom:12px;left:50%;transform:translateX(-50%);
-  background:var(--surface);border:1px solid var(--border2);
-  padding:7px 16px;font-size:12px;font-weight:700;letter-spacing:1px;
-  color:var(--gold);z-index:60;display:none;text-align:center;
-  white-space:nowrap;box-shadow:0 4px 20px rgba(0,0,0,.6);
-}
-
-/* ═══════════════════════════ TOUCH ACTION BAR ════════════════ */
-/* Replaces hardware controls — contextual buttons appear here */
-.action-bar{
-  display:flex;gap:8px;
-  padding:12px 14px;
-  padding-bottom:calc(max(16px,env(safe-area-inset-bottom)) + 4px);
-  flex-shrink:0;
-  border-top:1px solid var(--border);
-  background:var(--surface);
-  position:relative;z-index:10;
-  min-height:70px;align-items:stretch;
-}
-.tap-btn{
+/* ── KO section inside divider ── */
+.ko-section{
+  display:flex;align-items:center;gap:6px;
   flex:1;
-  padding:12px 8px;
-  font-family:var(--font-ui);font-size:14px;font-weight:900;
-  letter-spacing:2px;text-transform:uppercase;
-  border:1px solid var(--border2);
-  background:var(--surface2);color:var(--muted);
-  cursor:pointer;text-align:center;
-  transition:all .1s;border-radius:4px;
-  display:flex;align-items:center;justify-content:center;gap:6px;
 }
-.tap-btn:active{transform:scale(0.96);opacity:.8;}
-.tap-btn.primary{
-  background:var(--gold);color:var(--bg);
-  border-color:var(--gold);
-  box-shadow:0 4px 16px rgba(201,168,76,.25);
-}
-.tap-btn.secondary{
-  background:var(--surface2);color:var(--cream);
-  border-color:var(--border2);
-}
-.tap-btn.danger{
-  background:var(--red);color:var(--cream);
-  border-color:var(--red2);
-}
-.tap-btn.ghost{
-  background:transparent;color:var(--muted);
-  border-color:var(--border);font-size:12px;
-}
-.tap-btn:disabled,.tap-btn.disabled{opacity:0.3;pointer-events:none;}
+.ko-section.p1-ko{ justify-content:flex-start; }
+.ko-section.p2-ko{ justify-content:flex-end; }
 
-/* ═══════════════════════════ MODAL ════════════════════════════ */
-#scr-modal{
-  background:rgba(5,5,15,0.9);
-  align-items:center;justify-content:center;z-index:50;
-  backdrop-filter:blur(4px);
+.ko-label{
+  font-size:10px;font-weight:700;letter-spacing:2px;
+  color:#3a4060;text-transform:uppercase;white-space:nowrap;
 }
-.modal-box{
-  background:var(--surface);border:1px solid var(--border2);
-  padding:20px 22px;width:min(300px,90vw);
-  box-shadow:0 20px 60px rgba(0,0,0,.8);
-}
-.modal-title{
-  font-size:18px;font-weight:900;letter-spacing:3px;
-  color:var(--gold);text-transform:uppercase;
-  border-bottom:1px solid var(--border2);
-  padding-bottom:10px;margin-bottom:14px;text-align:center;
-}
-.modal-row{
-  display:flex;justify-content:space-between;padding:5px 0;
-  font-size:13px;font-weight:600;letter-spacing:1px;
-  color:var(--muted);border-bottom:1px solid var(--border);
-}
-.modal-row span{color:var(--cream);font-family:var(--font-mono);}
-.modal-hint{
-  font-size:11px;font-weight:700;letter-spacing:2px;
-  color:var(--muted);text-align:center;margin-top:14px;
-  animation:pulse 1s ease-in-out infinite;
-  text-transform:uppercase;
-}
-.modal-choice{display:flex;gap:10px;justify-content:center;margin-top:14px;}
-.choice-opt{
-  flex:1;padding:10px 14px;font-size:13px;font-weight:900;
-  letter-spacing:2px;cursor:pointer;text-align:center;
-  font-family:var(--font-ui);text-transform:uppercase;
-  background:var(--surface2);color:var(--muted);
-  border:1px solid var(--border2);transition:all .1s;
-}
-.choice-opt:active,.choice-opt.sel{
-  background:var(--gold);color:var(--bg);border-color:var(--gold);
-}
+/* P2's label is rotated 180° so it reads upright from across the table,
+   since the divider itself does not rotate with the players */
+.ko-label.flip-label{ transform:rotate(180deg); display:inline-block; }
 
-/* ═══════════════════════════ WINNER ════════════════════════════ */
-#scr-winner{
-  background:var(--bg);
-  align-items:center;justify-content:center;gap:16px;z-index:60;
+/* KO counter — single tappable element */
+.ko-counter{
+  display:flex;gap:4px;align-items:center;cursor:pointer;
+  padding:3px 6px;border-radius:6px;
+  transition:background .15s;
+  position:relative;
 }
-.winner-title{
-  font-size:44px;font-weight:900;letter-spacing:-1px;
-  color:var(--gold);text-align:center;text-transform:uppercase;
-  animation:pulse .5s ease-in-out infinite;
-}
-.winner-sub{font-size:16px;font-weight:700;letter-spacing:3px;color:var(--muted);text-transform:uppercase;}
+.ko-counter:active{ background:rgba(255,255,255,0.05); }
+.ko-counter.charging{ background:rgba(255,255,255,0.08); }
 
-/* ═══════════════════════════ RULES / LEGEND ═══════════════════ */
-#scr-rules,#scr-legend{
-  background:var(--bg);padding:14px 16px;
-  display:flex;flex-direction:column;gap:10px;overflow-y:auto;
+/* ── LED-style KO pips — saturated, glassy, glowing ── */
+.ko-pip{
+  width:11px;height:11px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%, #2a3142 0%, #11141c 75%);
+  border:1.5px solid #353d52;
+  box-shadow:inset 0 1px 1px rgba(255,255,255,0.04);
+  transition:background .15s,border-color .15s,box-shadow .2s;
 }
-.scr-top-bar{
-  font-size:15px;font-weight:900;letter-spacing:3px;color:var(--gold);
-  border-bottom:1px solid var(--border2);padding-bottom:10px;margin-bottom:2px;
-  display:flex;justify-content:space-between;align-items:center;
-  text-transform:uppercase;
+.ko-pip.lit{
+  background:radial-gradient(circle at 35% 30%, #ff5a44 0%, #e8230f 55%, #a3140a 100%);
+  border-color:#ff6b52;
+  box-shadow:
+    0 0 4px 1px #ff3a22,
+    0 0 12px 3px rgba(255,40,20,0.85),
+    0 0 22px 6px rgba(255,40,20,0.45),
+    inset 0 1px 2px rgba(255,255,255,0.5);
 }
-.scr-top-bar span{font-size:11px;color:var(--muted);font-weight:400;}
-.rules-section{border-left:3px solid var(--gold);padding:8px 12px;background:var(--surface);}
-.rules-hdr{
-  font-size:11px;font-weight:900;letter-spacing:3px;color:var(--gold);
-  margin-bottom:6px;text-transform:uppercase;
-}
-.rules-body{font-size:13px;font-weight:400;color:var(--muted);line-height:1.8;}
-
-/* ═══════════════════════════ ANIMATIONS ══════════════════════ */
-@keyframes dieshake{0%,100%{transform:translate(0,0) rotate(var(--spin-end,0deg))}25%{transform:translate(-3px,2px) rotate(var(--spin-end,0deg))}75%{transform:translate(3px,-2px) rotate(var(--spin-end,0deg))}}
-@keyframes zspin{
-  0%  {transform:rotate(var(--spin-start)) scale(1.1)}
-  60% {transform:rotate(var(--spin-mid))   scale(1.18)}
-  100%{transform:rotate(var(--spin-end))   scale(1)}
-}
-@keyframes dieland{0%{transform:scale(1.4) rotate(var(--spin-end,0deg))}60%{transform:scale(0.9) rotate(var(--spin-end,0deg))}100%{transform:scale(1) rotate(var(--spin-end,0deg))}}
-@keyframes popIn{from{opacity:0;transform:scale(0.88) translateY(8px)}to{opacity:1;transform:scale(1) translateY(0)}}
-@keyframes slideIn{from{opacity:0;transform:translateX(-20px)}to{opacity:1;transform:translateX(0)}}
-@keyframes gbBlink{0%,100%{opacity:1}50%{opacity:0}}
-@keyframes scanline{0%{transform:translateY(-100%)}100%{transform:translateY(100vh)}}
-@keyframes favPulse{0%,100%{opacity:1;text-shadow:0 0 8px var(--gold)}50%{opacity:.5;text-shadow:none}}
 </style>
 </head>
 <body>
 
-<div class="app" id="gb-shell">
-  <!-- Top bar -->
-  <div class="top-bar">
-    <div class="top-bar-logo">PROPAGAN<span>-</span>DICE</div>
-    <div class="top-bar-right">
-      <div class="power-pip" id="power-led"></div>
-      <button id="pause-btn" onclick="gbStart()" style="display:none;background:none;border:1px solid var(--border2);color:var(--muted);font-family:var(--font-ui);font-size:11px;font-weight:700;letter-spacing:1px;padding:4px 10px;cursor:pointer;border-radius:3px;">⏸ PAUSE</button>
+<!-- ══ PLAYER 2 (top, flipped) ══ -->
+<div class="player p2" id="p2">
+  <div class="flash" id="flash-p2" style="background:rgba(110,180,247,0.15)"></div>
+
+  <div class="p-header">
+    <span class="p-label">Player 2</span>
+  </div>
+
+  <div class="row-band row-gdp">
+    <div class="stat stat-gdp dec-mode" id="cell-p2-gdp" data-pid="p2" data-key="gdp">
+      <div class="unlock-flash"></div>
+      <div class="stat-label">GDP · Life</div>
+      <div class="stat-val" id="val-p2-gdp">20</div>
+      <div class="pip-track" id="pips-p2-gdp"></div>
+    </div>
+    <div class="dice-btn" onclick="openDice('p2')" aria-label="Roll dice">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="18" height="18" rx="3"></rect>
+        <circle cx="8" cy="8" r="1.2" fill="currentColor" stroke="none"></circle>
+        <circle cx="16" cy="8" r="1.2" fill="currentColor" stroke="none"></circle>
+        <circle cx="8" cy="16" r="1.2" fill="currentColor" stroke="none"></circle>
+        <circle cx="16" cy="16" r="1.2" fill="currentColor" stroke="none"></circle>
+        <circle cx="12" cy="12" r="1.2" fill="currentColor" stroke="none"></circle>
+      </svg>
+      <span class="dice-btn-label">Roll</span>
     </div>
   </div>
 
-  <!-- Screen -->
-  <div id="gb-screen">
+  <div class="row-band row-atk">
+    <div class="stat" id="cell-p2-atk" data-pid="p2" data-key="atk">
+      <div class="stat-label">Attack</div>
+      <div class="stat-val" id="val-p2-atk">1</div>
+      <div class="pip-track" id="pips-p2-atk"></div>
+    </div>
+    <div class="stat" id="cell-p2-def" data-pid="p2" data-key="def">
+      <div class="stat-label">Defense</div>
+      <div class="stat-val" id="val-p2-def">1</div>
+      <div class="pip-track" id="pips-p2-def"></div>
+    </div>
+  </div>
 
-    <!-- TITLE -->
-    <div class="scr" id="scr-title">
-      <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;padding:28px 20px 16px;">
-        <div style="font-size:11px;letter-spacing:5px;color:var(--muted);margin-bottom:12px;text-transform:uppercase;">TACTICAL DICE COMBAT</div>
-        <div class="title-logo">PROPA<em>GAN</em><br>DICE</div>
-        <div class="title-sub">v2 · FACTION EDITION</div>
-        <div class="title-factions">
-          <div class="faction-pill"><span class="fp-sym">T+၎</span>COMMUNIST</div>
-          <div class="faction-pill"><span class="fp-sym">✈+⌐</span>CAPITALIST</div>
-          <div class="faction-pill"><span class="fp-sym">t+t</span>KNIGHT</div>
-          <div class="faction-pill"><span class="fp-sym">ႎ+ႎ</span>ALIEN</div>
-        </div>
-      </div>
-      <!-- How to play — small quiet link at bottom -->
-      <div onclick="sfxBtn();showScreen('scr-rules');setActionBar();"
-        style="text-align:center;padding:14px;font-size:11px;font-weight:700;
-               letter-spacing:3px;color:var(--muted);text-transform:uppercase;
-               border-top:1px solid var(--border);flex-shrink:0;cursor:pointer;">
-        HOW TO PLAY ›
-      </div>
+  <div class="row-band row-eq">
+    <div class="stat" id="cell-p2-eq1" data-pid="p2" data-key="eq1">
+      <div class="unlock-flash"></div>
+      <div class="stat-label">Equip 1</div>
+      <div class="stat-val" id="val-p2-eq1">0</div>
+      <div class="pip-track" id="pips-p2-eq1"></div>
+    </div>
+    <div class="stat" id="cell-p2-eq2" data-pid="p2" data-key="eq2">
+      <div class="unlock-flash"></div>
+      <div class="stat-label">Equip 2</div>
+      <div class="stat-val" id="val-p2-eq2">0</div>
+      <div class="pip-track" id="pips-p2-eq2"></div>
+    </div>
+    <div class="stat" id="cell-p2-eq3" data-pid="p2" data-key="eq3">
+      <div class="unlock-flash"></div>
+      <div class="stat-label">Equip 3</div>
+      <div class="stat-val" id="val-p2-eq3">0</div>
+      <div class="pip-track" id="pips-p2-eq3"></div>
+    </div>
+  </div>
+
+  <!-- ══ DICE OVERLAY (slides over the board) ══ -->
+  <div class="dice-overlay" id="dice-overlay-p2">
+    <div class="dice-topbar">
+      <button class="dice-back-btn" onclick="closeDice('p2')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        Board
+      </button>
+      <span class="dice-title">ROLL DICE</span>
+      <span style="width:32px"></span>
     </div>
 
-    <!-- SETUP -->
-    <div class="scr scr-hidden" id="scr-setup">
-      <div class="setup-header">PLAYER SELECT<span>A/B = CHANGE</span></div>
-      <div class="setup-row sel" id="srow-0" onclick="setupTap(0)">
-        <span>P1 MODE</span><span class="sv" id="sm0-val">MANUAL</span>
+    <!-- Dice stage -->
+    <div class="dice-stage" id="dice-stage-p2">
+      <div class="dice-group-label">
+        FACTION DIE
+        <span class="roll-counter" id="dice-fac-rolls-p2">0/3</span>
       </div>
-      <div class="setup-row" id="srow-1" onclick="setupTap(1)">
-        <span>P2 MODE</span><span class="sv" id="sm1-val">AUTO</span>
+      <div class="dice-row dice-row-fac">
+        <div class="die-box" id="die-fac-p2-0" onclick="rollFactionOne('p2',0)"><span class="die-sym" id="die-fac-sym-p2-0">?</span></div>
+        <div class="die-box" id="die-fac-p2-1" onclick="rollFactionOne('p2',1)"><span class="die-sym" id="die-fac-sym-p2-1">?</span></div>
+        <div class="die-box" id="die-fac-p2-2" onclick="rollFactionOne('p2',2)"><span class="die-sym" id="die-fac-sym-p2-2">?</span></div>
       </div>
-      <div class="setup-faction-grid">
-        <div class="setup-faction-card"><div class="sfc-name">COMMUNIST</div><div class="sfc-sym">T + ၎</div></div>
-        <div class="setup-faction-card"><div class="sfc-name">CAPITALIST</div><div class="sfc-sym">✈ + ⌐</div></div>
-        <div class="setup-faction-card"><div class="sfc-name">KNIGHT</div><div class="sfc-sym">t + t</div></div>
-        <div class="setup-faction-card"><div class="sfc-name">ALIEN</div><div class="sfc-sym">ႎ + ႎ</div></div>
-      </div>
-      <div class="setup-begin" id="srow-2" onclick="startGame()">▶ ROLL STATS &amp; BEGIN</div>
-    </div>
+      <button class="dice-roll-btn dice-roll-btn-small" id="dice-roll-all-fac-p2" onclick="rollFactionAll('p2')">ROLL ALL 3</button>
 
-    <!-- STATS -->
-    <div class="scr scr-hidden" id="scr-stats" style="padding:10px 12px;gap:8px;">
-      <div style="font-size:13px;font-weight:900;letter-spacing:3px;color:var(--gold);border-bottom:1px solid var(--border2);padding-bottom:8px;text-transform:uppercase;">BATTLE STATS</div>
-      <div id="stat-content" style="display:flex;flex-direction:column;gap:8px;flex:1;min-height:0;"></div>
-      <div style="font-size:12px;font-weight:700;letter-spacing:3px;color:var(--muted);text-align:center;animation:pulse 1.4s ease-in-out infinite;text-transform:uppercase;" id="stat-hint">ROLLING...</div>
-    </div>
-
-    <!-- GAME -->
-    <div class="scr scr-hidden" id="scr-game" style="flex-direction:column;">
-      <!-- P1 -->
-      <div class="player-half" id="ph-0">
-        <div class="p-name-row">
-          <span class="p-name" id="pn-0">PLAYER 1</span>
-          <div class="p-falls" id="pf-0">
-            <div class="fall-dot" id="fd0-0"></div>
-            <div class="fall-dot" id="fd0-1"></div>
-            <div class="fall-dot" id="fd0-2"></div>
-          </div>
+      <div class="dice-group-label" style="margin-top:6px">EQUIP &mdash; tap either die to roll</div>
+      <div class="dice-row dice-row-eq">
+        <div class="eq-die-col">
+          <div class="die-box die-box-eq" id="die-eq-p2-0" onclick="rollEquip('p2',0)"><span class="die-sym" id="die-eq-sym-p2-0">?</span></div>
+          <span class="roll-counter" id="dice-eq-rolls-p2-0">0/3</span>
         </div>
-        <div class="hp-bar-row">
-          <div class="hp-label">GDP</div>
-          <div class="hp-track"><div class="hp-seg" id="hp-0" style="width:100%"></div></div>
-          <div class="hp-val" id="hv-0">--</div>
-          <div class="hp-stats"><span id="stat-atk-0">A-</span> <span id="stat-def-0">D-</span></div>
+        <div class="eq-die-col">
+          <div class="die-box die-box-eq" id="die-eq-p2-1" onclick="rollEquip('p2',1)"><span class="die-sym" id="die-eq-sym-p2-1">?</span></div>
+          <span class="roll-counter" id="dice-eq-rolls-p2-1">0/3</span>
         </div>
-        <div class="status-strip">
-          <span class="faction-badge" id="fb-0">P1 FACTION: ?</span>
-          <span class="phase-lbl" id="phase-0">ROLL FACTION DICE</span>
-        </div>
-        <div class="dice-tray" id="dt-0"></div>
-        <div class="out-bar" id="ob-0"></div>
-      </div>
-
-      <!-- Divider -->
-      <div class="divider" onclick="openLegend()">
-        <span class="active-arrow" id="act-arrow">▶</span>
-        <span class="div-text" id="div-vs">VS</span>
-        <span class="favored-sig" id="fav-sig" style="display:none"></span>
-      </div>
-
-      <!-- P2 (flipped) -->
-      <div class="player-half p2" id="ph-1">
-        <div class="p-name-row">
-          <span class="p-name" id="pn-1">PLAYER 2</span>
-          <div class="p-falls" id="pf-1">
-            <div class="fall-dot" id="fd1-0"></div>
-            <div class="fall-dot" id="fd1-1"></div>
-            <div class="fall-dot" id="fd1-2"></div>
-          </div>
-        </div>
-        <div class="hp-bar-row">
-          <div class="hp-label">GDP</div>
-          <div class="hp-track"><div class="hp-seg" id="hp-1" style="width:100%"></div></div>
-          <div class="hp-val" id="hv-1">--</div>
-          <div class="hp-stats"><span id="stat-atk-1">A-</span> <span id="stat-def-1">D-</span></div>
-        </div>
-        <div class="status-strip">
-          <span class="faction-badge" id="fb-1">P2 FACTION: ?</span>
-          <span class="phase-lbl" id="phase-1">ROLL FACTION DICE</span>
-        </div>
-        <div class="dice-tray" id="dt-1"></div>
-        <div class="out-bar" id="ob-1"></div>
-      </div>
-
-      <div id="gb-toast"></div>
-    </div>
-
-    <!-- LEGEND -->
-    <div class="scr scr-hidden" id="scr-legend">
-      <div class="scr-top-bar">SYMBOL KEY<span>A = BACK</span></div>
-      <div class="rules-section">
-        <div class="rules-hdr">FACTION DICE — ALL 6 SYMBOLS</div>
-        <div style="display:grid;grid-template-columns:32px 1fr;gap:6px 12px;align-items:center;">
-          <span style="font-size:22px;color:var(--cream);font-family:'Courier New',monospace;font-weight:900;">T</span><span style="font-size:12px;color:var(--muted);">HAMMER · COMMUNIST ATK</span>
-          <span style="font-size:22px;color:var(--cream);font-family:'Courier New',monospace;font-weight:900;">၎</span><span style="font-size:12px;color:var(--muted);">SICKLE · COMMUNIST DEF</span>
-          <span style="font-size:22px;color:var(--cream);font-family:'Courier New',monospace;font-weight:900;">✈</span><span style="font-size:12px;color:var(--muted);">PLANE · CAPITALIST ATK</span>
-          <span style="font-size:22px;color:var(--cream);font-family:'Courier New',monospace;font-weight:900;">⌐</span><span style="font-size:12px;color:var(--muted);">GUN · CAPITALIST DEF</span>
-          <span style="font-size:22px;color:var(--cream);font-family:'Courier New',monospace;font-weight:900;">t</span><span style="font-size:12px;color:var(--muted);">SWORD · KNIGHT ATK (×2 = faction)</span>
-          <span style="font-size:22px;color:var(--cream);font-family:'Courier New',monospace;font-weight:900;">ႎ</span><span style="font-size:12px;color:var(--muted);">UFO · ALIEN ATK+DEF (×2 = faction)</span>
+        <div class="eq-hit-badge" id="eq-hit-badge-p2">
+          <span class="eq-hit-sym">&#x2705;</span>
+          <span class="eq-hit-count" id="eq-hit-count-p2">0</span>
         </div>
       </div>
-      <div class="rules-section">
-        <div class="rules-hdr">EQUIP DICE — MATTE BLACK</div>
-        <div class="rules-body">⊕ = EQUIP (×2 per die) — activates ATK or DEF<br>○ = NO ACTION (×3) — roll again<br>✕ = END TURN · 2 end-turns = turn over</div>
-      </div>
-      <div class="rules-section">
-        <div class="rules-hdr">TRIPLE BONUS</div>
-        <div class="rules-body">3× SWORD = +6 ATK flat<br>3× UFO = mirror 3 DMG back<br>3× other = +3 ATK or DEF flat</div>
-      </div>
-      <div style="font-size:11px;color:var(--muted);text-align:center;letter-spacing:2px;text-transform:uppercase;">TAP DIVIDER TO REOPEN</div>
-    </div>
 
-    <!-- RULES -->
-    <div class="scr scr-hidden" id="scr-rules">
-      <div class="scr-top-bar">HOW TO PLAY<span>A = BACK</span></div>
-      <div class="rules-section"><div class="rules-hdr">STATS</div><div class="rules-body">Roll 5 dice: ATK · DEF · GDP × 3 (summed). Shake, then release.</div></div>
-      <div class="rules-section"><div class="rules-hdr">FAVORED FACTION</div><div class="rules-body">One faction die is rolled before the game. Any player rolling that faction gains +3 ATK that turn.</div></div>
-      <div class="rules-section"><div class="rules-hdr">PHASE 1 — FACTION</div><div class="rules-body">Roll all 3 faction dice. Need 2 matching symbols. A = shake all (3 rolls max). B = declare your faction.</div></div>
-      <div class="rules-section"><div class="rules-hdr">PHASE 2 — EQUIP</div><div class="rules-body">Tap equip zone to roll both dice. Each ⊕ = 1 activation. Tap your faction die to spend each equip as ATK or DEF. 2 end-turns = turn over. 3 rolls max.</div></div>
-      <div class="rules-section"><div class="rules-hdr">DAMAGE</div><div class="rules-body">Output = (ATK acts × ATK stat) + flat bonuses. Absorbed = DEF acts × DEF stat. GDP lost = output − absorbed.</div></div>
-      <div class="rules-section"><div class="rules-hdr">WIN</div><div class="rules-body">Reduce opponent to 0 GDP 3 times. 3 falls = eliminated.</div></div>
-    </div>
-
-    <!-- MODAL -->
-    <div class="scr scr-hidden" id="scr-modal">
-      <div class="modal-box">
-        <div class="modal-title" id="modal-title">INFO</div>
-        <div id="modal-body"></div>
-        <div class="modal-hint" id="modal-hint">PRESS A TO CONTINUE</div>
-        <div class="modal-choice scr-hidden" id="modal-choice">
-          <div class="choice-opt" id="mc-a" onclick="resolveChoice('a')">ATK</div>
-          <div class="choice-opt" id="mc-b" onclick="resolveChoice('b')">DEF</div>
-        </div>
+      <div class="end-turn-banner" id="dice-end-turn-p2">BOTH DICE STOPPED &mdash; TURN ENDS</div>
+      <div class="dice-bottom-row dice-bottom-row-solo">
+        <button class="next-turn-btn" onclick="nextTurnDice('p2')">NEXT TURN &#x21bb;</button>
       </div>
     </div>
+  </div>
+</div>
 
-    <!-- WINNER -->
-    <div class="scr scr-hidden" id="scr-winner">
-      <div class="winner-title">VICTORY</div>
-      <div style="font-size:52px;line-height:1;">🏆</div>
-      <div style="font-size:18px;font-weight:900;letter-spacing:3px;color:var(--cream);text-align:center;text-transform:uppercase;" id="w-name">---</div>
-      <div class="winner-sub" style="margin-top:8px;" id="w-sub">WINS!</div>
-      <div id="w-stats" style="margin-top:20px;display:flex;flex-direction:column;gap:8px;width:min(280px,80vw);"></div>
-      <div style="font-size:11px;font-weight:700;letter-spacing:3px;color:var(--muted);margin-top:20px;animation:pulse .8s ease-in-out infinite;text-transform:uppercase;">A = PLAY AGAIN</div>
+<!-- ══ DIVIDER ══ -->
+<div class="divider">
+  <!-- P1 KO (left) -->
+  <div class="ko-section p1-ko">
+    <span class="ko-label">P1 KO</span>
+    <div class="ko-counter" id="ko-p1">
+      <div class="ko-pip" id="ko-p1-0"></div>
+      <div class="ko-pip" id="ko-p1-1"></div>
+      <div class="ko-pip" id="ko-p1-2"></div>
+      <div class="unlock-flash"></div>
+    </div>
+  </div>
+
+  <div class="divider-title" id="divider-title" onclick="rotatePlayers()" style="cursor:pointer;letter-spacing:2px">PROPAGANDICE</div>
+
+  <!-- P2 KO (right) — label flipped 180° so it reads upright for player 2 -->
+  <div class="ko-section p2-ko">
+    <div class="ko-counter" id="ko-p2">
+      <div class="ko-pip" id="ko-p2-0"></div>
+      <div class="ko-pip" id="ko-p2-1"></div>
+      <div class="ko-pip" id="ko-p2-2"></div>
+      <div class="unlock-flash"></div>
+    </div>
+    <span class="ko-label flip-label">P2 KO</span>
+  </div>
+
+  <button class="reset-btn" ontouchstart="" onclick="resetAll()" aria-label="Reset all">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="1 4 1 10 7 10"></polyline>
+      <polyline points="23 20 23 14 17 14"></polyline>
+      <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10"></path>
+      <path d="M3.51 15A9 9 0 0 0 18.36 18.36L23 14"></path>
+    </svg>
+  </button>
+</div>
+
+<!-- ══ PLAYER 1 (bottom, normal) ══ -->
+<div class="player p1" id="p1">
+  <div class="flash" id="flash-p1" style="background:rgba(110,180,247,0.15)"></div>
+
+  <div class="p-header">
+    <span class="p-label">Player 1</span>
+  </div>
+
+  <div class="row-band row-gdp">
+    <div class="stat stat-gdp dec-mode" id="cell-p1-gdp" data-pid="p1" data-key="gdp">
+      <div class="unlock-flash"></div>
+      <div class="stat-label">GDP · Life</div>
+      <div class="stat-val" id="val-p1-gdp">20</div>
+      <div class="pip-track" id="pips-p1-gdp"></div>
+    </div>
+    <div class="dice-btn" onclick="openDice('p1')" aria-label="Roll dice">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="18" height="18" rx="3"></rect>
+        <circle cx="8" cy="8" r="1.2" fill="currentColor" stroke="none"></circle>
+        <circle cx="16" cy="8" r="1.2" fill="currentColor" stroke="none"></circle>
+        <circle cx="8" cy="16" r="1.2" fill="currentColor" stroke="none"></circle>
+        <circle cx="16" cy="16" r="1.2" fill="currentColor" stroke="none"></circle>
+        <circle cx="12" cy="12" r="1.2" fill="currentColor" stroke="none"></circle>
+      </svg>
+      <span class="dice-btn-label">Roll</span>
+    </div>
+  </div>
+
+  <div class="row-band row-atk">
+    <div class="stat" id="cell-p1-atk" data-pid="p1" data-key="atk">
+      <div class="stat-label">Attack</div>
+      <div class="stat-val" id="val-p1-atk">1</div>
+      <div class="pip-track" id="pips-p1-atk"></div>
+    </div>
+    <div class="stat" id="cell-p1-def" data-pid="p1" data-key="def">
+      <div class="stat-label">Defense</div>
+      <div class="stat-val" id="val-p1-def">1</div>
+      <div class="pip-track" id="pips-p1-def"></div>
+    </div>
+  </div>
+
+  <div class="row-band row-eq">
+    <div class="stat" id="cell-p1-eq1" data-pid="p1" data-key="eq1">
+      <div class="unlock-flash"></div>
+      <div class="stat-label">Equip 1</div>
+      <div class="stat-val" id="val-p1-eq1">0</div>
+      <div class="pip-track" id="pips-p1-eq1"></div>
+    </div>
+    <div class="stat" id="cell-p1-eq2" data-pid="p1" data-key="eq2">
+      <div class="unlock-flash"></div>
+      <div class="stat-label">Equip 2</div>
+      <div class="stat-val" id="val-p1-eq2">0</div>
+      <div class="pip-track" id="pips-p1-eq2"></div>
+    </div>
+    <div class="stat" id="cell-p1-eq3" data-pid="p1" data-key="eq3">
+      <div class="unlock-flash"></div>
+      <div class="stat-label">Equip 3</div>
+      <div class="stat-val" id="val-p1-eq3">0</div>
+      <div class="pip-track" id="pips-p1-eq3"></div>
+    </div>
+  </div>
+
+  <!-- ══ DICE OVERLAY (slides over the board) ══ -->
+  <div class="dice-overlay" id="dice-overlay-p1">
+    <div class="dice-topbar">
+      <button class="dice-back-btn" onclick="closeDice('p1')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        Board
+      </button>
+      <span class="dice-title">ROLL DICE</span>
+      <span style="width:32px"></span>
     </div>
 
-  </div><!-- /screen -->
+    <!-- Dice stage -->
+    <div class="dice-stage" id="dice-stage-p1">
+      <div class="dice-group-label">
+        FACTION DIE
+        <span class="roll-counter" id="dice-fac-rolls-p1">0/3</span>
+      </div>
+      <div class="dice-row dice-row-fac">
+        <div class="die-box" id="die-fac-p1-0" onclick="rollFactionOne('p1',0)"><span class="die-sym" id="die-fac-sym-p1-0">?</span></div>
+        <div class="die-box" id="die-fac-p1-1" onclick="rollFactionOne('p1',1)"><span class="die-sym" id="die-fac-sym-p1-1">?</span></div>
+        <div class="die-box" id="die-fac-p1-2" onclick="rollFactionOne('p1',2)"><span class="die-sym" id="die-fac-sym-p1-2">?</span></div>
+      </div>
+      <button class="dice-roll-btn dice-roll-btn-small" id="dice-roll-all-fac-p1" onclick="rollFactionAll('p1')">ROLL ALL 3</button>
 
-  <!-- Contextual touch action bar — buttons injected by JS per game state -->
-  <div class="action-bar" id="action-bar"></div>
+      <div class="dice-group-label" style="margin-top:6px">EQUIP &mdash; tap either die to roll</div>
+      <div class="dice-row dice-row-eq">
+        <div class="eq-die-col">
+          <div class="die-box die-box-eq" id="die-eq-p1-0" onclick="rollEquip('p1',0)"><span class="die-sym" id="die-eq-sym-p1-0">?</span></div>
+          <span class="roll-counter" id="dice-eq-rolls-p1-0">0/3</span>
+        </div>
+        <div class="eq-die-col">
+          <div class="die-box die-box-eq" id="die-eq-p1-1" onclick="rollEquip('p1',1)"><span class="die-sym" id="die-eq-sym-p1-1">?</span></div>
+          <span class="roll-counter" id="dice-eq-rolls-p1-1">0/3</span>
+        </div>
+        <div class="eq-hit-badge" id="eq-hit-badge-p1">
+          <span class="eq-hit-sym">&#x2705;</span>
+          <span class="eq-hit-count" id="eq-hit-count-p1">0</span>
+        </div>
+      </div>
 
-</div><!-- /app -->
+      <div class="end-turn-banner" id="dice-end-turn-p1">BOTH DICE STOPPED &mdash; TURN ENDS</div>
+      <div class="dice-bottom-row dice-bottom-row-solo">
+        <button class="next-turn-btn" onclick="nextTurnDice('p1')">NEXT TURN &#x21bb;</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Fixed centered charge-arc overlays for KO long-press, one per player panel -->
+<svg class="ko-center-arc" id="ko-arc-p1" viewBox="0 0 64 64">
+  <circle cx="32" cy="32" r="26" fill="none" stroke="rgba(0,200,255,0.7)" stroke-width="3"
+          stroke-dasharray="163.4" stroke-dashoffset="163.4" stroke-linecap="round" transform="rotate(-90 32 32)"></circle>
+</svg>
+<svg class="ko-center-arc" id="ko-arc-p2" viewBox="0 0 64 64">
+  <circle cx="32" cy="32" r="26" fill="none" stroke="rgba(214,59,255,0.7)" stroke-width="3"
+          stroke-dasharray="163.4" stroke-dashoffset="163.4" stroke-linecap="round" transform="rotate(-90 32 32)"></circle>
+</svg>
 
 <script>
+// ── Constants ─────────────────────────────────────────────────
+var MAX = { gdp:20, atk:6, def:6, eq1:6, eq2:6, eq3:6 };
+var MIN = { gdp:0,  atk:0, def:0, eq1:0, eq2:0, eq3:0 };
+var DEFAULT_DEC = { gdp:true, atk:false, def:true, eq1:false, eq2:false, eq3:false };
+var ROLLABLE = { gdp:false, atk:true, def:true, eq1:false, eq2:false, eq3:false }; // long-press rolls a d6
+var RESETTABLE = { gdp:true, atk:false, def:false, eq1:true, eq2:true, eq3:true }; // long-press resets
+var RESET_VALUE = { gdp:20, eq1:0, eq2:0, eq3:0 }; // target value for the long-press reset
+
+// ── State ─────────────────────────────────────────────────────
+var state = {
+  p1:{ gdp:20,atk:1,def:1,eq1:0,eq2:0,eq3:0,
+       dec:{gdp:true,atk:false,def:false,eq1:false,eq2:false,eq3:false},
+       ko:0 },
+  p2:{ gdp:20,atk:1,def:1,eq1:0,eq2:0,eq3:0,
+       dec:{gdp:true,atk:false,def:false,eq1:false,eq2:false,eq3:false},
+       ko:0 }
+};
 
 // ── Audio ─────────────────────────────────────────────────────
 var AC;
-function getAC(){if(!AC)AC=new(window.AudioContext||window.webkitAudioContext)();return AC;}
-function beep(f,d,v,t){try{var ac=getAC(),o=ac.createOscillator(),g=ac.createGain();o.connect(g);g.connect(ac.destination);o.type=t||'square';o.frequency.value=f;g.gain.setValueAtTime(v||0.12,ac.currentTime);g.gain.exponentialRampToValueAtTime(0.001,ac.currentTime+d);o.start();o.stop(ac.currentTime+d);}catch(e){}}
-function sfxBtn(){beep(880,.04,.07);}
-function sfxRoll(){beep(440,.04,.08);setTimeout(function(){beep(550,.04,.08)},50);}
-function sfxLand(){beep(660,.06,.1);}
-function sfxHit(){beep(180,.14,.18,'sawtooth');}
-function sfxBlock(){beep(660,.08,.1);}
-function sfxBad(){beep(110,.1,.12,'sawtooth');}
-function sfxLock(){beep(880,.05,.1);setTimeout(function(){beep(1100,.08,.12)},70);}
-
-var MUS={nodes:[],loop:null,cur:null};
-function musNote(ac,m,f,s,d,v,t){var o=ac.createOscillator(),g=ac.createGain();o.type=t||'square';o.frequency.value=f;g.gain.setValueAtTime(0,s);g.gain.linearRampToValueAtTime(v,s+.01);g.gain.setValueAtTime(v,s+d*.7);g.gain.linearRampToValueAtTime(0,s+d);o.connect(g);g.connect(m);o.start(s);o.stop(s+d+.05);MUS.nodes.push(o,g);}
-function musKick(ac,m,s){var o=ac.createOscillator(),g=ac.createGain();o.type='sine';o.frequency.setValueAtTime(160,s);o.frequency.exponentialRampToValueAtTime(40,s+.08);g.gain.setValueAtTime(.4,s);g.gain.exponentialRampToValueAtTime(.001,s+.1);o.connect(g);g.connect(m);o.start(s);o.stop(s+.12);MUS.nodes.push(o,g);}
-function musSnare(ac,m,s){var b=ac.createBuffer(1,ac.sampleRate*.07,ac.sampleRate),d=b.getChannelData(0);for(var i=0;i<d.length;i++)d[i]=Math.random()*2-1;var src=ac.createBufferSource(),g=ac.createGain(),f=ac.createBiquadFilter();f.type='highpass';f.frequency.value=2000;src.buffer=b;g.gain.setValueAtTime(.15,s);g.gain.exponentialRampToValueAtTime(.001,s+.07);src.connect(f);f.connect(g);g.connect(m);src.start(s);MUS.nodes.push(src,g,f);}
-function musStop(){if(MUS.loop){clearTimeout(MUS.loop);MUS.loop=null;}MUS.nodes.forEach(function(n){try{n.stop&&n.stop();n.disconnect&&n.disconnect();}catch(e){}});MUS.nodes=[];MUS.cur=null;}
-function musResume(){try{if(AC&&AC.state==='suspended')AC.resume();}catch(e){}}
-
-function playTitle(){
-  musStop();MUS.cur='title';
-  var ac=getAC(),m=ac.createGain();m.gain.value=.12;m.connect(ac.destination);MUS.nodes.push(m);
-  var b=60/140,now=ac.currentTime+.05;
-  var mel=[523,659,784,880,1047,880,784,659,523,659,784,880,1047,880,784,659];
-  mel.forEach(function(f,i){musNote(ac,m,f,now+i*b*.5,b*.45,.16,'square');});
-  var bass=[131,131,165,131,131,131,165,175];
-  for(var i=0;i<16;i++)musNote(ac,m,bass[i%8]*2,now+i*b,b*.4,.08,'triangle');
-  for(var i=0;i<16;i+=2)musKick(ac,m,now+i*b);
-  for(var i=1;i<16;i+=2)musSnare(ac,m,now+i*b);
-  MUS.loop=setTimeout(function(){if(MUS.cur==='title')playTitle();},16*b*1000-80);
+function getAC(){ if(!AC) AC=new(window.AudioContext||window.webkitAudioContext)(); return AC; }
+function beep(f,d,v,t){
+  try{
+    var ac=getAC(),o=ac.createOscillator(),g=ac.createGain();
+    o.connect(g);g.connect(ac.destination);
+    o.type=t||'sine';o.frequency.value=f;
+    g.gain.setValueAtTime(0,ac.currentTime);
+    g.gain.linearRampToValueAtTime(v||0.08,ac.currentTime+0.01);
+    g.gain.exponentialRampToValueAtTime(0.001,ac.currentTime+d);
+    o.start();o.stop(ac.currentTime+d+0.02);
+  }catch(e){}
 }
-function playGame(){
-  musStop();MUS.cur='game';
-  var ac=getAC(),m=ac.createGain();m.gain.value=.12;m.connect(ac.destination);MUS.nodes.push(m);
-  var b=60/160,now=ac.currentTime+.05;
-  var bass=[110,110,138,110,110,138,110,146,110,110,138,110,123,138,110,110];
-  for(var i=0;i<16;i++)musNote(ac,m,bass[i],now+i*b,b*.35,.13,'sawtooth');
-  var mel=[440,0,440,494,0,440,392,0,440,0,494,523,0,494,440,0];
-  for(var i=0;i<16;i++)if(mel[i])musNote(ac,m,mel[i],now+i*b,b*.45,.09,'square');
-  for(var i=0;i<16;i+=2)musKick(ac,m,now+i*b);
-  for(var i=1;i<16;i+=2)musSnare(ac,m,now+i*b);
-  MUS.loop=setTimeout(function(){if(MUS.cur==='game')playGame();},16*b*1000-80);
+function sfxUp(){
+  beep(660,0.07,0.07);
+  setTimeout(function(){beep(880,0.05,0.05);},55);
+}
+function sfxDown(){
+  beep(440,0.07,0.07,'triangle');
+  setTimeout(function(){beep(330,0.08,0.06,'triangle');},55);
+}
+function sfxToggle(){
+  beep(550,0.04,0.08);
+  setTimeout(function(){beep(770,0.04,0.06);},45);
 }
 function sfxKO(){
-  musStop();MUS.cur='ko';
-  var ac=getAC(),m=ac.createGain();m.gain.value=.16;m.connect(ac.destination);MUS.nodes.push(m);
-  var b=.13,now=ac.currentTime+.05;
-  var lead=[[440,2],[392,1],[349,1],[330,2],[294,1],[262,1],[247,3],[220,2],[196,2],[175,2],[165,4]];
-  var t=now;lead.forEach(function(n){musNote(ac,m,n[0],t,n[1]*b,.15,'square');musNote(ac,m,n[0]/2,t,n[1]*b,.1,'sawtooth');t+=n[1]*b;});
-  for(var i=0;i<8;i++)musSnare(ac,m,now+i*b*2);
-  musKick(ac,m,now);musKick(ac,m,now+b*4);
+  beep(180,0.1,0.12,'sawtooth');
+  setTimeout(function(){beep(130,0.15,0.12,'sawtooth');},100);
+  setTimeout(function(){beep(90,0.22,0.12,'sawtooth');},230);
 }
-function sfxWin(){
-  musStop();MUS.cur='win';
-  var ac=getAC(),m=ac.createGain();m.gain.value=.16;m.connect(ac.destination);MUS.nodes.push(m);
-  var b=.1,now=ac.currentTime+.05;
-  var f=[[262,2],[330,2],[392,2],[523,4],[392,1],[440,1],[494,1],[523,1],[587,1],[659,1],[784,6],[659,1],[523,1],[659,1],[784,1],[1047,8]];
-  var t=now;f.forEach(function(n){musNote(ac,m,n[0],t,n[1]*b,.17,'square');t+=n[1]*b;});
-  t=now;[[131,4],[165,4],[196,4],[262,12],[131,4],[262,8]].forEach(function(n){musNote(ac,m,n[0],t,n[1]*b,.12,'triangle');t+=n[1]*b;});
-  for(var i=0;i<24;i+=2)musKick(ac,m,now+i*b);
-  for(var i=2;i<24;i+=4)musSnare(ac,m,now+i*b);
+function sfxKOPip(){
+  beep(300,0.06,0.09,'triangle');
+}
+function sfxReset(){
+  beep(440,0.04,0.06);
+  setTimeout(function(){beep(550,0.04,0.06);},50);
+  setTimeout(function(){beep(660,0.06,0.06);},100);
+}
+function sfxLongPress(){
+  beep(990,0.05,0.1);
 }
 
-// ── Constants ─────────────────────────────────────────────────
-var SCREENS=['scr-title','scr-setup','scr-stats','scr-game','scr-legend','scr-rules','scr-modal','scr-winner'];
-var MAX_KO=3, MAX_EQUIP_ROLLS=3, MAX_FACTION_ROLLS=3;
+// ── Flash ─────────────────────────────────────────────────────
+function flashPanel(pid){
+  var el=document.getElementById('flash-'+pid);
+  if(!el)return;
+  el.classList.add('show');
+  setTimeout(function(){el.classList.remove('show');},180);
+}
 
+// ── Pop ───────────────────────────────────────────────────────
+function popVal(pid,key){
+  var el=document.getElementById('val-'+pid+'-'+key);
+  if(!el)return;
+  el.classList.remove('pop');
+  void el.offsetWidth;
+  el.classList.add('pop');
+  setTimeout(function(){el.classList.remove('pop');},130);
+}
+
+// ── Pips ─────────────────────────────────────────────────────
+function buildPips(pid,key){
+  // Only GDP has a visual track; others suppressed via CSS
+  // Nothing to build — bar is pure CSS driven by --bar-pct
+}
+function updatePips(pid,key){
+  if(key!=='gdp') return;
+  var pct=(state[pid][key]/MAX[key]*100).toFixed(1)+'%';
+  var track=document.getElementById('pips-'+pid+'-'+key);
+  if(track) track.style.setProperty('--bar-pct', pct);
+}
+
+// ── Mode pill ─────────────────────────────────────────────────
+function renderMode(pid,key){
+  var isDec=state[pid].dec[key];
+  var cell=document.getElementById('cell-'+pid+'-'+key);
+  if(cell) cell.classList.toggle('dec-mode',isDec);
+}
+
+// ── Long-press reset (GDP/Equip → max) ────────────────────────
+function flashReset(cell){
+  var fl=cell.querySelector('.unlock-flash');
+  if(!fl) return;
+  fl.classList.remove('show');
+  void fl.offsetWidth;
+  fl.classList.add('show');
+}
+function sfxResetCell(){
+  beep(523,0.06,0.09);
+  setTimeout(function(){beep(659,0.06,0.09);},55);
+  setTimeout(function(){beep(880,0.1,0.1);},110);
+}
+
+// ── Change ────────────────────────────────────────────────────
+function change(pid,key,delta){
+  try{getAC().resume();}catch(e){}
+  var cur=state[pid][key];
+  var next=Math.max(MIN[key],Math.min(MAX[key],cur+delta));
+  if(next===cur)return;
+  state[pid][key]=next;
+  if(delta>0) sfxUp(); else sfxDown();
+  if(key==='gdp'&&next===0){sfxKO();flashPanel(pid);}
+  document.getElementById('val-'+pid+'-'+key).textContent=next;
+  popVal(pid,key);
+  updatePips(pid,key);
+}
+
+// ── KO ────────────────────────────────────────────────────────
+function cycleKO(pid){
+  try{getAC().resume();}catch(e){}
+  state[pid].ko=(state[pid].ko+1)%4;
+  renderKO(pid);
+  if(state[pid].ko===0) sfxDown();
+  else if(state[pid].ko===3){sfxKO();flashPanel(pid);}
+  else sfxKOPip();
+}
+function renderKO(pid){
+  var n=state[pid].ko;
+  for(var i=0;i<3;i++){
+    var dot=document.getElementById('ko-'+pid+'-'+i);
+    if(dot) dot.classList.toggle('lit',i<n);
+  }
+}
+
+// Long-press on the KO counter resets that player's whole panel.
+// The charge arc renders centered over that player's whole panel (not the
+// small KO dots), so it stays visible no matter where your thumb is.
+var koLpTimers={};
+var koLpFired={};
+
+function positionKoArc(pid){
+  var arc=document.getElementById('ko-arc-'+pid);
+  var panel=document.getElementById(pid);
+  if(!arc||!panel) return;
+  var r=panel.getBoundingClientRect();
+  arc.style.left=(r.left+r.width/2)+'px';
+  arc.style.top=(r.top+r.height/2)+'px';
+}
+
+function koLpStart(el,pid){
+  var id=el.id;
+  koLpFired[id]=false;
+  el.classList.add('charging');
+
+  var arc=document.getElementById('ko-arc-'+pid);
+  positionKoArc(pid);
+  arc.classList.add('active');
+  var circle=arc.querySelector('circle');
+  var perim=163.4;
+  var start=Date.now();
+  var dur=LONG_MS_SLOW;
+  if(koLpTimers[id+'a']) cancelAnimationFrame(koLpTimers[id+'a']);
+
+  function frame(){
+    var p=Math.min((Date.now()-start)/dur,1);
+    circle.setAttribute('stroke-dashoffset',perim*(1-p));
+    if(p<1&&koLpTimers[id+'t']) koLpTimers[id+'a']=requestAnimationFrame(frame);
+  }
+  koLpTimers[id+'a']=requestAnimationFrame(frame);
+
+  koLpTimers[id+'t']=setTimeout(function(){
+    koLpFired[id]=true;
+    arc.classList.remove('active');
+    el.classList.remove('charging');
+    try{getAC().resume();}catch(e){}
+    sfxResetCell();
+    resetPlayer(pid);
+    flashPanel(pid);
+  },dur);
+}
+function koLpEnd(el,pid){
+  var id=el.id;
+  var fired=koLpFired[id];
+  clearTimeout(koLpTimers[id+'t']);koLpTimers[id+'t']=null;
+  cancelAnimationFrame(koLpTimers[id+'a']);koLpTimers[id+'a']=null;
+  var arc=document.getElementById('ko-arc-'+pid);
+  if(arc){
+    arc.classList.remove('active');
+    var c=arc.querySelector('circle');
+    if(c) c.setAttribute('stroke-dashoffset','163.4');
+  }
+  el.classList.remove('charging');
+  if(!fired) cycleKO(pid); // short tap — normal cycle behavior
+}
+function koLpCancel(el,pid){
+  var id=el.id;
+  clearTimeout(koLpTimers[id+'t']);koLpTimers[id+'t']=null;
+  cancelAnimationFrame(koLpTimers[id+'a']);koLpTimers[id+'a']=null;
+  var arc=document.getElementById('ko-arc-'+pid);
+  if(arc){
+    arc.classList.remove('active');
+    var c=arc.querySelector('circle');
+    if(c) c.setAttribute('stroke-dashoffset','163.4');
+  }
+  el.classList.remove('charging');
+}
+function wireKO(el,pid){
+  el.addEventListener('touchstart',function(e){e.preventDefault();koLpStart(el,pid);},{passive:false});
+  el.addEventListener('touchend',  function(e){e.preventDefault();koLpEnd(el,pid);},{passive:false});
+  el.addEventListener('touchcancel',function(){koLpCancel(el,pid);});
+  el.addEventListener('mousedown', function(){koLpStart(el,pid);});
+  el.addEventListener('mouseup',   function(){koLpEnd(el,pid);});
+  el.addEventListener('mouseleave',function(){koLpCancel(el,pid);});
+}
+
+// ── D6 Roll ───────────────────────────────────────────────────
+function sfxDice(){
+  // rattling shake then a landing click
+  [0,60,120].forEach(function(t){
+    setTimeout(function(){
+      beep(80+Math.random()*60, 0.04, 0.07, 'sawtooth');
+    },t);
+  });
+  setTimeout(function(){ beep(900,0.05,0.1); },220);
+  setTimeout(function(){ beep(1200,0.04,0.08); },280);
+}
+
+function rollD6(cell,pid,key){
+  sfxDice();
+
+  // Rapid-flicker animation for ~280ms then settle on result
+  var result=Math.floor(Math.random()*6)+1;
+  var overlay=cell.querySelector('.d6-overlay');
+  if(!overlay){
+    overlay=document.createElement('div');
+    overlay.className='d6-overlay';
+    overlay.innerHTML='<div class="d6-face" id="d6f-'+cell.id+'">—</div>'
+                    +'<div class="d6-label">D6 ROLL</div>';
+    cell.appendChild(overlay);
+  }
+  var face=overlay.querySelector('.d6-face');
+  overlay.classList.add('show');
+
+  // Flicker through random values
+  var flickers=0, maxFlickers=10;
+  var interval=setInterval(function(){
+    face.textContent=Math.floor(Math.random()*6)+1;
+    flickers++;
+    if(flickers>=maxFlickers){
+      clearInterval(interval);
+      face.textContent=result;
+      // set the counter to this value
+      state[pid][key]=Math.min(result,MAX[key]);
+      document.getElementById('val-'+pid+'-'+key).textContent=state[pid][key];
+      popVal(pid,key);
+      // hide overlay after a beat
+      setTimeout(function(){ overlay.classList.remove('show'); },900);
+    }
+  },28);
+}
+
+// ── Faction + Equip Dice Screen ────────────────────────────────
+// ONE shared 6-face Faction die (rolled as 3 separate dice, max 3
+// rolls total per turn — rolling "all 3" or just one each cost 1
+// of that budget) and ONE shared Equip die (rolled as 2 separate
+// dice, each with its OWN budget of up to 3 rolls per turn).
+//
+// Equip die faces: 2 Equip, 2 No Action (still rerollable), 2 Stop
+// (locks THAT die only, until next turn). If both equip dice end up
+// locked on Stop at the same time, that ends the turn.
+//
+// Scoring/tracking is manual — this screen is purely for rolling.
 var FDIE_FACES=[
-  {sym:'T',  label:'hammer',faction:'communist',role:'atk'},
-  {sym:'၎',label:'sickle',faction:'communist',role:'def'},
-  {sym:'✈', label:'plane', faction:'capitalist',role:'atk'},
-  {sym:'⌐', label:'gun',   faction:'capitalist',role:'def'},
-  {sym:'t',  label:'sword', faction:'knight',   role:'atk'},
-  {sym:'ႎ', label:'ufo',   faction:'alien',    role:'atk'},
+  {sym:'\u{1F528}', label:'Hammer', faction:'communist'},   // 🔨
+  {sym:'\u{1FA8F}', label:'Sickle', faction:'communist'}, // 🪏 shovel — stand-in for sickle
+  {sym:'\u{2708}\uFE0F', label:'Plane',  faction:'capitalist'}, // ✈️
+  {sym:'\u{1F52B}', label:'Gun',    faction:'capitalist'},  // 🔫
+  {sym:'\u{2694}\uFE0F', label:'Sword',  faction:'knight'},    // ⚔️
+  {sym:'\u{1F6F8}', label:'UFO',    faction:'alien'}        // 🛸
 ];
 var EDIE_FACES=[
-  {type:'equip'},{type:'equip'},
-  {type:'noact'},{type:'noact'},{type:'noact'},
-  {type:'endturn'},
+  {sym:'\u{2705}', label:'Equip',     stop:false},  // ✅
+  {sym:'\u{2705}', label:'Equip',     stop:false},  // ✅
+  {sym:'\u{2B55}', label:'No Action', stop:false},  // ⭕ rerollable
+  {sym:'\u{2B55}', label:'No Action', stop:false},  // ⭕ rerollable
+  {sym:'\u{1F6D1}',label:'Stop',      stop:true},   // 🛑 locks this die
+  {sym:'\u{1F6D1}',label:'Stop',      stop:true}     // 🛑 locks this die
 ];
-var FACTIONS={
-  communist:{name:'COMMUNIST', atkSym:['hammer'],defSym:['sickle']},
-  capitalist:{name:'CAPITALIST',atkSym:['plane'], defSym:['gun']},
-  knight:    {name:'KNIGHT',   atkSym:['sword'],  defSym:[]},
-  alien:     {name:'ALIEN',    atkSym:['ufo'],    defSym:['ufo']},
-};
-var FACTION_TRIGGERS={
-  communist:['hammer','sickle'],capitalist:['plane','gun'],
-  knight:['sword','sword'],alien:['ufo','ufo'],
+var MAX_FACTION_ROLLS=3;
+var MAX_EQUIP_ROLLS=3;
+
+var diceUI = {
+  p1:{ facRolls:0, eqRolls:[0,0], eqLocked:[false,false], eqHits:0 },
+  p2:{ facRolls:0, eqRolls:[0,0], eqLocked:[false,false], eqHits:0 }
 };
 
-// Symbol → which faction it belongs to
-var SYM_TO_FACTION={hammer:'communist',sickle:'communist',plane:'capitalist',gun:'capitalist',sword:'knight',ufo:'alien'};
-
-function detectFaction(labels){
-  // Count how many dice belong to each faction
-  var counts={communist:0,capitalist:0,knight:0,alien:0};
-  labels.forEach(function(l){if(l&&SYM_TO_FACTION[l])counts[SYM_TO_FACTION[l]]++;});
-  // Any faction with 2+ dice qualifies
-  for(var fk in counts){if(counts[fk]>=2)return fk;}
-  return null;
+function openDice(pid){
+  try{getAC().resume();}catch(e){}
+  sfxBtn2();
+  document.getElementById('dice-overlay-'+pid).classList.add('open');
+  refreshDiceScreen(pid);
+}
+function closeDice(pid){
+  try{getAC().resume();}catch(e){}
+  sfxBtn2();
+  document.getElementById('dice-overlay-'+pid).classList.remove('open');
+}
+function sfxBtn2(){ beep(660,0.045,0.07); }
+function sfxLockDie(){ beep(740,0.05,0.08); setTimeout(function(){beep(420,0.08,0.08,'triangle');},60); }
+function sfxEndTurn(){
+  beep(200,0.08,0.13,'sawtooth');
+  setTimeout(function(){beep(150,0.12,0.13,'sawtooth');},90);
+  setTimeout(function(){beep(100,0.2,0.13,'sawtooth');},200);
 }
 
-// ── State ─────────────────────────────────────────────────────
-var setup={modes:[true,false],row:0};
-var G={players:[],round:0,running:false,resume:null,choiceCtx:null,favoredFaction:null,favoredFaceIdx:null};
-var titleCursor=0,G_QUIT=false;
-
-function d6(){return Math.floor(Math.random()*6)+1;}
-function makePlayer(id){
-  return{id:id,atk:0,def:0,hp:0,maxHp:0,kos:0,
-    factionKey:null,fdice:[null,null,null],
-    phase:'faction',equipFace:null,equipRolls:0,atkAct:0,defAct:0,
-    equipStrikes:0,factionRolls:0,tripleBonus:null,
-    totalAtkDeployed:0,totalDefDeployed:0};
+function refreshDiceScreen(pid){
+  renderRollCounters(pid);
+  renderEquipLockState(pid);
+  renderEqHits(pid);
 }
 
-function wait(ms){return new Promise(function(r){setTimeout(r,ms);});}
-function waitResume(ctx){return new Promise(function(r){G.resume=function(v){G.resume=null;r(v);};G.choiceCtx=ctx||null;});}
-
-// ── Screens ───────────────────────────────────────────────────
-function showScreen(id){
-  SCREENS.forEach(function(s){document.getElementById(s).classList.toggle('scr-hidden',s!==id);});
-  musResume();
-  if(id==='scr-title'||id==='scr-setup'){if(MUS.cur!=='title')playTitle();}
-  else if(id==='scr-game'){if(MUS.cur!=='game')playGame();}
-  else if(id==='scr-winner'){musStop();}
-}
-function getScr(){for(var i=0;i<SCREENS.length;i++)if(!document.getElementById(SCREENS[i]).classList.contains('scr-hidden'))return SCREENS[i];return null;}
-
-// ── Toast ─────────────────────────────────────────────────────
-var _toastT=null;
-function toast(msg){var el=document.getElementById('gb-toast');el.textContent=msg;el.style.display='block';if(_toastT)clearTimeout(_toastT);_toastT=setTimeout(function(){el.style.display='none';},2400);}
-function toastClear(){var el=document.getElementById('gb-toast');if(el)el.style.display='none';}
-
-// ── Modal ─────────────────────────────────────────────────────
-function showModal(title,rows,hint,withChoice,choiceA,choiceB){
-  document.getElementById('modal-title').textContent=title;
-  var body=document.getElementById('modal-body');body.innerHTML='';
-  (rows||[]).forEach(function(r){var d=document.createElement('div');d.className='modal-row';d.innerHTML='<span>'+r.label+'</span><span>'+r.val+'</span>';body.appendChild(d);});
-  document.getElementById('modal-hint').textContent=hint||'PRESS A TO CONTINUE';
-  var ch=document.getElementById('modal-choice');ch.classList.toggle('scr-hidden',!withChoice);
-  if(withChoice){document.getElementById('mc-a').textContent=choiceA||'A';document.getElementById('mc-b').textContent=choiceB||'B';}
-  showScreen('scr-modal');
-}
-function hideModal(){showScreen('scr-game');}
-function resolveChoice(which){sfxBtn();if(G.resume){var r=G.resume;G.choiceCtx=null;r(which);}}
-
-// ── Display ───────────────────────────────────────────────────
-function updHp(pid){
-  var p=G.players[pid];
-  var pct=p.maxHp>0?Math.max(0,p.hp/p.maxHp*100):100;
-  document.getElementById('hp-'+pid).style.width=pct+'%';
-  document.getElementById('hv-'+pid).textContent=Math.max(0,p.hp)+'/'+p.maxHp;
-  var falls='';for(var i=0;i<MAX_KO;i++)falls+=(i<p.kos?'■':'□');
-  document.getElementById('pf-'+pid).textContent=falls;
-  // Also refresh ATK/DEF labels if they exist
-  var atkEl=document.getElementById('stat-atk-'+pid);
-  var defEl=document.getElementById('stat-def-'+pid);
-  if(atkEl)atkEl.textContent='A'+p.atk;
-  if(defEl)defEl.textContent='D'+p.def;
-}
-function updFactionBadge(pid){
-  var p=G.players[pid],el=document.getElementById('fb-'+pid);
-  if(p.factionKey){
-    el.textContent='P'+(pid+1)+' '+FACTIONS[p.factionKey].name;
-    el.classList.add('lit');
-  } else {
-    el.textContent='P'+(pid+1)+' FACTION: ?';
-    el.classList.remove('lit');
-  }
-}
-function updPhaseLabel(pid,msg,isActive){
-  var el=document.getElementById('phase-'+pid);
-  el.textContent=msg;
-  el.classList.toggle('active',!!isActive);
-}
-function updOutBar(pid){
-  var p=G.players[pid],el=document.getElementById('ob-'+pid);
-  if(!p.factionKey||p.phase==='faction'){el.innerHTML='';return;}
-  var html='';
-  if(p.atkAct>0) html+='<span class="out-chip war">ATK×'+p.atkAct+'·'+p.atk+'='+(p.atkAct*p.atk)+'</span>';
-  if(p.atkFlat>0) html+='<span class="out-chip war">+'+p.atkFlat+' flat</span>';
-  if(p.defAct>0) html+='<span class="out-chip">DEF×'+p.defAct+'·'+p.def+'='+(p.defAct*p.def)+'</span>';
-  if(p.defFlat>0) html+='<span class="out-chip">+'+p.defFlat+' flat</span>';
-  if(p.equipRolls>0) html+='<span style="font-size:7px;color:#6b6b8a">R'+p.equipRolls+'/'+MAX_EQUIP_ROLLS+'</span>';
-  el.innerHTML=html;
+// Starts a new turn: clears roll budgets and unlocks both equip dice.
+function nextTurnDice(pid){
+  try{getAC().resume();}catch(e){}
+  sfxBtn2();
+  diceUI[pid].facRolls=0;
+  diceUI[pid].eqRolls=[0,0];
+  diceUI[pid].eqLocked=[false,false];
+  diceUI[pid].eqHits=0;
+  renderRollCounters(pid);
+  renderEquipLockState(pid);
+  renderEqHits(pid);
 }
 
-// ── Dice rendering ────────────────────────────────────────────
-function buildDiceTray(pid){
-  var tray=document.getElementById('dt-'+pid);tray.innerHTML='';
-  var fz=document.createElement('div');fz.className='fdie-zone';fz.id='fz-'+pid;
-  var ez=document.createElement('div');ez.className='edie-zone';ez.id='ez-'+pid;
-  tray.appendChild(fz);tray.appendChild(ez);
+function renderEqHits(pid){
+  var el=document.getElementById('eq-hit-count-'+pid);
+  if(el) el.textContent = diceUI[pid].eqHits;
+}
+
+// ── Roll counters / lock-state rendering ──────────────────────
+function renderRollCounters(pid){
+  var d=diceUI[pid];
+  var facEl=document.getElementById('dice-fac-rolls-'+pid);
+  if(facEl) facEl.textContent = d.facRolls+'/'+MAX_FACTION_ROLLS;
+  var facAllBtn=document.getElementById('dice-roll-all-fac-'+pid);
+  if(facAllBtn) facAllBtn.disabled = d.facRolls>=MAX_FACTION_ROLLS;
   for(var i=0;i<3;i++){
-    var d=document.createElement('div');d.className='fdie';d.id='fd-'+pid+'-'+i;
-    d.innerHTML='<span class="fsym">?</span>';
-    d.style.left='4px';d.style.top='4px';
-    (function(idx){d.onclick=function(){fdieTap(pid,idx);};})(i);
-    fz.appendChild(d);
+    var single=document.getElementById('die-fac-'+pid+'-'+i);
+    if(single) single.classList.toggle('die-disabled', d.facRolls>=MAX_FACTION_ROLLS);
   }
-  // TWO equip dice
-  for(var e=0;e<2;e++){
-    var ed=document.createElement('div');ed.className='edie';ed.id='ed-'+pid+'-'+e;
-    var cvSize=48;
-    ed.innerHTML='<canvas width="'+cvSize+'" height="'+cvSize+'" id="ec-'+pid+'-'+e+'"></canvas>';
-    ed.style.left='8px';ed.style.top=(e===0?'4px':'56px');
-    ez.appendChild(ed);
-  }
-  // Tap either equip die to roll both
-  ez.onclick=function(){edieTap(pid);};
-}
-
-// Random position within a zone for a die of size S, with padding
-// colIdx (0-2) divides the zone into thirds and places die in that column with jitter
-function randPos(zoneEl,S,pad,colIdx,numCols,maxJitter){
-  pad=pad||4; maxJitter=maxJitter||10;
-  var w=zoneEl.offsetWidth||120,h=zoneEl.offsetHeight||80;
-  if(colIdx!==undefined&&numCols){
-    var colW=w/numCols;
-    var baseX=colIdx*colW+(colW-S)/2;
-    var x=baseX+(Math.random()-0.5)*maxJitter*2;
-    x=Math.max(pad,Math.min(w-S-pad,x));
-    var y=pad+Math.random()*Math.max(0,h-S-pad*2);
-    return{x:Math.round(x),y:Math.round(y)};
-  }
-  var x=pad+Math.random()*Math.max(0,w-S-pad*2);
-  var y=pad+Math.random()*Math.max(0,h-S-pad*2);
-  return{x:Math.round(x),y:Math.round(y)};
-}
-function randRot(){return(Math.random()-0.5)*22;} // ±11 deg
-
-function renderFdie(pid,idx,faceIdx,cls){
-  var el=document.getElementById('fd-'+pid+'-'+idx);if(!el)return;
-  el.className='fdie'+(cls?' '+cls:'');
-  if(faceIdx===null||faceIdx===undefined){
-    el.innerHTML='<span class="fsym">?</span>';
-  } else {
-    var f=FDIE_FACES[faceIdx];
-    el.innerHTML='<span class="fsym">'+f.sym+'</span>';
+  for(var j=0;j<2;j++){
+    var eqRollEl=document.getElementById('dice-eq-rolls-'+pid+'-'+j);
+    if(eqRollEl) eqRollEl.textContent = d.eqRolls[j]+'/'+MAX_EQUIP_ROLLS;
+    var eqBox=document.getElementById('die-eq-'+pid+'-'+j);
+    if(eqBox) eqBox.classList.toggle('die-disabled', d.eqRolls[j]>=MAX_EQUIP_ROLLS && !d.eqLocked[j]);
   }
 }
-
-// Spin a faction die on Z axis then land at a random position/rotation in the zone
-async function spinFdie(pid,idx,newFace){
-  var el=document.getElementById('fd-'+pid+'-'+idx);if(!el)return;
-  var fz=document.getElementById('fz-'+pid);
-  var finalRot=randRot();
-  var spinDeg=360*3+finalRot; // 3 full spins + final angle
-  var startRot=parseFloat(el.style.getPropertyValue('--spin-end')||'0');
-  el.style.setProperty('--spin-start',startRot+'deg');
-  el.style.setProperty('--spin-mid',(startRot+spinDeg*0.6)+'deg');
-  el.style.setProperty('--spin-end',(finalRot)+'deg');
-  el.classList.add('zspinning');
-  sfxRoll();
-  await wait(550);
-  el.classList.remove('zspinning');
-  // Land in this die's column (X) and its own Y-band (top/mid/bottom) so auto dice never stack
-  var S=54,pad=4;
-  var fzW=fz.offsetWidth||120,fzH=fz.offsetHeight||80;
-  var colW=fzW/3;
-  var x=Math.round(idx*colW+(colW-S)/2+(Math.random()-0.5)*12);
-  x=Math.max(pad,Math.min(fzW-S-pad,x));
-  var bandH=(fzH-pad*2)/3;
-  var y=Math.round(pad+idx*bandH+Math.random()*Math.max(0,bandH-S-2));
-  y=Math.max(pad,Math.min(fzH-S-pad,y));
-  el.style.left=x+'px';el.style.top=y+'px';
-  el.style.transform='rotate('+finalRot+'deg)';
-  G.players[pid].fdice[idx]=newFace;
-  renderFdie(pid,idx,newFace,'land');
-  sfxLand();
-  await wait(200);
-  renderFdie(pid,idx,newFace,'');
-  el.style.transform='rotate('+finalRot+'deg)'; // keep rotation after class clear
+function renderEquipLockState(pid){
+  var d=diceUI[pid];
+  for(var j=0;j<2;j++){
+    var box=document.getElementById('die-eq-'+pid+'-'+j);
+    if(box) box.classList.toggle('die-locked', d.eqLocked[j]);
+  }
+  var bothLocked = d.eqLocked[0] && d.eqLocked[1];
+  var endTurnEl=document.getElementById('dice-end-turn-'+pid);
+  if(endTurnEl) endTurnEl.classList.toggle('show', bothLocked);
 }
 
-// Spin BOTH equip dice together, return array of two face results
-async function spinBothEdice(pid){
-  var ez=document.getElementById('ez-'+pid);
-  var faces=[Math.floor(Math.random()*6),Math.floor(Math.random()*6)];
-  var finalRots=[randRot(),randRot()];
+// ── Rolling: faction (all 3 or just one) ───────────────────────
+function rollFactionAll(pid){
+  var d=diceUI[pid];
+  if(d.facRolls>=MAX_FACTION_ROLLS) return;
+  try{getAC().resume();}catch(e){}
+  sfxDice();
+  d.facRolls++;
 
-  for(var e=0;e<2;e++){
-    var el=document.getElementById('ed-'+pid+'-'+e);if(!el)continue;
-    var startRot=parseFloat(el.dataset.rot||'0');
-    el.style.setProperty('--spin-start',startRot+'deg');
-    el.style.setProperty('--spin-mid',(startRot+360*3)+'deg');
-    el.style.setProperty('--spin-end',finalRots[e]+'deg');
-    el.classList.add('zspinning');
-    // Land at random position in edie zone
-    var S=48,w=ez.offsetWidth||70,h=ez.offsetHeight||80,pad=4;
-    var x=pad+Math.random()*Math.max(0,w-S-pad*2);
-    var yRange=Math.max(0,h-S-pad*2);
-    // Keep dice in top/bottom halves loosely
-    var y=e===0?(pad+Math.random()*(yRange/2)):(h/2+Math.random()*(yRange/2));
-    el.style.left=Math.round(x)+'px';el.style.top=Math.round(y)+'px';
-  }
-  sfxRoll();
-  await wait(560);
-  for(var e=0;e<2;e++){
-    var el=document.getElementById('ed-'+pid+'-'+e);if(!el)continue;
-    el.classList.remove('zspinning');
-    el.style.transform='rotate('+finalRots[e]+'deg)';
-    el.dataset.rot=finalRots[e];
-    renderEdie(pid,e,faces[e]);
-    el.classList.add('land');
-  }
-  sfxLand();await wait(50);sfxLand();
-  await wait(160);
-  for(var e=0;e<2;e++){
-    var el=document.getElementById('ed-'+pid+'-'+e);if(!el)return faces;
-    el.classList.remove('land');
-    el.style.transform='rotate('+finalRots[e]+'deg)';
-  }
-  return faces;
-}
+  var boxEls=[0,1,2].map(function(i){ return document.getElementById('die-fac-'+pid+'-'+i); });
+  var symEls=[0,1,2].map(function(i){ return document.getElementById('die-fac-sym-'+pid+'-'+i); });
+  boxEls.forEach(function(b){ b.classList.add('rolling'); });
+  var results=[0,1,2].map(function(){ return FDIE_FACES[Math.floor(Math.random()*FDIE_FACES.length)]; });
 
-function renderEdie(pid,dieIdx,faceIdx){
-  // dieIdx = 0 or 1; if undefined, render both as blank
-  var indices=(dieIdx!==undefined)?[dieIdx]:[0,1];
-  indices.forEach(function(e){
-    var cv=document.getElementById('ec-'+pid+'-'+e);if(!cv)return;
-    var ctx=cv.getContext('2d'),W=cv.width,H=cv.height;
-    ctx.clearRect(0,0,W,H);ctx.fillStyle='#306230';ctx.fillRect(0,0,W,H);
-    if(faceIdx===null||faceIdx===undefined){
-      ctx.fillStyle='#9bbc0f';ctx.font='bold 12px "Press Start 2P",monospace';
-      ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('?',W/2,H/2);return;
+  var flickers=0,maxFlickers=9;
+  var interval=setInterval(function(){
+    symEls.forEach(function(el){ el.textContent=FDIE_FACES[Math.floor(Math.random()*FDIE_FACES.length)].sym; });
+    flickers++;
+    if(flickers>=maxFlickers){
+      clearInterval(interval);
+      boxEls.forEach(function(b){ b.classList.remove('rolling'); });
+      symEls.forEach(function(el,i){ el.textContent=results[i].sym; });
+      renderRollCounters(pid);
+      beep(900,0.05,0.1);
+      setTimeout(function(){ beep(1200,0.04,0.08); },70);
     }
-    var f=EDIE_FACES[faceIdx],cx=W/2,cy=H/2;
-    ctx.fillStyle='#9bbc0f';ctx.strokeStyle='#9bbc0f';ctx.lineWidth=3;
-    if(f.type==='endturn'){
-      // Bold X
-      ctx.lineWidth=3.5;
-      ctx.beginPath();ctx.moveTo(9,9);ctx.lineTo(W-9,H-9);ctx.stroke();
-      ctx.beginPath();ctx.moveTo(W-9,9);ctx.lineTo(9,H-9);ctx.stroke();
-    } else if(f.type==='noact'){
-      // Empty circle
-      ctx.lineWidth=3;ctx.beginPath();ctx.arc(cx,cy,12,0,Math.PI*2);ctx.stroke();
-    } else {
-      // equip — draw a fist-like plus/cross symbol
-      ctx.lineWidth=4;
-      ctx.beginPath();ctx.moveTo(cx,cy-12);ctx.lineTo(cx,cy+12);ctx.stroke();
-      ctx.beginPath();ctx.moveTo(cx-12,cy);ctx.lineTo(cx+12,cy);ctx.stroke();
-      // small corner squares to make it feel like a fist/icon
-      ctx.fillRect(cx-4,cy-4,8,8);
+  },32);
+}
+
+function rollFactionOne(pid,idx){
+  var d=diceUI[pid];
+  if(d.facRolls>=MAX_FACTION_ROLLS) return;
+  try{getAC().resume();}catch(e){}
+  sfxDice();
+  d.facRolls++;
+
+  var boxEl=document.getElementById('die-fac-'+pid+'-'+idx);
+  var symEl=document.getElementById('die-fac-sym-'+pid+'-'+idx);
+  boxEl.classList.add('rolling');
+  var result=FDIE_FACES[Math.floor(Math.random()*FDIE_FACES.length)];
+
+  var flickers=0,maxFlickers=9;
+  var interval=setInterval(function(){
+    symEl.textContent=FDIE_FACES[Math.floor(Math.random()*FDIE_FACES.length)].sym;
+    flickers++;
+    if(flickers>=maxFlickers){
+      clearInterval(interval);
+      boxEl.classList.remove('rolling');
+      symEl.textContent=result.sym;
+      renderRollCounters(pid);
+      beep(900,0.05,0.1);
+      setTimeout(function(){ beep(1200,0.04,0.08); },70);
     }
-  });
+  },32);
 }
 
-// ── Tap callbacks ─────────────────────────────────────────────
-var _fdieTapCb=null,_edieTapCb=null;
-function fdieTap(pid,idx){if(_fdieTapCb)_fdieTapCb(pid,idx);}
-function edieTap(pid){if(_edieTapCb)_edieTapCb(pid);}
-function waitFdieTap(pid){return new Promise(function(r){_fdieTapCb=function(p,idx){if(p===pid){_fdieTapCb=null;r(idx);}};});}
-function waitEdieTap(pid){return new Promise(function(r){_edieTapCb=function(p){if(p===pid){_edieTapCb=null;r(true);}};});}
+// ── Rolling: equip dice ─────────────────────────────────────────
+// By default both equip dice roll together as a pair (tapping either
+// one triggers both). If one die has locked on "Stop", only the
+// remaining unlocked die can still be rolled, on its own.
+function rollEquip(pid,idx){
+  var d=diceUI[pid];
+  if(d.eqLocked[idx]){ beep(220,0.05,0.05,'triangle'); return; } // this die is locked — denial click
 
-// ── Faction helpers ───────────────────────────────────────────
-function getCurrentFaction(pid){
-  var p=G.players[pid];
-  var labels=p.fdice.map(function(f){return f!==null?FDIE_FACES[f].label:null;}).filter(Boolean);
-  return detectFaction(labels);
-}
-function countSymFor(pid,fKey){
-  var p=G.players[pid],fac=FACTIONS[fKey],atk=0,def=0;
-  p.fdice.forEach(function(fi){
-    if(fi===null)return;
-    var lbl=FDIE_FACES[fi].label;
-    if(fac.atkSym.indexOf(lbl)>=0)atk++;
-    if(fac.defSym.length&&fac.defSym.indexOf(lbl)>=0)def++;
-  });
-  return{atk:atk,def:def};
-}
-function getDominantFaction(pid){
-  var p=G.players[pid];
-  var counts={communist:0,capitalist:0,knight:0,alien:0};
-  p.fdice.forEach(function(fi){
-    if(fi===null)return;
-    var lbl=FDIE_FACES[fi].label;
-    if(SYM_TO_FACTION[lbl])counts[SYM_TO_FACTION[lbl]]++;
-  });
-  var best=null,bv=0;for(var k in counts)if(counts[k]>bv){bv=counts[k];best=k;}return best;
-}
+  var otherIdx = idx===0 ? 1 : 0;
+  var otherAvailable = !d.eqLocked[otherIdx];
+  var indices = otherAvailable ? [0,1] : [idx]; // roll the pair, or just the lone unlocked die
 
-// ── TRIPLE BONUS ─────────────────────────────────────────────
-// Called after any faction dice land. Detects triples and stores bonus on player.
-function getTriple(pid){
-  var p=G.players[pid];
-  var counts={};
-  p.fdice.forEach(function(fi){
-    if(fi===null)return;
-    var lbl=FDIE_FACES[fi].label;
-    counts[lbl]=(counts[lbl]||0)+1;
-  });
-  for(var lbl in counts){
-    if(counts[lbl]===3) return lbl; // e.g. 'hammer','sickle','sword','ufo','plane','gun'
-  }
-  return null;
-}
+  // Filter to only indices that still have rolls left
+  indices = indices.filter(function(i){ return d.eqRolls[i] < MAX_EQUIP_ROLLS; });
+  if(indices.length===0) return;
 
-function tripleBonus(lbl){
-  // Returns {type, amount, desc}
-  if(lbl==='sword')  return{type:'atk',flat:6,  desc:'⚔ TRIPLE SWORD +6 ATK'};
-  if(lbl==='ufo')    return{type:'mirror',flat:3,desc:'👾 TRIPLE UFO MIRROR +3'};
-  if(lbl==='hammer') return{type:'atk',flat:3,  desc:'🔨 TRIPLE HAMMER +3 ATK'};
-  if(lbl==='sickle') return{type:'def',flat:3,  desc:'☭ TRIPLE SICKLE +3 DEF'};
-  if(lbl==='plane')  return{type:'atk',flat:3,  desc:'✈ TRIPLE PLANE +3 ATK'};
-  if(lbl==='gun')    return{type:'def',flat:3,  desc:'⌐ TRIPLE GUN +3 DEF'};
-  return null;
-}
+  try{getAC().resume();}catch(e){}
+  sfxDice();
+  indices.forEach(function(i){ d.eqRolls[i]++; });
 
-async function checkAndAwardTriple(pid){
-  var lbl=getTriple(pid);
-  if(!lbl) return;
-  var bonus=tripleBonus(lbl);
-  if(!bonus) return;
-  var p=G.players[pid];
-  // Store bonus — applied at combat time
-  p.tripleBonus=bonus;
-  // Flash the dice tray to highlight the triple
-  for(var i=0;i<3;i++){
-    var el=document.getElementById('fd-'+pid+'-'+i);
-    if(el)el.style.boxShadow='0 0 0 4px #0f380f, 0 0 0 6px #9bbc0f';
-  }
-  sfxLock();sfxLock();
-  // Show popup
-  await showTriplePopup(pid,bonus);
-  // Remove highlight
-  for(var i=0;i<3;i++){
-    var el=document.getElementById('fd-'+pid+'-'+i);
-    if(el)el.style.boxShadow='';
-  }
-}
+  var boxEls = indices.map(function(i){ return document.getElementById('die-eq-'+pid+'-'+i); });
+  var symEls = indices.map(function(i){ return document.getElementById('die-eq-sym-'+pid+'-'+i); });
+  boxEls.forEach(function(b){ b.classList.add('rolling'); });
+  var results = indices.map(function(){ return EDIE_FACES[Math.floor(Math.random()*EDIE_FACES.length)]; });
 
-function showTriplePopup(pid,bonus){
-  return new Promise(function(resolve){
-    var existing=document.getElementById('triple-popup');if(existing)existing.remove();
-    var popup=document.createElement('div');
-    popup.id='triple-popup';
-    popup.style.cssText='position:absolute;inset:0;background:rgba(10,10,20,0.75);display:flex;align-items:center;justify-content:center;z-index:85;animation:popIn .2s cubic-bezier(.2,1.4,.4,1)';
-    var typeDesc=bonus.type==='mirror'?'MIRROR SHIELD':'bonus type '+bonus.type;
-    popup.innerHTML=
-      '<div style="background:#13131f;border:2px solid #c9a84c;padding:14px 18px;width:min(280px,88vw);font-family:\'Press Start 2P\',monospace;color:#e8e4d0;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.8)">'+
-        '<div style="font-size:13px;margin-bottom:10px;animation:slowBlink .6s step-end infinite">TRIPLE!</div>'+
-        '<div style="font-size:10px;margin-bottom:10px;color:#6b6b8a">'+bonus.desc+'</div>'+
-        '<div style="font-size:8px;color:#306230;line-height:2;border:1px solid #3a3a54;padding:6px 8px;background:#1a1a2a">'+
-          (bonus.type==='atk'?'+'  +bonus.flat+' ATK added before equips':'')+
-          (bonus.type==='def'?'+'+bonus.flat+' DEF added before equips':'')+
-          (bonus.type==='mirror'?'Return 3 DMG when hit this turn':'')+
-        '</div>'+
-        '<div style="font-size:7px;color:#6b6b8a;margin-top:10px;animation:gbBlink .6s step-end infinite">TAP OR PRESS A</div>'+
-      '</div>';
-    popup.onclick=function(){popup.remove();resolve();};
-    // Also resolve on gbA
-    var oldResume=G.resume;
-    G.resume=function(){popup.remove();G.resume=oldResume;resolve();};
-    G.choiceCtx='triple-popup';
-    document.getElementById('gb-screen').appendChild(popup);
-  });
-}
-// ── CONTEXTUAL TIP POPUPS ─────────────────────────────────────
-// Small non-blocking popups that explain what to do next.
-// Tap anywhere or wait 4s to dismiss.
-function showTip(title, body){
-  var existing=document.getElementById('tip-popup');if(existing)existing.remove();
-  var popup=document.createElement('div');
-  popup.id='tip-popup';
-  popup.style.cssText=[
-    'position:absolute',
-    'left:10px','right:10px',
-    'bottom:12px',
-    'background:var(--surface)',
-    'border:1px solid var(--gold)',
-    'padding:16px 18px',
-    'z-index:75',
-    'animation:popIn .2s cubic-bezier(.2,1.4,.4,1)',
-    'box-shadow:0 8px 32px rgba(0,0,0,.8)',
-    'cursor:pointer',
-  ].join(';');
-  popup.innerHTML=
-    '<div style="font-family:var(--font-ui);color:var(--gold);font-size:15px;font-weight:900;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">'+title+'</div>'+
-    '<div style="font-family:var(--font-ui);color:var(--cream);font-size:15px;font-weight:600;line-height:1.8;">'+body+'</div>'+
-    '<div style="font-family:var(--font-ui);color:var(--muted);font-size:12px;letter-spacing:2px;margin-top:10px;text-transform:uppercase;">TAP TO DISMISS</div>';
-  popup.onclick=function(e){e.stopPropagation();popup.remove();};
-  document.getElementById('gb-screen').appendChild(popup);
-}
-function hideTip(){
-  var el=document.getElementById('tip-popup');if(el)el.remove();
-}
+  var flickers=0,maxFlickers=9;
+  var interval=setInterval(function(){
+    symEls.forEach(function(el){ el.textContent=EDIE_FACES[Math.floor(Math.random()*EDIE_FACES.length)].sym; });
+    flickers++;
+    if(flickers>=maxFlickers){
+      clearInterval(interval);
+      boxEls.forEach(function(b){ b.classList.remove('rolling'); });
+      symEls.forEach(function(el,k){ el.textContent=results[k].sym; });
+      renderRollCounters(pid);
 
-async function doFactionPhase(pid){
-  var p=G.players[pid];
-  p.phase='faction';p.factionKey=null;p.fdice=[null,null,null];
-  p.atkAct=0;p.defAct=0;p.equipRolls=0;p.equipStrikes=0;p.factionRolls=0;p.tripleBonus=null;
-  updFactionBadge(pid);updPhaseLabel(pid,'ROLL TO FIND FACTION (3 MAX)');updOutBar(pid);
-  buildDiceTray(pid);
-  renderEdie(pid,0,null);renderEdie(pid,1,null);
-  var isManual=setup.modes[pid];
+      results.forEach(function(r){ if(r.label==='Equip') d.eqHits++; });
+      renderEqHits(pid);
 
-  if(isManual){
-    // Explain faction phase on first roll of each turn
-    showTip(
-      'P'+(pid+1)+' — FIND YOUR FACTION',
-      'Tap your dice to shake all 3. You need 2 matching symbols to declare a faction.<br>You have <b style="color:var(--cream);">'+MAX_FACTION_ROLLS+' rolls</b> — use them wisely.',
-      5000
-    );
-    // Initial roll — counts as roll 1
-    var fz0=document.getElementById('fz-'+pid);
-    var rollsLeft0=MAX_FACTION_ROLLS;
-    updPhaseLabel(pid,'TAP DICE TO SHAKE ('+rollsLeft0+' ROLLS)',true);
-    fz0.style.cursor='pointer';
-    await new Promise(function(r){fz0.onclick=function(){fz0.onclick=null;fz0.style.cursor='default';r();};});
-    await shakeAndLandFdice(pid);
-    p.factionRolls=1;
-    await checkAndAwardTriple(pid);
-
-    while(true){
-      var detected=getCurrentFaction(pid);
-      var rollsLeft=MAX_FACTION_ROLLS-p.factionRolls;
-      var canRoll=rollsLeft>0;
-      var triple=p.tripleBonus?(' ★TRIPLE'):'';
-
-      if(!detected&&!canRoll){
-        var forced=getDominantFaction(pid)||Object.keys(FACTIONS)[0];
-        p.factionKey=forced;updFactionBadge(pid);
-        toast('OUT OF ROLLS — '+FACTIONS[forced].name);
-        sfxLock();await wait(600);return;
-      }
-
-      // Update phase label
-      if(detected){
-        updPhaseLabel(pid,FACTIONS[detected].name+triple+(canRoll?' · TAP=REROLL':''),true);
-        updFactionBadge(pid);
-      } else {
-        updPhaseLabel(pid,canRoll?'TAP DICE TO REROLL ('+rollsLeft+' LEFT)':'DECLARE FORCED',true);
-        document.getElementById('fb-'+pid).classList.remove('lit');
-      }
-
-      // Wait for tap on dice zone (= roll) OR declare promise (= from action bar DECLARE button)
-      var fz=document.getElementById('fz-'+pid);
-      var declared=false;
-      var rolled=false;
-
-      await new Promise(function(resolve){
-        // Declare button resolves via G.resume('b')
-        G.resume=function(v){
-          G.resume=null;G.choiceCtx=null;
-          fz.onclick=null;fz.style.cursor='default';
-          if(v==='b'){declared=true;}
-          else{rolled=true;}
-          resolve();
-        };
-        G.choiceCtx='faction-input';
-
-        if(canRoll){
-          fz.style.cursor='pointer';
-          fz.onclick=function(){
-            fz.onclick=null;fz.style.cursor='default';
-            G.resume=null;G.choiceCtx=null;
-            rolled=true;resolve();
-          };
-        }
-        // If no rolls left, only declare is possible (action bar handles it)
-        if(!canRoll&&!detected){
-          // Auto-declare via a short wait
-          declared=true;resolve();
-        }
+      var anyStopped=false;
+      results.forEach(function(r,k){
+        if(r.stop){ d.eqLocked[indices[k]]=true; anyStopped=true; }
       });
-
-      if(declared){
-        var fk=getCurrentFaction(pid)||getDominantFaction(pid)||Object.keys(FACTIONS)[0];
-        p.factionKey=fk;updFactionBadge(pid);sfxLock();
-        hideTip();
-        showTip(
-          FACTIONS[fk].name+' DECLARED',
-          'Now tap your equip dice (right side) to roll for activations.<br>Each ⊕ lets you assign 1 ATK or DEF — tap a faction die to spend it.',
-          6000
-        );
-        await wait(300);return;
-      } else if(rolled&&canRoll){
-        p.tripleBonus=null;
-        await shakeAndLandFdice(pid);
-        p.factionRolls++;
-        await checkAndAwardTriple(pid);
-      } else if(!canRoll){
-        var fk=getCurrentFaction(pid)||getDominantFaction(pid)||Object.keys(FACTIONS)[0];
-        p.factionKey=fk;updFactionBadge(pid);sfxLock();await wait(300);return;
-      }
-    }
-  } else {
-    // Auto — always rolls all 3, max MAX_FACTION_ROLLS attempts
-    await rollAllFdice(pid);p.factionRolls=1;
-    while(!getCurrentFaction(pid)&&p.factionRolls<MAX_FACTION_ROLLS){
-      await wait(G.speed||400);
-      p.tripleBonus=null;
-      await rollAllFdice(pid);
-      p.factionRolls++;
-    }
-    var fk=getCurrentFaction(pid)||getDominantFaction(pid)||Object.keys(FACTIONS)[0];
-    p.factionKey=fk;updFactionBadge(pid);sfxLock();await wait(300);
-    updPhaseLabel(pid,FACTIONS[fk].name+' LOCKED');
-  }
-}
-
-// Auto player faction dice roll — same visual as manual but timed instead of tap-driven
-async function rollAllFdice(pid){
-  var p=G.players[pid];
-  var fz=document.getElementById('fz-'+pid);
-
-  // Shake all 3 showing ?
-  for(var i=0;i<3;i++){
-    var el=document.getElementById('fd-'+pid+'-'+i);
-    if(el){el.classList.remove('zspinning');el.style.transform='rotate(0deg)';el.classList.add('rolling');el.querySelector('.fsym').textContent='?';}
-  }
-  sfxRoll();
-
-  // Roll values secretly while shaking
-  var newFaces=[Math.floor(Math.random()*6),Math.floor(Math.random()*6),Math.floor(Math.random()*6)];
-  await wait(G.speed||320);
-
-  // Spin all 3 simultaneously into Y-banded positions
-  for(var i=0;i<3;i++){
-    var el=document.getElementById('fd-'+pid+'-'+i);if(!el)continue;
-    el.classList.remove('rolling');
-    var finalRot=randRot();
-    el.style.setProperty('--spin-start','0deg');
-    el.style.setProperty('--spin-mid',(360*2)+'deg');
-    el.style.setProperty('--spin-end',finalRot+'deg');
-    el.classList.add('zspinning');
-    // Y-banded: die 0 top, die 1 mid, die 2 bottom
-    var S=54,pad=4;
-    var fzW=fz.offsetWidth||120,fzH=fz.offsetHeight||80;
-    var colW=fzW/3;
-    var x=Math.round(i*colW+(colW-S)/2+(Math.random()-0.5)*12);
-    x=Math.max(pad,Math.min(fzW-S-pad,x));
-    var bandH=(fzH-pad*2)/3;
-    var y=Math.round(pad+i*bandH+Math.random()*Math.max(0,bandH-S-2));
-    y=Math.max(pad,Math.min(fzH-S-pad,y));
-    el.style.left=x+'px';el.style.top=y+'px';
-  }
-  await wait(560);
-
-  // Reveal faces
-  for(var i=0;i<3;i++){
-    var el=document.getElementById('fd-'+pid+'-'+i);if(!el)continue;
-    el.classList.remove('zspinning');
-    var rot=randRot();
-    el.style.transform='rotate('+rot+'deg)';
-    p.fdice[i]=newFaces[i];
-    renderFdie(pid,i,newFaces[i],'land');
-    sfxLand();
-    await wait(90);
-    renderFdie(pid,i,newFaces[i],'');
-    el.style.transform='rotate('+rot+'deg)';
-  }
-}
-
-// Shake dice (showing ?), wait for A, then land them — used by manual player
-async function shakeAndLandFdice(pid){
-  var p=G.players[pid];
-  var fz=document.getElementById('fz-'+pid);
-
-  // Shake all 3 showing ?
-  for(var i=0;i<3;i++){
-    var el=document.getElementById('fd-'+pid+'-'+i);
-    if(el){el.classList.remove('zspinning');el.style.transform='rotate(0deg)';el.classList.add('rolling');el.querySelector('.fsym').textContent='?';}
-  }
-  sfxRoll();
-
-  // Roll values secretly
-  var newFaces=[Math.floor(Math.random()*6),Math.floor(Math.random()*6),Math.floor(Math.random()*6)];
-
-  // Tap the faction die zone to release
-  updPhaseLabel(pid,'TAP DICE TO RELEASE!',true);
-  fz.style.cursor='pointer';
-  await new Promise(function(r){fz.onclick=function(){fz.onclick=null;fz.style.cursor='default';r();};});
-
-  // All 3 spin simultaneously then land staggered
-  for(var i=0;i<3;i++){
-    var el=document.getElementById('fd-'+pid+'-'+i);if(!el)continue;
-    el.classList.remove('rolling');
-    var finalRot=randRot();
-    el.style.setProperty('--spin-start','0deg');
-    el.style.setProperty('--spin-mid',(360*2)+'deg');
-    el.style.setProperty('--spin-end',finalRot+'deg');
-    el.classList.add('zspinning');
-    var S=54,pos=randPos(fz,S,4,i,3);
-    el.style.left=pos.x+'px';el.style.top=pos.y+'px';
-  }
-  await wait(560);
-
-  for(var i=0;i<3;i++){
-    var el=document.getElementById('fd-'+pid+'-'+i);if(!el)continue;
-    el.classList.remove('zspinning');
-    var rot2=randRot();
-    el.style.transform='rotate('+rot2+'deg)';
-    p.fdice[i]=newFaces[i];
-    renderFdie(pid,i,newFaces[i],'land');
-    sfxLand();
-    await wait(90);
-    renderFdie(pid,i,newFaces[i],'');
-    el.style.transform='rotate('+rot2+'deg)';
-  }
-}
-
-// ── COMBAT PHASE ──────────────────────────────────────────────
-async function doCombatPhase(pid){
-  var p=G.players[pid];
-  p.phase='combat';p.equipRolls=0;p.atkAct=0;p.defAct=0;p.equipStrikes=0;p.atkFlat=0;p.defFlat=0;
-  var isManual=setup.modes[pid];
-  var fac=FACTIONS[p.factionKey];
-  var counts=countSymFor(pid,p.factionKey);
-
-  // Apply triple bonus — store as flat damage/def, NOT as activations (avoids stat multiplication)
-  if(p.tripleBonus){
-    var tb=p.tripleBonus;
-    if(tb.type==='atk'){p.atkFlat=tb.flat;toast(tb.desc);}
-    else if(tb.type==='def'){p.defFlat=tb.flat;toast(tb.desc);}
-    else if(tb.type==='mirror'){toast(tb.desc);}
-    updOutBar(pid);
-    await wait(800);toastClear();
-  }
-
-  updPhaseLabel(pid,'TAP EQUIP DICE TO ROLL',true);updOutBar(pid);
-
-  while(true){
-    // Check if more rolls available
-    if(p.equipRolls>=MAX_EQUIP_ROLLS) break;
-
-    if(isManual){
-      await waitEdieTap(pid);
-    } else {
-      await wait(G.speed||320);
-    }
-
-    // Roll both dice together
-    var faces=await spinBothEdice(pid);
-    p.equipRolls++;
-
-    // Tally this roll
-    var equipCount=0,endCount=0;
-    faces.forEach(function(ef){
-      var f=EDIE_FACES[ef];
-      if(f.type==='endturn') endCount++;
-      else if(f.type==='equip') equipCount++;
-    });
-
-    p.equipStrikes+=endCount;
-
-    // 2-strike rule — end turn immediately, don't process equips from this roll
-    if(p.equipStrikes>=2){
-      hideTip();
-      showTip('2 STRIKES — TURN ENDS','Two end-turn faces rolled. Your turn is over — damage resolves after both players finish.');
-      updPhaseLabel(pid,'2 STRIKES — TURN ENDS',false);
-      sfxBad();await wait(400);
-      break;
-    }
-
-    // Process any equips from this roll
-    if(equipCount>0){
-      if(isManual){
-        var hasAtk=counts.atk>0,hasDef=counts.def>0&&fac.defSym.length>0;
-        if(hasAtk&&hasDef){
-          var rem=equipCount;
-          hideTip();
-          showTip(
-            'SPEND YOUR EQUIPS',
-            'You rolled <b style="color:var(--cream);">'+equipCount+' ⊕</b> — tap a faction die to spend each one.<br>ATK symbols → attack · DEF symbols → defense.',
-            5000
-          );
-          updPhaseLabel(pid,'TAP FACTION DIE ('+rem+' EQUIP)',true);
-          setFdiceHighlight(pid,true);
-          while(rem>0){
-            var tappedIdx=await waitFdieTap(pid);
-            var fi=p.fdice[tappedIdx];
-            if(fi===null){toast('EMPTY DIE');continue;}
-            var lbl=FDIE_FACES[fi].label;
-            if(SYM_TO_FACTION[lbl]!==p.factionKey){toast('WRONG FACTION');continue;}
-            var role=FDIE_FACES[fi].role;
-            if(role==='atk')p.atkAct++;
-            else p.defAct++;
-            rem--;
-            updOutBar(pid);
-            toast(role==='atk'?'ATK +1':'DEF +1');
-            if(rem>0)updPhaseLabel(pid,'TAP FACTION DIE ('+rem+' EQUIP)',true);
-          }
-          setFdiceHighlight(pid,false);
-          toastClear();
-        } else if(hasAtk){
-          p.atkAct+=equipCount;
-        } else if(hasDef){
-          p.defAct+=equipCount;
-        }
+      if(anyStopped){
+        renderEquipLockState(pid);
+        if(d.eqLocked[0] && d.eqLocked[1]) sfxEndTurn();
+        else sfxLockDie();
       } else {
-        // Auto
-        var lifeR=p.maxHp>0?p.hp/p.maxHp:1;
-        var defPips=(fac.defSym.length&&counts.def>0)?(lifeR<0.4?Math.ceil(equipCount/2):Math.floor(equipCount/3)):0;
-        p.atkAct+=Math.min(equipCount-defPips,counts.atk);
-        p.defAct+=Math.min(defPips,counts.def||0);
+        beep(900,0.05,0.1);
+        setTimeout(function(){ beep(1200,0.04,0.08); },70);
       }
-      updOutBar(pid);
-    } else {
-      // No equips this roll
-      sfxBad();
     }
+  },32);
+}
 
-    // Show roll result label
-    var rollLabel='R'+p.equipRolls+'/'+MAX_EQUIP_ROLLS;
-    if(p.equipStrikes>0) rollLabel+=' · ⚠'+p.equipStrikes+'/2';
-    if(equipCount>0) rollLabel+=' · +'+equipCount+' EQUIP';
-    updPhaseLabel(pid,rollLabel+(p.equipRolls<MAX_EQUIP_ROLLS?' · TAP TO ROLL AGAIN':''),p.equipRolls<MAX_EQUIP_ROLLS);
-    // Small pause so player can read result before next tap
-    if(!isManual) await wait(200);
+// ── Long-press + tap ─────────────────────────────────────────
+var LONG_MS=480; // default hold length (used by Equip cells)
+var LONG_MS_SLOW=960; // doubled hold length for GDP and Attack/Defense (reset/roll actions)
+function holdDuration(key){
+  return (key==='gdp'||key==='atk'||key==='def') ? LONG_MS_SLOW : LONG_MS;
+}
+var lpTimers={};
+var lpFired={};
+var lpLockout={}; // brief lockout after long-press so touchend doesn't also tap
+
+function makeLPSvg(cell){
+  var ex=cell.querySelector('.lp-svg');
+  if(ex)return ex;
+  var ns='http://www.w3.org/2000/svg';
+  var svg=document.createElementNS(ns,'svg');
+  svg.setAttribute('class','lp-svg');
+  svg.setAttribute('width','64');svg.setAttribute('height','64');
+  svg.setAttribute('viewBox','0 0 64 64');
+  var circle=document.createElementNS(ns,'circle');
+  circle.setAttribute('cx','32');circle.setAttribute('cy','32');circle.setAttribute('r','26');
+  circle.setAttribute('fill','none');
+  circle.setAttribute('stroke','rgba(0,200,255,0.55)');
+  circle.setAttribute('stroke-width','3');
+  circle.setAttribute('stroke-dasharray','163.4');
+  circle.setAttribute('stroke-dashoffset','163.4');
+  circle.setAttribute('stroke-linecap','round');
+  circle.setAttribute('transform','rotate(-90 32 32)');
+  svg.appendChild(circle);
+  cell.appendChild(svg);
+  return svg;
+}
+
+function lpStart(cell,pid,key){
+  var id=cell.id;
+  lpFired[id]=false;
+  lpLockout[id]=false;
+  cell.classList.add('tapped');
+  var svg=makeLPSvg(cell);
+  svg.classList.add('active');
+  var circle=svg.querySelector('circle');
+  var perim=163.4;
+  var start=Date.now();
+  var dur=holdDuration(key);
+  if(lpTimers[id+'a'])cancelAnimationFrame(lpTimers[id+'a']);
+
+  function frame(){
+    var p=Math.min((Date.now()-start)/dur,1);
+    circle.setAttribute('stroke-dashoffset',perim*(1-p));
+    if(p<1&&lpTimers[id+'t']) lpTimers[id+'a']=requestAnimationFrame(frame);
   }
+  lpTimers[id+'a']=requestAnimationFrame(frame);
 
-  // Turn over — show final totals
-  p.phase='done';
-  hideTip();
-  var doneLabel='ATK:'+(p.atkAct*p.atk)+' DEF:'+(p.defAct*p.def);
-  if(p.atkAct===0&&p.defAct===0) doneLabel='NO OUTPUT';
-  updPhaseLabel(pid,'DONE · '+doneLabel,false);
-  updOutBar(pid);
+  lpTimers[id+'t']=setTimeout(function(){
+    lpFired[id]=true;
+    lpLockout[id]=true;
+    svg.classList.remove('active');
+    cell.classList.remove('tapped');
+
+    if(ROLLABLE[key]){
+      // ATK/DEF — long press rolls a d6
+      rollD6(cell,pid,key);
+    } else if(RESETTABLE[key]){
+      // GDP resets to 20; Equips reset to 0
+      state[pid][key]=RESET_VALUE[key];
+      sfxResetCell();
+      document.getElementById('val-'+pid+'-'+key).textContent=state[pid][key];
+      popVal(pid,key);
+      updatePips(pid,key);
+      flashReset(cell);
+    }
+  },dur);
 }
 
-// ── DAMAGE POPUP ──────────────────────────────────────────────
-function playerLabel(pid){
-  var p=G.players[pid];
-  var faction=p.factionKey?FACTIONS[p.factionKey].name:'?';
-  return'P'+(pid+1)+' '+faction;
-}
-
-function showDamagePopup(attPid,defPid,output,absorbed,dmg,isKo,kos,mirrorDmg,favoredBonus){
-  var existing=document.getElementById('dmg-popup');if(existing)existing.remove();
-  mirrorDmg=mirrorDmg||0;favoredBonus=favoredBonus||0;
-
-  var attName=playerLabel(attPid);
-  var defName=playerLabel(defPid);
-  var isHit=dmg>0;
-  var headerText=isKo?'💀 COLLAPSE!':isHit?'⚔ HIT!':'🛡 BLOCKED!';
-
-  var popup=document.createElement('div');
-  popup.id='dmg-popup';
-  popup.style.cssText='position:absolute;inset:0;background:rgba(10,10,20,0.75);display:flex;align-items:center;justify-content:center;z-index:80;animation:popIn .18s cubic-bezier(.2,1.4,.4,1)';
-
-  var box=document.createElement('div');
-  box.style.cssText='background:#13131f;border:2px solid #c9a84c;padding:14px 18px;width:min(280px,88vw);font-family:"Press Start 2P",monospace;color:#e8e4d0;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.8)';
-
-  var hdr=document.createElement('div');
-  hdr.style.cssText='font-size:16px;margin-bottom:12px;letter-spacing:2px;animation:slowBlink 0.7s step-end infinite;color:#c9a84c';
-  hdr.textContent=headerText;
-  box.appendChild(hdr);
-
-  var calc=document.createElement('div');
-  calc.style.cssText='font-size:8px;color:#306230;margin-bottom:8px;line-height:2.4;border:1px solid #3a3a54;padding:6px 8px;background:#1a1a2a;text-align:left';
-  var atkActivations2=G.players[attPid].atkAct*G.players[attPid].atk;
-  var atkFlat=G.players[attPid].atkFlat||0;
-  var atkLine=G.players[attPid].atkAct+'×'+G.players[attPid].atk+' ATK = '+atkActivations2+(atkFlat>0?' +'+atkFlat+' bonus':'');
-  var favoredLine=favoredBonus>0?('<br>★ FAVORED +'+favoredBonus+' = '+output+' total'):'';
-  var defLine=absorbed>0?(G.players[defPid].defAct+'×'+G.players[defPid].def+' DEF = '+absorbed+' blocked'):'no defense';
-  var dmgLine=isHit
-    ?'<div style="font-size:22px;font-weight:900;color:#c9a84c;margin-top:4px">−'+dmg+' GDP</div>'
-    :'<div style="font-size:15px;color:#6b6b8a;margin-top:4px">ALL BLOCKED</div>';
-  var arrowLine='<div style="font-size:13px;font-weight:700;color:#e8e4d0;letter-spacing:1px;margin-bottom:6px">'+attName+' → '+defName+'</div>';
-  var mirrorLine=mirrorDmg>0?('<div style="color:#0f380f;font-size:9px;margin-top:4px">👾 UFO MIRROR −'+mirrorDmg+' to '+attName+'</div>'):'';
-  calc.innerHTML=arrowLine+atkLine+favoredLine+'<br>'+defLine+dmgLine+mirrorLine;
-  box.appendChild(calc);
-
-  if(isKo){
-    var koLine=document.createElement('div');
-    koLine.style.cssText='font-size:13px;font-weight:700;margin-top:8px;color:#c0392b;letter-spacing:2px;border:1px solid #3a3a54;padding:4px';
-    koLine.textContent='FALL '+kos+'/'+MAX_KO;
-    box.appendChild(koLine);
+function lpEnd(cell,pid,key){
+  var id=cell.id;
+  var fired=lpFired[id];
+  var locked=lpLockout[id];
+  clearTimeout(lpTimers[id+'t']);lpTimers[id+'t']=null;
+  cancelAnimationFrame(lpTimers[id+'a']);lpTimers[id+'a']=null;
+  var svg=cell.querySelector('.lp-svg');
+  if(svg){
+    svg.classList.remove('active');
+    var c=svg.querySelector('circle');
+    if(c) c.setAttribute('stroke-dashoffset','163.4');
   }
+  cell.classList.remove('tapped');
+  // If long-press fired OR we're in lockout window, don't also register a tap
+  if(fired||locked) return;
 
-  var hint=document.createElement('div');
-  hint.style.cssText='font-size:7px;color:#6b6b8a;margin-top:10px;animation:gbBlink .6s step-end infinite';
-  hint.textContent='TAP OR PRESS A';
-  box.appendChild(hint);
-
-  popup.appendChild(box);
-  popup.onclick=function(){if(G.resume){var r=G.resume;G.resume=null;G.choiceCtx=null;r();}};
-  document.getElementById('gb-screen').appendChild(popup);
-}
-
-function removeDamagePopup(){
-  var el=document.getElementById('dmg-popup');if(el)el.remove();
-}
-
-async function doDamage(attPid,defPid){
-  var att=G.players[attPid],def=G.players[defPid];
-  var atkActivations=att.atkAct*att.atk;
-  var defActivations=def.defAct*def.def;
-  var output=atkActivations+(att.atkFlat||0),absorbed=defActivations+(def.defFlat||0);
-
-  // Favored faction bonus: +3 flat ATK if attacker's faction matches
-  var favoredBonus=0;
-  if(G.favoredFaction&&att.factionKey===G.favoredFaction){
-    favoredBonus=3;
-    output+=favoredBonus;
+  if(key==='atk'){
+    // Attack — cycles 6→5→4→3→2→1→6, decrementing and wrapping, on every tap
+    var cur=state[pid][key];
+    var next = cur<=1 ? MAX[key] : cur-1;
+    state[pid][key]=next;
+    sfxDown();
+    document.getElementById('val-'+pid+'-'+key).textContent=next;
+    popVal(pid,key);
+  } else if(key==='def'){
+    // Defense — tap always decrements, never increments
+    change(pid,key,-1);
+  } else if(key==='gdp'){
+    change(pid,key,-1); // GDP only ever counts down on a normal tap
+  } else {
+    // EQ1/2/3 — counts up, caps at MAX (no wraparound; long-press resets to 0)
+    var cur=state[pid][key];
+    if(cur>=MAX[key]){
+      beep(220,0.05,0.05,'triangle'); // gentle denial click at the ceiling
+    } else {
+      var next=cur+1;
+      state[pid][key]=next;
+      sfxUp();
+      document.getElementById('val-'+pid+'-'+key).textContent=next;
+      popVal(pid,key);
+    }
   }
+  cell.classList.add('tapped');
+  setTimeout(function(){cell.classList.remove('tapped');},130);
+}
 
-  var dmg=Math.max(0,output-absorbed);
-  if(output===0)return false;
-
-  // Accumulate lifetime stats
-  att.totalAtkDeployed+=(att.atkAct*att.atk)+(att.atkFlat||0)+(favoredBonus);
-  def.totalDefDeployed+=(def.defAct*def.def)+(def.defFlat||0);
-
-  if(dmg>0)sfxHit();else sfxBlock();
-  def.hp=Math.max(0,def.hp-dmg);updHp(defPid);
-
-  // UFO mirror
-  var mirrorDmg=0;
-  if(dmg>0&&def.tripleBonus&&def.tripleBonus.type==='mirror'){
-    mirrorDmg=def.tripleBonus.flat;
-    att.hp=Math.max(0,att.hp-mirrorDmg);updHp(attPid);
-    def.tripleBonus=null;
+function lpCancel(cell){
+  var id=cell.id;
+  clearTimeout(lpTimers[id+'t']);lpTimers[id+'t']=null;
+  cancelAnimationFrame(lpTimers[id+'a']);lpTimers[id+'a']=null;
+  var svg=cell.querySelector('.lp-svg');
+  if(svg){
+    svg.classList.remove('active');
+    var c=svg.querySelector('circle');
+    if(c) c.setAttribute('stroke-dashoffset','163.4');
   }
-
-  var isKo=def.hp<=0;
-  showDamagePopup(attPid,defPid,output,absorbed,dmg,isKo,isKo?def.kos+1:def.kos,mirrorDmg,favoredBonus);
-  await waitResume('dmg-ack');
-  removeDamagePopup();
-
-  if(def.hp<=0){
-    def.kos++;sfxKO();
-    if(def.kos>=MAX_KO)return true;
-
-    // Show regime change overlay — player physically rerolls their stat dice
-    var overlay=document.createElement('div');
-    overlay.id='dmg-popup';
-    overlay.style.cssText='position:absolute;inset:0;background:rgba(10,10,20,0.92);display:flex;flex-direction:column;align-items:center;justify-content:flex-start;z-index:80;animation:popIn .18s cubic-bezier(.2,1.4,.4,1);padding:16px 14px;overflow:hidden;gap:12px;';
-
-    // Header
-    var hdr=document.createElement('div');
-    hdr.style.cssText='font-family:var(--font-ui);font-size:20px;font-weight:900;letter-spacing:3px;color:#c9a84c;text-transform:uppercase;text-align:center;animation:slowBlink .8s step-end infinite;';
-    hdr.textContent='REGIME CHANGE';
-    overlay.appendChild(hdr);
-
-    var sub=document.createElement('div');
-    sub.style.cssText='font-family:var(--font-ui);font-size:12px;font-weight:700;letter-spacing:2px;color:#6b6b8a;text-align:center;text-transform:uppercase;';
-    sub.textContent=playerLabel(defPid)+' · FALL '+def.kos+'/'+MAX_KO;
-    overlay.appendChild(sub);
-
-    // Stat box — reuse existing buildStatBox infrastructure
-    var boxWrap=document.createElement('div');
-    boxWrap.style.cssText='width:100%;flex:1;min-height:0;display:flex;flex-direction:column;gap:8px;';
-
-    // Inject a temp stat-content-style container
-    var tempId='regime-stat-box-'+defPid;
-    var tempBox=document.createElement('div');
-    tempBox.className='stat-box';tempBox.id='stat-box-'+defPid;
-    tempBox.style.flex='1';
-    boxWrap.appendChild(tempBox);
-    overlay.appendChild(boxWrap);
-
-    var hint=document.createElement('div');
-    hint.id='regime-hint';
-    hint.style.cssText='font-family:var(--font-ui);font-size:12px;font-weight:700;letter-spacing:2px;color:#6b6b8a;text-align:center;text-transform:uppercase;animation:slowBlink 1.4s ease-in-out infinite;flex-shrink:0;';
-    hint.textContent='TAP DICE TO SHAKE';
-    overlay.appendChild(hint);
-
-    document.getElementById('gb-screen').appendChild(overlay);
-
-    // Init the stat dice display
-    statDice[defPid]={hp:[1,1,1],atk:1,def:1};
-    buildStatBox(defPid);
-
-    // TAP die zone to shake
-    var sz=document.getElementById('sz-'+defPid);
-    sz.style.cursor='pointer';
-    await new Promise(function(r){sz.onclick=function(){sz.onclick=null;sz.style.cursor='default';r();};});
-
-    setStatShaking(defPid,true);sfxRoll();
-    statDice[defPid]={hp:[d6(),d6(),d6()],atk:d6(),def:d6()};
-
-    // TAP to release
-    hint.textContent='TAP DICE TO RELEASE!';
-    sz.style.cursor='pointer';
-    await new Promise(function(r){sz.onclick=function(){sz.onclick=null;sz.style.cursor='default';r();};});
-
-    setStatShaking(defPid,false);
-    await landStatDice(defPid);
-
-    var newHp=statDice[defPid].hp[0]+statDice[defPid].hp[1]+statDice[defPid].hp[2];
-    var newAtk=statDice[defPid].atk;
-    var newDef=statDice[defPid].def;
-
-    // Tap anywhere to continue
-    hint.textContent='TAP TO CONTINUE';
-    hint.style.animation='slowBlink 1.4s ease-in-out infinite';
-    await new Promise(function(r){overlay.onclick=function(){overlay.onclick=null;r();};});
-
-    removeDamagePopup();
-    playGame();
-    def.hp=newHp;def.maxHp=newHp;def.atk=newAtk;def.def=newDef;
-    updHp(defPid);
-  }
-  return false;
+  cell.classList.remove('tapped');
 }
 
-// ── STAT ROLL SCREEN ──────────────────────────────────────────
-var statDice=[{hp:[1,1,1],atk:1,def:1},{hp:[1,1,1],atk:1,def:1}];
-
-var STAT_LABELS=['ATK','DEF','GDP','GDP','GDP'];
-
-function buildStatBox(pid){
-  var box=document.getElementById('stat-box-'+pid);if(!box)return;
-  var dice='';
-  for(var i=0;i<5;i++){
-    var pct=10+i*20; // spread evenly across width as starting position
-    dice+='<div class="stat-die" id="ss-'+pid+'-'+i+'" style="left:calc('+pct+'% - 23px);top:50%;transform:translateY(-50%)">'+
-      '<span class="die-val">?</span>'+
-      '<span class="die-lbl">'+STAT_LABELS[i]+'</span>'+
-    '</div>';
-  }
-  box.innerHTML=
-    '<div class="stat-title">'+
-      '<span>PLAYER '+(pid+1)+'</span>'+
-      '<span style="font-size:6px;color:#8bac0f;letter-spacing:1px">ATK · DEF · GDP×3</span>'+
-    '</div>'+
-    '<div class="stat-zone" id="sz-'+pid+'">'+dice+
-      '<div class="stat-hp-total" id="sht-'+pid+'"></div>'+
-    '</div>';
+function wireCell(cell){
+  var pid=cell.dataset.pid,key=cell.dataset.key;
+  cell.addEventListener('touchstart',function(e){e.preventDefault();lpStart(cell,pid,key);},{passive:false});
+  cell.addEventListener('touchend',  function(e){e.preventDefault();lpEnd(cell,pid,key);},{passive:false});
+  cell.addEventListener('touchcancel',function(){lpCancel(cell);});
+  cell.addEventListener('mousedown', function(){lpStart(cell,pid,key);});
+  cell.addEventListener('mouseup',   function(){lpEnd(cell,pid,key);});
+  cell.addEventListener('mouseleave',function(){lpCancel(cell);});
 }
 
-function setStatShaking(pid,on){
-  for(var i=0;i<5;i++){
-    var el=document.getElementById('ss-'+pid+'-'+i);
-    if(!el)continue;
-    var valEl=el.querySelector('.die-val');
-    if(on){el.classList.add('rolling');if(valEl)valEl.textContent='?';}
-    else el.classList.remove('rolling');
-  }
+// ── Reset ─────────────────────────────────────────────────────
+function resetPlayer(pid){
+  Object.keys(MAX).forEach(function(key){
+    state[pid][key]=(key==='gdp'?20:(key==='atk'||key==='def')?1:0);
+    document.getElementById('val-'+pid+'-'+key).textContent=state[pid][key];
+    state[pid].dec[key]=DEFAULT_DEC[key];
+    renderMode(pid,key);
+    updatePips(pid,key);
+  });
+  state[pid].ko=0;
+  renderKO(pid);
 }
 
-// All 5 dice smash into the zone together, bounce off each other
-async function landStatDice(pid){
-  var sd=statDice[pid];
-  var sz=document.getElementById('sz-'+pid);
-  var S=46,pad=5;
-  // Left-to-right column order: ATK(0) DEF(1) GDP1(2) GDP2(3) GDP3(4)
-  var vals=[sd.atk,sd.def,sd.hp[0],sd.hp[1],sd.hp[2]];
-
-  // Launch all 5 spinning simultaneously into wide scattered positions
-  var finalRots=[];
-  for(var i=0;i<5;i++){
-    var el=document.getElementById('ss-'+pid+'-'+i);if(!el)continue;
-    el.classList.remove('rolling');
-    var rot=(Math.random()-0.5)*32; // ±16 deg — more dramatic on big zone
-    finalRots.push(rot);
-    el.style.setProperty('--spin-start','0deg');
-    el.style.setProperty('--spin-mid',(360*2+(Math.random()*200))+'deg');
-    el.style.setProperty('--spin-end',rot+'deg');
-    el.classList.add('zspinning');
-    el.style.transform='';
-    // Wide scatter — each die in its column with big jitter
-    var pos=randPos(sz,S,pad,i,5,24);
-    el.style.left=pos.x+'px';el.style.top=pos.y+'px';
-  }
-  sfxRoll();
-  await wait(580);
-
-  // Bounce — nudge outward then spring back
-  for(var i=0;i<5;i++){
-    var el=document.getElementById('ss-'+pid+'-'+i);if(!el)continue;
-    el.classList.remove('zspinning');
-    var nudge=(i<2?-1:1)*(5+Math.random()*8);
-    el.style.transition='transform 0.09s ease-out';
-    el.style.transform='rotate('+finalRots[i]+'deg) translate('+nudge+'px,'+(Math.random()-0.5)*6+'px)';
-  }
-  sfxLand();
-  await wait(95);
-
-  // Spring back, reveal values
-  for(var i=0;i<5;i++){
-    var el=document.getElementById('ss-'+pid+'-'+i);if(!el)continue;
-    el.style.transition='transform 0.13s ease-in-out';
-    el.style.transform='rotate('+finalRots[i]+'deg)';
-    var valEl=el.querySelector('.die-val');
-    if(valEl)valEl.textContent=vals[i];
-    el.classList.add('land');
-  }
-  sfxLand();
-  await wait(240);
-  for(var i=0;i<5;i++){
-    var el=document.getElementById('ss-'+pid+'-'+i);if(!el)continue;
-    el.classList.remove('land');
-    el.style.transition='';
-    el.style.transform='rotate('+finalRots[i]+'deg)';
-  }
-
-  // GDP total badge
-  var total=sd.hp[0]+sd.hp[1]+sd.hp[2];
-  var tot=document.getElementById('sht-'+pid);
-  if(tot)tot.textContent='GDP='+total+' ATK='+sd.atk+' DEF='+sd.def;
+function resetAll(){
+  try{getAC().resume();}catch(e){}
+  sfxReset();
+  ['p1','p2'].forEach(resetPlayer);
 }
 
-async function doStatRoll(){
-  showScreen('scr-stats');
-  var content=document.getElementById('stat-content'),hint=document.getElementById('stat-hint');
-
-  // ── Phase 1 & 2: each player rolls alone, full screen ────────
-  for(var pid=0;pid<2;pid++){
-    var p=G.players[pid];
-    content.innerHTML='';
-    statDice[pid]={hp:[1,1,1],atk:1,def:1};
-
-    // Big header
-    var hdr=document.createElement('div');
-    hdr.style.cssText='font-size:18px;font-weight:900;letter-spacing:3px;color:var(--gold);text-transform:uppercase;text-align:center;padding:14px 0 6px;flex-shrink:0;';
-    hdr.textContent='PLAYER '+(pid+1)+' STATS';
-    content.appendChild(hdr);
-
-    var div=document.createElement('div');div.className='stat-box';div.id='stat-box-'+pid;
-    div.style.flex='1';
-    content.appendChild(div);
-    buildStatBox(pid);
-
-    // Tap to shake
-    hint.textContent='P'+(pid+1)+': TAP DICE TO SHAKE';
-    hint.style.animation='slowBlink 1.4s ease-in-out infinite';
-    var sz=document.getElementById('sz-'+pid);
-    sz.style.cursor='pointer';
-    await new Promise(function(r){sz.onclick=function(){sz.onclick=null;sz.style.cursor='default';r();};});
-
-    setStatShaking(pid,true);sfxRoll();
-    statDice[pid]={hp:[d6(),d6(),d6()],atk:d6(),def:d6()};
-
-    // Tap to release
-    hint.textContent='P'+(pid+1)+': TAP TO RELEASE!';
-    sz.style.cursor='pointer';
-    await new Promise(function(r){sz.onclick=function(){sz.onclick=null;sz.style.cursor='default';r();};});
-
-    setStatShaking(pid,false);
-    await landStatDice(pid);
-    var hp=statDice[pid].hp[0]+statDice[pid].hp[1]+statDice[pid].hp[2];
-    p.hp=hp;p.maxHp=hp;p.atk=statDice[pid].atk;p.def=statDice[pid].def;
-
-    // Brief pause so player can read their results
-    hint.textContent=pid===0?'TAP TO REVEAL PLAYER 2':'TAP TO CONTINUE';
-    var statScr=document.getElementById('scr-stats');
-    await new Promise(function(r){statScr.onclick=function(){statScr.onclick=null;r();};});
-  }
-
-  // ── Phase 3: battle clash animation then both stats revealed ─
-  content.innerHTML=
-    '<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;padding:0 20px;position:relative;">'+
-      '<div id="clash-zone" style="position:relative;width:100%;height:120px;overflow:hidden;">'+
-        '<div class="fdie" id="clash-l" style="position:absolute;left:-70px;top:50%;transform:translateY(-50%);transition:left .5s cubic-bezier(.2,1.3,.4,1);pointer-events:none;width:60px;height:60px;">'+
-          '<span class="fsym" style="font-size:24px;">1</span>'+
-        '</div>'+
-        '<div class="fdie" id="clash-r" style="position:absolute;right:-70px;top:50%;transform:translateY(-50%);transition:right .5s cubic-bezier(.2,1.3,.4,1);pointer-events:none;width:60px;height:60px;">'+
-          '<span class="fsym" style="font-size:24px;">2</span>'+
-        '</div>'+
-        '<div id="clash-flash" style="position:absolute;inset:0;background:rgba(201,168,76,0);pointer-events:none;transition:background .1s;"></div>'+
-      '</div>'+
-      '<div id="stats-summary" style="display:none;width:100%;flex:1;display:flex;flex-direction:column;gap:8px;"></div>'+
-    '</div>';
-
-  hint.textContent='';hint.style.animation='';
-  await wait(200);
-
-  // Fly dice to centre
-  var zone=document.getElementById('clash-zone');
-  var zw=zone.offsetWidth||280;
-  var cl=document.getElementById('clash-l');
-  var cr=document.getElementById('clash-r');
-  cl.style.left=Math.round(zw/2-80)+'px';
-  cr.style.right=Math.round(zw/2-80)+'px';
-  await wait(520);
-
-  // Clash!
-  sfxHit();sfxHit();
-  var flash=document.getElementById('clash-flash');
-  flash.style.background='rgba(201,168,76,0.35)';
-  await wait(120);
-  flash.style.background='rgba(201,168,76,0)';
-
-  // Shake both dice
-  cl.classList.add('rolling');cr.classList.add('rolling');
-  await wait(200);
-  cl.classList.remove('rolling');cr.classList.remove('rolling');
-
-  // Fly dice off screen
-  cl.style.transition='left .3s ease-in';
-  cr.style.transition='right .3s ease-in';
-  cl.style.left='-70px';
-  cr.style.right='-70px';
-  await wait(340);
-
-  // Fade in the stats
-  var summ=document.getElementById('stats-summary');
-  summ.style.display='flex';
-  summ.style.flexDirection='column';
-  summ.style.gap='8px';
-  summ.style.opacity='0';
-  summ.style.transition='opacity .4s ease';
-
-  // Header
-  var sumHdr=document.createElement('div');
-  sumHdr.style.cssText='font-size:13px;font-weight:900;letter-spacing:3px;color:var(--gold);text-transform:uppercase;text-align:center;padding:8px 0 10px;border-bottom:1px solid var(--border2);flex-shrink:0;';
-  sumHdr.textContent='BATTLE STATS';
-  summ.appendChild(sumHdr);
-
-  var row=document.createElement('div');
-  row.style.cssText='display:flex;gap:8px;flex:1;';
-  for(var pid=0;pid<2;pid++){
-    var sd=statDice[pid];
-    var total=sd.hp[0]+sd.hp[1]+sd.hp[2];
-    var card=document.createElement('div');
-    card.style.cssText='flex:1;border:1px solid var(--border2);background:var(--surface);padding:12px 10px;display:flex;flex-direction:column;gap:8px;';
-    card.innerHTML=
-      '<div style="font-size:12px;font-weight:900;letter-spacing:2px;color:var(--gold);text-transform:uppercase;">P'+(pid+1)+'</div>'+
-      '<div style="font-size:11px;color:var(--muted);letter-spacing:1px;">GDP</div>'+
-      '<div style="font-size:36px;font-weight:900;font-family:var(--font-mono);color:var(--cream);line-height:1;">'+total+'</div>'+
-      '<div style="display:flex;gap:6px;">'+
-        '<div style="flex:1;border:1px solid var(--border);padding:6px 4px;text-align:center;">'+
-          '<div style="font-size:9px;color:var(--muted);letter-spacing:1px;">ATK</div>'+
-          '<div style="font-size:22px;font-weight:900;font-family:var(--font-mono);color:var(--gold);">'+sd.atk+'</div>'+
-        '</div>'+
-        '<div style="flex:1;border:1px solid var(--border);padding:6px 4px;text-align:center;">'+
-          '<div style="font-size:9px;color:var(--muted);letter-spacing:1px;">DEF</div>'+
-          '<div style="font-size:22px;font-weight:900;font-family:var(--font-mono);color:var(--blue2);">'+sd.def+'</div>'+
-        '</div>'+
-      '</div>';
-    row.appendChild(card);
-  }
-  summ.appendChild(row);
-
-  // Fade in
-  await wait(50);
-  summ.style.opacity='1';
-  sfxLock();
-
-  hint.textContent='TAP TO ROLL THE WILDCARD';
-  hint.style.animation='slowBlink 1.4s ease-in-out infinite';
-  var statScr2=document.getElementById('scr-stats');
-  await new Promise(function(r){statScr2.onclick=function(){statScr2.onclick=null;r();};});
-  hint.style.animation='';
+// ── Rotate table ─────────────────────────────────────────────
+var tableRotated = false;
+function rotatePlayers(){
+  try{getAC().resume();}catch(e){}
+  tableRotated = !tableRotated;
+  document.body.style.transform = tableRotated ? 'rotate(180deg)' : '';
+  beep(tableRotated ? 770 : 550, 0.08, 0.08);
 }
-
-// ── FAVORED FACTION ROLL ─────────────────────────────────────
-async function doFavoredRoll(){
-  showScreen('scr-stats');
-  var content=document.getElementById('stat-content');
-  var hint=document.getElementById('stat-hint');
-
-  content.innerHTML=
-    '<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;padding:0 24px;">'+
-      '<div style="font-size:32px;font-weight:900;letter-spacing:4px;color:var(--gold);text-transform:uppercase;text-align:center;line-height:1.1;">WILD<br>CARD</div>'+
-      '<div style="font-size:15px;font-weight:600;color:var(--muted);text-align:center;line-height:1.9;max-width:280px;">'+
-        'Roll to reveal the favored faction.<br>Match it each turn for <span style="color:var(--gold);font-weight:900;">+3 ATK bonus</span>.'+
-      '</div>'+
-      '<div style="position:relative;width:100%;height:220px;" id="fav-zone">'+
-        '<div class="fdie" id="fav-die" style="left:50%;top:50%;transform:translate(-50%,-50%);cursor:pointer;width:110px;height:110px;border-radius:14px;border-width:2px;">'+
-          '<span class="fsym" style="font-size:52px;">?</span>'+
-        '</div>'+
-      '</div>'+
-      '<div style="font-size:16px;font-weight:900;letter-spacing:2px;color:var(--gold);text-align:center;min-height:28px;text-transform:uppercase;" id="fav-result"></div>'+
-    '</div>';
-
-  hint.textContent='TAP THE DIE TO SHAKE';
-  hint.style.animation='slowBlink 1.4s ease-in-out infinite';
-
-  var favEl=document.getElementById('fav-die');
-  await new Promise(function(r){favEl.onclick=function(){favEl.onclick=null;r();};});
-
-  favEl.classList.add('rolling');
-  favEl.querySelector('.fsym').textContent='?';
-  sfxRoll();
-  var faceIdx=Math.floor(Math.random()*6);
-
-  hint.textContent='TAP TO RELEASE!';
-  favEl.style.cursor='pointer';
-  await new Promise(function(r){favEl.onclick=function(){favEl.onclick=null;favEl.style.cursor='default';r();};});
-
-  favEl.classList.remove('rolling');
-  var zone=document.getElementById('fav-zone');
-  var rot=randRot();
-  favEl.style.setProperty('--spin-start','0deg');
-  favEl.style.setProperty('--spin-mid',(360*3)+'deg');
-  favEl.style.setProperty('--spin-end',rot+'deg');
-  favEl.classList.add('zspinning');
-  var S=110,zw=zone.offsetWidth||280;
-  favEl.style.left=Math.round(zw/2-S/2+(Math.random()-0.5)*20)+'px';
-  favEl.style.top=Math.round(20+Math.random()*30)+'px';
-  sfxRoll();
-  await wait(580);
-  favEl.classList.remove('zspinning');
-  favEl.style.transform='rotate('+rot+'deg)';
-  var face=FDIE_FACES[faceIdx];
-  favEl.querySelector('.fsym').textContent=face.sym;
-  favEl.classList.add('land');
-  sfxLock();await wait(80);sfxLock();
-  await wait(300);
-  favEl.classList.remove('land');
-  favEl.style.transform='rotate('+rot+'deg)';
-
-  G.favoredFaceIdx=faceIdx;
-  G.favoredFaction=SYM_TO_FACTION[face.label];
-  var favName=G.favoredFaction?FACTIONS[G.favoredFaction].name:face.label.toUpperCase();
-  document.getElementById('fav-result').textContent=face.sym+'  '+favName+' IS FAVORED  +3 ATK';
-
-  hint.textContent='TAP TO BEGIN BATTLE';
-  hint.style.animation='slowBlink 1.4s ease-in-out infinite';
-  var statScr=document.getElementById('scr-stats');
-  await new Promise(function(r){statScr.onclick=function(){statScr.onclick=null;r();};});
-  hint.style.animation='';
-}
-async function runGame(){
-  if(G.running)return;
-  G.running=true;G.round=0;G.speed=280;
-  G.favoredFaction=null;G.favoredFaceIdx=null;
-  G.players=[makePlayer(0),makePlayer(1)];
-  document.getElementById('power-led').classList.add('on');
-  document.getElementById('pn-0').textContent='PLAYER 1';
-  document.getElementById('pn-1').textContent='PLAYER 2';
-  await doStatRoll();
-  await doFavoredRoll();
-  showScreen('scr-game');
-  buildDiceTray(0);buildDiceTray(1);
-  renderEdie(0,0,null);renderEdie(0,1,null);
-  renderEdie(1,0,null);renderEdie(1,1,null);
-  updHp(0);updHp(1);updFactionBadge(0);updFactionBadge(1);
-  // Show favored faction on divider
-  updFavoredLabel();
-
-  while(true){
-    G.round++;
-    document.getElementById('div-vs').textContent='R'+G.round+(G.favoredFaction?' ★'+FDIE_FACES[G.favoredFaceIdx].sym:'');
-    setArrow(0);await doFactionPhase(0);await doCombatPhase(0);
-    setArrow(1);await doFactionPhase(1);await doCombatPhase(1);
-    var done=await doDamage(0,1);if(done){showWinner(0);return;}
-    done=await doDamage(1,0);if(done){showWinner(1);return;}
-  }
-}
-
-function updFavoredLabel(){
-  var el=document.getElementById('div-vs');
-  if(!el)return;
-  var sym=G.favoredFaceIdx!==null?FDIE_FACES[G.favoredFaceIdx].sym:'';
-  el.textContent='★ '+sym+' FAVORED ★';
-}
-
-function setFdiceHighlight(pid,on){
-  for(var i=0;i<3;i++){
-    var el=document.getElementById('fd-'+pid+'-'+i);
-    if(el)el.style.boxShadow=on?'0 0 0 3px #0f380f':'';
-  }
-}
-function setArrow(pid){
-  var a=document.getElementById('act-arrow');
-  if(pid===0){a.style.left='10px';a.style.right='auto';a.textContent='▶';}
-  else{a.style.right='10px';a.style.left='auto';a.textContent='◀';}
-}
-function showWinner(pid){
-  sfxWin();
-  var p=G.players[pid];
-  document.getElementById('w-name').textContent=playerLabel(pid)+' WINS!';
-  var statsEl=document.getElementById('w-stats');
-  if(statsEl){
-    var statRow=function(label,val,color){
-      return '<div style="display:flex;justify-content:space-between;align-items:center;'+
-        'border:1px solid var(--border2);padding:10px 14px;background:var(--surface);">'+
-        '<span style="font-size:12px;font-weight:700;letter-spacing:2px;color:var(--muted);text-transform:uppercase;">'+label+'</span>'+
-        '<span style="font-size:18px;font-weight:900;font-family:var(--font-mono);color:'+(color||'var(--cream)')+';">'+val+'</span>'+
-        '</div>';
-    };
-    statsEl.innerHTML=
-      statRow('ROUNDS PLAYED', G.round)+
-      statRow('TOTAL ATK DEPLOYED', p.totalAtkDeployed, 'var(--gold)')+
-      statRow('TOTAL DEF DEPLOYED', p.totalDefDeployed, 'var(--blue2)');
-  }
-  showScreen('scr-winner');G.running=false;
-}
-
-// ── Button handlers ───────────────────────────────────────────
-function gbA(){
-  sfxBtn();musResume();if(!MUS.cur)playTitle();
-  var scr=getScr();
-  if(scr==='scr-title'){activateTitle();return;}
-  if(scr==='scr-setup'){if(setup.row===2)startGame();else cycleSetup(1);return;}
-  if(scr==='scr-rules'){showScreen('scr-title');return;}
-  if(scr==='scr-legend'){showScreen('scr-game');return;}
-  if(scr==='scr-winner'){resetTitle();return;}
-  if(scr==='scr-stats'){if(G.resume)G.resume();return;}
-  if(scr==='scr-modal'){
-    if(G_QUIT){G_QUIT=false;musStop();G.running=false;G.resume=null;_fdieTapCb=null;_edieTapCb=null;resetTitle();return;}
-    if(G.resume){G.resume('a');return;}return;
-  }
-  if(scr==='scr-game'){
-    if(G.resume){
-      // faction-input: A = roll all / advance
-      if(G.choiceCtx==='faction-input'){G.resume('a');return;}
-      // fdie-land: A = release dice
-      if(G.choiceCtx&&G.choiceCtx.indexOf('fdie-land')===0){G.resume();return;}
-      // triple-popup: A = dismiss
-      if(G.choiceCtx==='triple-popup'){G.resume();return;}
-      G.resume('a');return;
-    }return;
-  }
-}
-
-function gbB(){
-  sfxBtn();var scr=getScr();
-  if(G_QUIT&&scr==='scr-modal'){G_QUIT=false;showScreen('scr-game');return;}
-  if(scr==='scr-modal'){
-    if(G.resume)G.resume('b');return;
-  }
-  if(scr==='scr-game'){
-    if(G.resume){
-      // faction-input: B = declare faction
-      if(G.choiceCtx==='faction-input'){G.resume('b');return;}
-      G.resume('b');return;
-    }return;
-  }
-  if(scr==='scr-setup'){cycleSetup(-1);return;}
-  if(scr==='scr-legend'){showScreen('scr-game');return;}
-  if(scr==='scr-rules'){showScreen('scr-title');return;}
-  if(scr==='scr-winner'){resetTitle();return;}
-}
-
-// ── Pause screen ──────────────────────────────────────────────
-var G_PAUSED=false;
-function showPause(){
-  if(!G.running)return;
-  G_PAUSED=true;
-  musStop();
-  var existing=document.getElementById('pause-overlay');if(existing)existing.remove();
-  var ov=document.createElement('div');
-  ov.id='pause-overlay';
-  ov.style.cssText='position:absolute;inset:0;background:rgba(10,10,20,0.80);display:flex;align-items:center;justify-content:center;z-index:90;animation:popIn .15s ease';
-  ov.innerHTML=
-    '<div style="background:#13131f;border:2px solid #c9a84c;padding:16px 20px;width:min(260px,88vw);font-family:\'Press Start 2P\',monospace;color:#e8e4d0;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.8)">'+
-      '<div style="font-size:22px;font-weight:900;margin-bottom:16px;letter-spacing:3px;color:#c9a84c">PAUSED</div>'+
-      '<div style="display:flex;flex-direction:column;gap:8px">'+
-        '<div onclick="resumeGame()" style="border:2px solid #0f380f;padding:7px;font-size:9px;cursor:pointer;background:#1a1a2a">▶ RESUME</div>'+
-        '<div onclick="quitFromPause()" style="border:2px solid #306230;padding:7px;font-size:9px;cursor:pointer;background:#8bac0f;color:#6b6b8a">✕ QUIT TO TITLE</div>'+
-      '</div>'+
-    '</div>';
-  document.getElementById('gb-screen').appendChild(ov);
-}
-function resumeGame(){
-  var ov=document.getElementById('pause-overlay');if(ov)ov.remove();
-  G_PAUSED=false;
-  playGame();
-}
-function quitFromPause(){
-  var ov=document.getElementById('pause-overlay');if(ov)ov.remove();
-  G_PAUSED=false;
-  musStop();G.running=false;G.resume=null;_fdieTapCb=null;_edieTapCb=null;
-  resetTitle();
-}
-
-function gbStart(){
-  sfxBtn();var scr=getScr();
-  if(scr==='scr-title'){activateTitle();return;}
-  if(scr==='scr-setup'){startGame();return;}
-  if(scr==='scr-winner'){resetTitle();return;}
-  if(scr==='scr-stats'&&G.resume){G.resume();return;}
-  // In game — toggle pause
-  if(scr==='scr-game'){
-    if(G_PAUSED){resumeGame();}
-    else{showPause();}
-    return;
-  }
-  // On pause overlay dismiss
-  if(document.getElementById('pause-overlay')){resumeGame();return;}
-}
-function gbDpad(dir){
-  sfxBtn();var scr=getScr();
-  if(scr==='scr-title'){if(dir==='up'||dir==='dn'){titleCursor=(titleCursor+1)%2;updTitle();}}
-  else if(scr==='scr-setup'){
-    if(dir==='up')setup.row=Math.max(0,setup.row-1);
-    if(dir==='dn')setup.row=Math.min(2,setup.row+1);
-    if(dir==='lt')cycleSetup(-1);if(dir==='rt')cycleSetup(1);
-    updSetup();
-  }
-}
-
-// ── Setup ─────────────────────────────────────────────────────
-function updSetup(){
-  var labels=['P1 MODE','P2 MODE'];
-  for(var i=0;i<2;i++){
-    var r=document.getElementById('srow-'+i);if(!r)continue;
-    r.classList.toggle('sel',i===setup.row);
-    r.querySelector('span').textContent=(i===setup.row?'▶ ':'')+labels[i];
-  }
-  document.getElementById('sm0-val').textContent=setup.modes[0]?'MANUAL':'AUTO';
-  document.getElementById('sm1-val').textContent=setup.modes[1]?'MANUAL':'AUTO';
-}
-function setupTap(row){sfxBtn();setup.row=row;updSetup();}
-function cycleSetup(dir){if(setup.row===0)setup.modes[0]=!setup.modes[0];else if(setup.row===1)setup.modes[1]=!setup.modes[1];updSetup();}
-
-// ── Title ─────────────────────────────────────────────────────
-function updTitle(){
-  // No tmenu elements in touch version — title menu is handled by action bar
-  // titleCursor still tracked for keyboard nav but not displayed
-}
-function titleSel(i){sfxBtn();titleCursor=i;}
-function activateTitle(){if(titleCursor===0){showScreen('scr-setup');updSetup();}else showScreen('scr-rules');}
-function openLegend(){sfxBtn();showScreen('scr-legend');}
-function startGame(){showScreen('scr-stats');runGame();}
-function resetTitle(){
-  G.running=false;G.resume=null;_fdieTapCb=null;_edieTapCb=null;G_QUIT=false;
-  titleCursor=0;updTitle();showScreen('scr-title');
-  document.getElementById('power-led').classList.remove('on');
-}
-
-// ── Keyboard ──────────────────────────────────────────────────
-document.addEventListener('keydown',function(e){
-  if(e.key==='Enter')gbA();
-  else if(e.key===' '){e.preventDefault();gbB();}
-  else if(e.key==='Shift')gbSelect();
-  else if(e.key==='ArrowUp')gbDpad('up');
-  else if(e.key==='ArrowDown')gbDpad('dn');
-  else if(e.key==='ArrowLeft')gbDpad('lt');
-  else if(e.key==='ArrowRight')gbDpad('rt');
-});
 
 // ── Init ──────────────────────────────────────────────────────
-showScreen('scr-title');updTitle();updSetup();
-
-// ── ACTION BAR CONTROLLER ─────────────────────────────────────
-// Renders contextual tap buttons for the current game state.
-// Called whenever state changes. Each screen/phase gets its own set.
-
-function btn(label,cls,fn,id){
-  var b=document.createElement('button');
-  b.className='tap-btn '+(cls||'secondary');
-  b.innerHTML=label;
-  if(id) b.id=id;
-  b.onclick=fn;
-  return b;
-}
-
-function setActionBar(){
-  var bar=document.getElementById('action-bar');
-  if(!bar) return;
-  bar.innerHTML='';
-  var scr=getScr();
-
-  if(scr==='scr-title'){
-    bar.appendChild(btn('▶ START GAME','primary',function(){sfxBtn();musResume();if(!MUS.cur)playTitle();activateTitle();}));
-    return;
-  }
-  if(scr==='scr-setup'){
-    return;
-  }
-  if(scr==='scr-stats'){
-    // Stats and favored screens are fully tap-driven on the dice/zones — no bar needed
-    return;
-  }
-  if(scr==='scr-rules'||scr==='scr-legend'){
-    bar.appendChild(btn('← BACK','secondary',function(){sfxBtn();showScreen(G.running?'scr-game':'scr-title');setActionBar();}));
-    return;
-  }
-  if(scr==='scr-winner'){
-    bar.appendChild(btn('▶ PLAY AGAIN','primary',function(){sfxBtn();resetTitle();setActionBar();}));
-    return;
-  }
-  if(scr==='scr-modal'){
-    if(G_QUIT){
-      bar.appendChild(btn('✕ QUIT TO TITLE','danger',function(){sfxBtn();G_QUIT=false;musStop();G.running=false;G.resume=null;_fdieTapCb=null;_edieTapCb=null;resetTitle();setActionBar();}));
-      bar.appendChild(btn('▶ RESUME','primary',function(){sfxBtn();G_QUIT=false;showScreen('scr-game');setActionBar();}));
-    } else {
-      var ch=document.getElementById('modal-choice');
-      var hasChoice=ch&&!ch.classList.contains('scr-hidden');
-      if(hasChoice){
-        bar.appendChild(btn(document.getElementById('mc-a').textContent,'primary',function(){sfxBtn();resolveChoice('a');}));
-        bar.appendChild(btn(document.getElementById('mc-b').textContent,'secondary',function(){sfxBtn();resolveChoice('b');}));
-      } else {
-        bar.appendChild(btn('▶ CONTINUE','primary',function(){sfxBtn();if(G.resume)G.resume();}));
-      }
-    }
-    return;
-  }
-  if(scr==='scr-game'){
-    // Damage/KO/triple popup — tap the popup itself, bar shows continue
-    if(document.getElementById('dmg-popup')||document.getElementById('triple-popup')){
-      bar.appendChild(btn('▶ CONTINUE','primary',function(){sfxBtn();if(G.resume){var r=G.resume;G.resume=null;G.choiceCtx=null;r();}}));
-      return;
-    }
-    // Faction phase — ONLY show DECLARE when a faction is detected
-    if(G.choiceCtx==='faction-input'){
-      var activePid=document.getElementById('act-arrow').style.left==='10px'?0:1;
-      var detected=getCurrentFaction(activePid);
-      if(detected){
-        bar.appendChild(btn('✓ DECLARE '+FACTIONS[detected].name,'primary',function(){
-          sfxBtn();
-          if(G.resume){G.resume('b');}
-        }));
-      }
-      // No other buttons — tapping the dice zone handles rolling
-      return;
-    }
-    // Equip phase — tapping equip zone handles rolling, faction die taps handle pip spend
-    // Show a subtle hint only
-    if(!G.resume) return;
-    // Generic continue for damage ack etc
-    bar.appendChild(btn('▶ CONTINUE','primary',function(){sfxBtn();if(G.resume)G.resume();}));
-    return;
-  }
-}
-
-// Patch waitResume to refresh action bar after each state change
-var _origWaitResume=waitResume;
-waitResume=function(ctx){
-  var p=_origWaitResume(ctx);
-  setTimeout(setActionBar,40); // slight delay so ctx is set first
-  return p;
-};
-
-// Patch showScreen to refresh action bar on every screen transition
-var _origShowScreen=showScreen;
-showScreen=function(id){
-  _origShowScreen(id);
-  // Show/hide pause button
-  var pb=document.getElementById('pause-btn');
-  if(pb) pb.style.display=(id==='scr-game')?'block':'none';
-  setTimeout(setActionBar,30);
-};
-
-// Patch showDamagePopup and removeDamagePopup to update action bar
-var _origShowDmgPopup=showDamagePopup;
-showDamagePopup=function(){
-  _origShowDmgPopup.apply(this,arguments);
-  setTimeout(setActionBar,40);
-};
-var _origRemoveDmgPopup=removeDamagePopup;
-removeDamagePopup=function(){
-  _origRemoveDmgPopup();
-  setTimeout(setActionBar,40);
-};
-
-// Patch showPause/resumeGame to update action bar
-var _origShowPause=showPause;
-showPause=function(){
-  _origShowPause();
-  setTimeout(setActionBar,40);
-};
-var _origResumeGame=resumeGame;
-resumeGame=function(){
-  _origResumeGame();
-  setTimeout(setActionBar,40);
-};
-
-// ── Visual overrides for modern skin ─────────────────────────
-
-// Override updHp to use dot falls instead of text
-updHp = function(pid){
-  var p=G.players[pid];
-  var pct=p.maxHp>0?Math.max(0,p.hp/p.maxHp*100):100;
-  var hpEl=document.getElementById('hp-'+pid);
-  var hvEl=document.getElementById('hv-'+pid);
-  if(hpEl) hpEl.style.width=pct+'%';
-  if(hvEl) hvEl.textContent=Math.max(0,p.hp)+'/'+p.maxHp;
-  for(var i=0;i<MAX_KO;i++){
-    var dot=document.getElementById('fd'+pid+'-'+i);
-    if(dot) dot.classList.toggle('filled',i<p.kos);
-  }
-  var atkEl=document.getElementById('stat-atk-'+pid);
-  var defEl=document.getElementById('stat-def-'+pid);
-  if(atkEl) atkEl.textContent='A'+p.atk;
-  if(defEl) defEl.textContent='D'+p.def;
-};
-
-// Override updFavoredLabel to update the divider sigil
-updFavoredLabel = function(){
-  var el=document.getElementById('div-vs');
-  var sig=document.getElementById('fav-sig');
-  if(!el) return;
-  if(G.favoredFaceIdx!==null){
-    var sym=FDIE_FACES[G.favoredFaceIdx].sym;
-    el.textContent='';
-    if(sig){sig.textContent=sym;sig.style.display='block';}
-  }
-};
-
-// Override edie render to use gold color scheme
-renderEdie = function(pid,dieIdx,faceIdx){
-  var indices=(dieIdx!==undefined)?[dieIdx]:[0,1];
-  indices.forEach(function(e){
-    var cv=document.getElementById('ec-'+pid+'-'+e);if(!cv)return;
-    var ctx=cv.getContext('2d'),W=cv.width,H=cv.height;
-    ctx.clearRect(0,0,W,H);
-    ctx.fillStyle='#1a1508';ctx.fillRect(0,0,W,H);
-    if(faceIdx===null||faceIdx===undefined){
-      ctx.fillStyle='#c9a84c';ctx.font='bold 11px "JetBrains Mono",monospace';
-      ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('?',W/2,H/2);return;
-    }
-    var f=EDIE_FACES[faceIdx],cx=W/2,cy=H/2;
-    ctx.fillStyle='#c9a84c';ctx.strokeStyle='#c9a84c';ctx.lineWidth=2.5;
-    if(f.type==='endturn'){
-      ctx.lineWidth=3;
-      ctx.beginPath();ctx.moveTo(9,9);ctx.lineTo(W-9,H-9);ctx.stroke();
-      ctx.beginPath();ctx.moveTo(W-9,9);ctx.lineTo(9,H-9);ctx.stroke();
-    } else if(f.type==='noact'){
-      ctx.lineWidth=2.5;ctx.beginPath();ctx.arc(cx,cy,11,0,Math.PI*2);ctx.stroke();
-    } else {
-      ctx.lineWidth=3;
-      ctx.beginPath();ctx.moveTo(cx,cy-11);ctx.lineTo(cx,cy+11);ctx.stroke();
-      ctx.beginPath();ctx.moveTo(cx-11,cy);ctx.lineTo(cx+11,cy);ctx.stroke();
-      ctx.fillRect(cx-4,cy-4,8,8);
-    }
+['p1','p2'].forEach(function(pid){
+  Object.keys(MAX).forEach(function(key){
+    buildPips(pid,key);
+    updatePips(pid,key);
+    renderMode(pid,key);
   });
-};
-
-// Also patch updPhaseLabel to refresh action bar when active state changes
-var _origUpdPhaseLabel=updPhaseLabel;
-updPhaseLabel=function(pid,msg,isActive){
-  _origUpdPhaseLabel(pid,msg,isActive);
-  if(isActive) setTimeout(setActionBar,40);
-};
-
-// Keyboard fallback (still works)
-document.addEventListener('keydown',function(e){
-  if(e.key==='Enter')gbA();
-  else if(e.key===' '){e.preventDefault();gbB();}
-  else if(e.key==='Escape')gbStart();
+  renderKO(pid);
 });
-
-// Init
-showScreen('scr-title');updTitle();updSetup();
-setActionBar();
+document.querySelectorAll('.stat').forEach(function(cell){
+  if(cell.dataset.pid) wireCell(cell);
+});
+wireKO(document.getElementById('ko-p1'),'p1');
+wireKO(document.getElementById('ko-p2'),'p2');
 </script>
 </body>
 </html>
